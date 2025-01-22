@@ -47,3 +47,150 @@ Hello worldHello world
 2025.01.21 19:55:06
 
 Hello logger world
+
+2025.01.22 19:01:24
+
+The selected option: table row
+
+2025.01.22 19:55:58
+
+Error in opening db connectionsql: unknown driver "postgres" (forgotten import?)
+
+2025.01.22 19:58:35
+
+
+
+2025.01.22 19:59:37
+
+After the connection: 0s
+
+2025.01.22 20:22:59
+
+Connected to database: local
+ Connecting to table: res_usersError scanning rows: local
+ Table: res_users
+ Error: sql: expected 3 destination arguments in Scan, not 4
+
+2025.01.22 20:23:33
+
+Connected to database: local
+ Connecting to table: res_usersError scanning rows: local
+ Table: res_users
+ Error: sql: Scan error on column index 0, name "column_name": destination not a pointer
+
+2025.01.22 20:27:03
+
+Connected to database: local
+ Connecting to table: res_usersColumn name: idData type: integerIsNullable: NOColumn name: activeData type: booleanIsNullable: YESColumn name: loginData type: character varyingIsNullable: NOColumn name: passwordData type: character varyingIsNullable: YESColumn name: company_idData type: integerIsNullable: NOColumn name: partner_idData type: integerIsNullable: NOColumn name: create_dateData type: timestamp without time zoneIsNullable: YESColumn name: signatureData type: textIsNullable: YESColumn name: action_idData type: integerIsNullable: YESColumn name: shareData type: booleanIsNullable: YESColumn name: create_uidData type: integerIsNullable: YESColumn name: write_uidData type: integerIsNullable: YESColumn name: write_dateData type: timestamp without time zoneIsNullable: YESColumn name: notification_typeData type: character varyingIsNullable: NOColumn name: odoobot_stateData type: character varyingIsNullable: YESColumn name: odoobot_failedData type: booleanIsNullable: YESColumn name: sale_team_idData type: integerIsNullable: YESColumn name: karmaData type: integerIsNullable: YESColumn name: rank_idData type: integerIsNullable: YESColumn name: next_rank_idData type: integerIsNullable: YESColumn name: website_idData type: integerIsNullable: YESColumn name: allow_previewData type: booleanIsNullable: YESColumn name: depot_idData type: integerIsNullable: YESColumn name: chatter_positionData type: character varyingIsNullable: YESColumn name: langData type: character varyingIsNullable: YESColumn name: is_hide_show_exportData type: booleanIsNullable: YESColumn name: hide_show_export_apply_onData type: character varyingIsNullable: YES
+
+2025.01.22 20:28:08
+
+Connected to database: local
+ Connecting to table: res_usersColumn name: id
+Data type: integer
+IsNullable: NO
+--------------------------
+Column name: active
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: login
+Data type: character varying
+IsNullable: NO
+--------------------------
+Column name: password
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: company_id
+Data type: integer
+IsNullable: NO
+--------------------------
+Column name: partner_id
+Data type: integer
+IsNullable: NO
+--------------------------
+Column name: create_date
+Data type: timestamp without time zone
+IsNullable: YES
+--------------------------
+Column name: signature
+Data type: text
+IsNullable: YES
+--------------------------
+Column name: action_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: share
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: create_uid
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: write_uid
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: write_date
+Data type: timestamp without time zone
+IsNullable: YES
+--------------------------
+Column name: notification_type
+Data type: character varying
+IsNullable: NO
+--------------------------
+Column name: odoobot_state
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: odoobot_failed
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: sale_team_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: karma
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: rank_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: next_rank_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: website_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: allow_preview
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: depot_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: chatter_position
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: lang
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: is_hide_show_export
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: hide_show_export_apply_on
+Data type: character varying
+IsNullable: YES
+--------------------------

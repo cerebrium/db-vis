@@ -2,6 +2,9 @@ package appstate
 
 import (
 	"fmt"
+	"os"
+
+	"github.com/charmbracelet/huh"
 )
 
 /*
@@ -43,4 +46,33 @@ func (m Model) View() string {
 
 	// Send the UI for rendering
 	return s
+}
+
+func (m Model) SchemaView() (string, string, string) {
+	var (
+		name     string
+		table    string
+		userName string
+	)
+
+	form := huh.NewForm(
+		huh.NewGroup(
+
+			huh.NewInput().Title("What is the db name").Value(&name),
+		),
+		huh.NewGroup(
+			huh.NewInput().Title("What is the db table").Value(&table),
+		),
+		huh.NewGroup(
+			huh.NewInput().Title("What is the db user name").Value(&userName),
+		),
+	)
+
+	err := form.Run()
+	if err != nil {
+		m.logger.Log("Error in running form" + err.Error())
+		os.Exit(1)
+	}
+
+	return name, table, userName
 }

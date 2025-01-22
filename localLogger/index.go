@@ -29,8 +29,6 @@ func CreateLogger() (*Logger, error) {
 
 	log_file := path.Join(dir, "/logs.txt")
 
-	fmt.Println("LOCATION for the file: ", log_file)
-
 	loc := newLogLocation(log_file)
 
 	f, err := os.OpenFile(loc.path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -54,8 +52,6 @@ func CreateLogger() (*Logger, error) {
 }
 
 func (l *Logger) Log(str string) {
-	fmt.Printf("File descriptor: %v\n", l.File.Fd())
-
 	_, err := l.File.Write([]byte(str))
 	if err != nil {
 		fmt.Println("Error in writer: ", err)
