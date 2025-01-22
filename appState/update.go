@@ -1,6 +1,7 @@
 package appstate
 
 import (
+	"dbVisualizer.com/localdb"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -56,6 +57,23 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			} else {
 				m.selected[m.cursor] = struct{}{}
 			}
+
+			// Display the selected option
+			// selectedOption := m.choices[m.cursor]
+
+			var isSchema bool
+
+			if m.cursor == 1 {
+				isSchema = true
+			} else {
+				isSchema = false
+			}
+
+			name, table, userName := m.SchemaView()
+
+			dbd := localdb.CreateDbDetails(isSchema, name, table, userName, m.logger)
+
+			localdb.Walk(dbd)
 		}
 	}
 
