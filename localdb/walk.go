@@ -2,6 +2,7 @@ package localdb
 
 import (
 	"os"
+	"slices"
 
 	"github.com/charmbracelet/log"
 )
@@ -10,23 +11,35 @@ func Walk(dbd *DBDetails) {
 	log.Info("Connecting to database")
 	dbd.connect()
 
+	// Internal logging
 	dbd.logger.Log("Connected to database: " + dbd.name + "\n Connecting to table: " + dbd.table)
 
 	log.Info("Walking schema for table: " + dbd.table)
-	dbd.SchemaWalk()
-	log.Info("Walked schema for table: " + dbd.table)
 
+	// Actually write to the struct
+	dbd.schemaWalk(dbd.Schema, dbd.table)
+
+	// Tell the user stuff is happening
+	log.Info("Walked schema for table: " + dbd.table)
 	log.Info("Walking children for table: " + dbd.table)
 
-	for i := 0; i < len(dbd.Schema); i++ {
-		dbd.logger.Log("Column name: " + dbd.Schema[i].ColumnName + "\n")
-		dbd.logger.Log("Data type: " + dbd.Schema[i].DataType + "\n")
-		if dbd.Schema[i].ReferencesAnotherTable {
+	// Append the top level table to visited
+	dbd.visitedTables = append(dbd.visitedTables, dbd.table)
 
-			dbd.logger.Log("IsNullable: " + dbd.Schema[i].IsNullable + "\n")
-			dbd.logger.Log("ForeignTableName: " + *dbd.Schema[i].ReferencedTableName + "\n--------------------------\n")
-		} else {
-			dbd.logger.Log("IsNullable: " + dbd.Schema[i].IsNullable + "\n--------------------------\n")
+	// Walk the children of the first query
+	for i := 0; i < len(dbd.Schema); i++ {
+		if dbd.Schema[i].ReferencesAnotherTable {
+			dbd.child_walk(*dbd.Schema[i].ReferencedTableName, dbd.Schema[i].Children)
+		}
+	}
+
+	log.Info("Past child walk")
+
+	for i := 0; i < len(dbd.Schema); i++ {
+		if len(dbd.Schema[i].Children) > 0 {
+			for c := 0; c < len(dbd.Schema[i].Children); c++ {
+				dbd.logger.Log("child val: " + dbd.Schema[i].Children[c].ColumnName)
+			}
 		}
 	}
 
@@ -34,10 +47,27 @@ func Walk(dbd *DBDetails) {
 	defer dbd.dbConn.Close()
 }
 
-// func (dbd *DBDetails) child_walk() {
-// }
+// TODO: We don't want circular queries, it will be forever... literally, however,
+// multiple children might reference a table differently, we still want to
+// represent that.
+func (dbd *DBDetails) child_walk(table_name string, children []*ColumnSchema) {
+	if slices.Contains(dbd.visitedTables, table_name) {
+		return
+	}
 
-func (dbd *DBDetails) SchemaWalk() {
+	dbd.visitedTables = append(dbd.visitedTables, table_name)
+
+	dbd.schemaWalk(children, table_name)
+
+	// Walk its children and recursively grab all data
+	for i := 0; i < len(children); i++ {
+		if children[i].ReferencesAnotherTable {
+			dbd.child_walk(*children[i].ReferencedTableName, children[i].Children)
+		}
+	}
+}
+
+func (dbd *DBDetails) schemaWalk(current_schema_arr []*ColumnSchema, table_name string) {
 	query := `
 		SELECT
 		    c.column_name,
@@ -66,7 +96,7 @@ func (dbd *DBDetails) SchemaWalk() {
 			`
 
 	// Execute the query
-	rows, err := dbd.dbConn.Query(query, dbd.table)
+	rows, err := dbd.dbConn.Query(query, table_name)
 	if err != nil {
 		dbd.logger.Log("Error getting schema details for: " + dbd.name + "\nTable: " + dbd.table)
 		rows.Close()
@@ -76,7 +106,6 @@ func (dbd *DBDetails) SchemaWalk() {
 	defer rows.Close()
 
 	// Parse the results
-	var schema []*ColumnSchema
 	for rows.Next() {
 		col := &ColumnSchema{}
 
@@ -92,7 +121,10 @@ func (dbd *DBDetails) SchemaWalk() {
 			os.Exit(1)
 		}
 
-		schema = append(schema, col)
+		// In case we need to add children always append this
+		col.Children = []*ColumnSchema{}
+
+		current_schema_arr = append(current_schema_arr, col)
 	}
 
 	// Check for any error encountered during iteration
@@ -100,6 +132,4 @@ func (dbd *DBDetails) SchemaWalk() {
 		dbd.logger.Log("Error scanning rows: " + dbd.name + "\n Table: " + dbd.table + "\n Error: " + err.Error())
 		os.Exit(1)
 	}
-
-	dbd.Schema = schema
 }
