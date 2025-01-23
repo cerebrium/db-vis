@@ -194,3 +194,596 @@ Column name: hide_show_export_apply_on
 Data type: character varying
 IsNullable: YES
 --------------------------
+
+
+2025.01.22 20:39:34
+
+Connected to database: local
+ Connecting to table: fleet_vehicla
+
+2025.01.22 20:42:29
+
+Connected to database: local
+ Connecting to table: fleet_vehicleColumn name: id
+Data type: integer
+IsNullable: NO
+--------------------------
+Column name: message_main_attachment_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: name
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: description
+Data type: text
+IsNullable: YES
+--------------------------
+Column name: active
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: manager_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: company_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: license_plate
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: vin_sn
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: trailer_hook
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: driver_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: future_driver_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: model_id
+Data type: integer
+IsNullable: NO
+--------------------------
+Column name: brand_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: next_assignation_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: acquisition_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: first_contract_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: color
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: state_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: location
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: seats
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: model_year
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: doors
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: odometer_unit
+Data type: character varying
+IsNullable: NO
+--------------------------
+Column name: transmission
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: fuel_type
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: horsepower
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: horsepower_tax
+Data type: double precision
+IsNullable: YES
+--------------------------
+Column name: power
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: co2
+Data type: double precision
+IsNullable: YES
+--------------------------
+Column name: co2_standard
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: car_value
+Data type: double precision
+IsNullable: YES
+--------------------------
+Column name: net_car_value
+Data type: double precision
+IsNullable: YES
+--------------------------
+Column name: residual_value
+Data type: double precision
+IsNullable: YES
+--------------------------
+Column name: plan_to_change_car
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: plan_to_change_bike
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: frame_type
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: electric_assistance
+Data type: boolean
+IsNullable: YES
+--------------------------
+Column name: frame_size
+Data type: double precision
+IsNullable: YES
+--------------------------
+Column name: create_uid
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: create_date
+Data type: timestamp without time zone
+IsNullable: YES
+--------------------------
+Column name: write_uid
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: write_date
+Data type: timestamp without time zone
+IsNullable: YES
+--------------------------
+Column name: mobility_card
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: driver_employee_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: future_driver_employee_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: fleet_ownership
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: fleet_entry_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: fleet_exit_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: vin_chassis_number
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: v5c_number
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: tax_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: motor_insurance_policy_number
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: motor_insurance_expiry
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: motor_insurance_certificate_name
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: git_insurance_policy_number
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: git_insurance_expiry
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: git_insurance_certificate_name
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: public_liability_insurance_policy_number
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: public_liability_insurance_expiry
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: public_liability_insurance_certificate_name
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: monthly_lease_rental
+Data type: numeric
+IsNullable: YES
+--------------------------
+Column name: lease_term_months
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: lease_end_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: purchase_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: sell_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: h2o_type
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: sell_value
+Data type: double precision
+IsNullable: YES
+--------------------------
+Column name: inspector
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: inspection_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: product_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: depots_id
+Data type: integer
+IsNullable: YES
+--------------------------
+Column name: last_inspection_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: next_inspection_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: daily_rental
+Data type: numeric
+IsNullable: YES
+--------------------------
+Column name: annual_premium
+Data type: numeric
+IsNullable: YES
+--------------------------
+Column name: daily_contribution
+Data type: numeric
+IsNullable: YES
+--------------------------
+Column name: legacy_id
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: mot_expiry_date
+Data type: date
+IsNullable: YES
+--------------------------
+Column name: v5c_document_filename
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: mot_certificate_filename
+Data type: character varying
+IsNullable: YES
+--------------------------
+Column name: motor_insurance_certificate
+Data type: bytea
+IsNullable: YES
+--------------------------
+Column name: git_insurance_certificate
+Data type: bytea
+IsNullable: YES
+--------------------------
+Column name: public_liability_insurance_certificate
+Data type: bytea
+IsNullable: YES
+--------------------------
+
+
+2025.01.23 19:25:57
+
+Connected to database: local
+ Connecting to table: res_usersError scanning foreign keys: local
+ Table: res_users
+ Error: sql: no rows in result set
+
+2025.01.23 19:42:02
+
+Connected to database: local
+ Connecting to table: res_usersError scanning rows: local
+ Table: res_users
+ Error: sql: Scan error on column index 4, name "referenced_table_name": converting NULL to string is unsupported
+
+2025.01.23 19:47:57
+
+Connected to database: local
+ Connecting to table: res_usersColumn name: id
+Data type: integer
+IsNullable: false
+Column name: active
+Data type: boolean
+IsNullable: true
+Column name: login
+Data type: character varying
+IsNullable: false
+Column name: password
+Data type: character varying
+IsNullable: true
+Column name: company_id
+Data type: integer
+IsNullable: false
+ForeignTableName: res_company
+--------------------------
+Column name: partner_id
+Data type: integer
+IsNullable: false
+ForeignTableName: res_partner
+--------------------------
+Column name: create_date
+Data type: timestamp without time zone
+IsNullable: true
+Column name: signature
+Data type: text
+IsNullable: true
+Column name: action_id
+Data type: integer
+IsNullable: true
+Column name: share
+Data type: boolean
+IsNullable: true
+Column name: create_uid
+Data type: integer
+IsNullable: true
+ForeignTableName: res_users
+--------------------------
+Column name: write_uid
+Data type: integer
+IsNullable: true
+ForeignTableName: res_users
+--------------------------
+Column name: write_date
+Data type: timestamp without time zone
+IsNullable: true
+Column name: notification_type
+Data type: character varying
+IsNullable: false
+Column name: odoobot_state
+Data type: character varying
+IsNullable: true
+Column name: odoobot_failed
+Data type: boolean
+IsNullable: true
+Column name: sale_team_id
+Data type: integer
+IsNullable: true
+ForeignTableName: crm_team
+--------------------------
+Column name: karma
+Data type: integer
+IsNullable: true
+Column name: rank_id
+Data type: integer
+IsNullable: true
+ForeignTableName: gamification_karma_rank
+--------------------------
+Column name: next_rank_id
+Data type: integer
+IsNullable: true
+ForeignTableName: gamification_karma_rank
+--------------------------
+Column name: website_id
+Data type: integer
+IsNullable: true
+Column name: website_id
+Data type: integer
+IsNullable: true
+ForeignTableName: website
+--------------------------
+Column name: allow_preview
+Data type: boolean
+IsNullable: true
+Column name: depot_id
+Data type: integer
+IsNullable: true
+ForeignTableName: prefered_depots
+--------------------------
+Column name: chatter_position
+Data type: character varying
+IsNullable: true
+Column name: lang
+Data type: character varying
+IsNullable: true
+Column name: is_hide_show_export
+Data type: boolean
+IsNullable: true
+Column name: hide_show_export_apply_on
+Data type: character varying
+IsNullable: true
+
+
+2025.01.23 19:49:19
+
+Connected to database: local
+ Connecting to table: res_usersColumn name: id
+Data type: integer
+IsNullable: false
+--------------------------
+Column name: active
+Data type: boolean
+IsNullable: true
+--------------------------
+Column name: login
+Data type: character varying
+IsNullable: false
+--------------------------
+Column name: password
+Data type: character varying
+IsNullable: true
+--------------------------
+Column name: company_id
+Data type: integer
+IsNullable: false
+ForeignTableName: res_company
+--------------------------
+Column name: partner_id
+Data type: integer
+IsNullable: false
+ForeignTableName: res_partner
+--------------------------
+Column name: create_date
+Data type: timestamp without time zone
+IsNullable: true
+--------------------------
+Column name: signature
+Data type: text
+IsNullable: true
+--------------------------
+Column name: action_id
+Data type: integer
+IsNullable: true
+--------------------------
+Column name: share
+Data type: boolean
+IsNullable: true
+--------------------------
+Column name: create_uid
+Data type: integer
+IsNullable: true
+ForeignTableName: res_users
+--------------------------
+Column name: write_uid
+Data type: integer
+IsNullable: true
+ForeignTableName: res_users
+--------------------------
+Column name: write_date
+Data type: timestamp without time zone
+IsNullable: true
+--------------------------
+Column name: notification_type
+Data type: character varying
+IsNullable: false
+--------------------------
+Column name: odoobot_state
+Data type: character varying
+IsNullable: true
+--------------------------
+Column name: odoobot_failed
+Data type: boolean
+IsNullable: true
+--------------------------
+Column name: sale_team_id
+Data type: integer
+IsNullable: true
+ForeignTableName: crm_team
+--------------------------
+Column name: karma
+Data type: integer
+IsNullable: true
+--------------------------
+Column name: rank_id
+Data type: integer
+IsNullable: true
+ForeignTableName: gamification_karma_rank
+--------------------------
+Column name: next_rank_id
+Data type: integer
+IsNullable: true
+ForeignTableName: gamification_karma_rank
+--------------------------
+Column name: website_id
+Data type: integer
+IsNullable: true
+--------------------------
+Column name: website_id
+Data type: integer
+IsNullable: true
+ForeignTableName: website
+--------------------------
+Column name: allow_preview
+Data type: boolean
+IsNullable: true
+--------------------------
+Column name: depot_id
+Data type: integer
+IsNullable: true
+ForeignTableName: prefered_depots
+--------------------------
+Column name: chatter_position
+Data type: character varying
+IsNullable: true
+--------------------------
+Column name: lang
+Data type: character varying
+IsNullable: true
+--------------------------
+Column name: is_hide_show_export
+Data type: boolean
+IsNullable: true
+--------------------------
+Column name: hide_show_export_apply_on
+Data type: character varying
+IsNullable: true
+--------------------------

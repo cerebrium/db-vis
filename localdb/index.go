@@ -10,10 +10,11 @@ import (
 )
 
 type ColumnSchema struct {
-	ColumnName string
-	DataType   string
-	IsNullable string
-	Child      *ColumnSchema
+	ColumnName             string
+	DataType               string
+	IsNullable             string
+	ReferencesAnotherTable bool
+	ReferencedTableName    *string
 }
 
 type DBDetails struct {
