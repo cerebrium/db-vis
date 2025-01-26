@@ -9,7 +9,7 @@ func Walk(dbd *DBDetails) error {
 	dbd.connect()
 
 	// Internal logging
-	dbd.logger.Log("Connected to database: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
+	dbd.Logger.Log("Connected to database: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
 
 	// Actually write to the struct
 	dbd.schemaWalk(&dbd.Schema, dbd.Table)
@@ -17,13 +17,13 @@ func Walk(dbd *DBDetails) error {
 	// Append the top level table to visited
 	dbd.visitedTables = append(dbd.visitedTables, dbd.Table)
 
-	dbd.logger.Log("past initial schema walk: ")
+	dbd.Logger.Log("past initial schema walk: ")
 
 	// Walk the children of the first query
 	for i := 0; i < len(dbd.Schema); i++ {
 		if dbd.Schema[i].ReferencesAnotherTable {
 
-			dbd.logger.Log("calling child_walk on: " + *dbd.Schema[i].ReferencedTableName)
+			dbd.Logger.Log("calling child_walk on: " + *dbd.Schema[i].ReferencedTableName)
 			dbd.child_walk(*dbd.Schema[i].ReferencedTableName, &dbd.Schema[i].Children)
 		}
 	}
@@ -85,7 +85,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 	// Execute the query
 	rows, err := dbd.dbConn.Query(query, table_name)
 	if err != nil {
-		dbd.logger.Log("Error getting schema details for: " + dbd.Name + "\nTable: " + dbd.Table)
+		dbd.Logger.Log("Error getting schema details for: " + dbd.Name + "\nTable: " + dbd.Table)
 		rows.Close()
 		os.Exit(1)
 	}
@@ -104,7 +104,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 			&col.ReferencedTableName)
 		// &col.ColumnName, &col.DataType, &col.IsNullable)
 		if err != nil {
-			dbd.logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
+			dbd.Logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
 			os.Exit(1)
 		}
 
@@ -116,7 +116,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 
 	// Check for any error encountered during iteration
 	if err := rows.Err(); err != nil {
-		dbd.logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
+		dbd.Logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
 		os.Exit(1)
 	}
 }

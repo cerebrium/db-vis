@@ -21,21 +21,21 @@ type ColumnSchema struct {
 type DBDetails struct {
 	Name          string
 	Table         string
-	isSchema      bool
-	userName      string
+	IsSchema      bool
+	UserName      string
 	dbConn        *sql.DB
-	logger        *locallogger.Logger // Anywhere there is state, there are logs
+	Logger        *locallogger.Logger // Anywhere there is state, there are logs
 	visitedTables []string
 	Schema        []*ColumnSchema
 }
 
 func CreateDbDetails(isSchema bool, name string, table string, userName string, logger *locallogger.Logger) *DBDetails {
 	DbD := DBDetails{
-		isSchema:      isSchema,
+		IsSchema:      isSchema,
 		Name:          name,
 		Table:         table,
-		userName:      userName,
-		logger:        logger,
+		UserName:      userName,
+		Logger:        logger,
 		visitedTables: []string{},
 	}
 
@@ -49,16 +49,16 @@ func (dbd *DBDetails) connect() {
 	)
 
 	dsn := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable",
-		host, port, dbd.userName, dbd.Name)
+		host, port, dbd.UserName, dbd.Name)
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
-		dbd.logger.Log("Error in opening db connection" + err.Error())
+		dbd.Logger.Log("Error in opening db connection" + err.Error())
 		os.Exit(1)
 	}
 
 	if err = db.Ping(); err != nil {
-		dbd.logger.Log("Error in pinging db: " + err.Error())
+		dbd.Logger.Log("Error in pinging db: " + err.Error())
 		os.Exit(1)
 	}
 

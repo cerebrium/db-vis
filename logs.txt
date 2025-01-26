@@ -78,3 +78,85 @@ Error in running formuser aborted
 Connected to database: local
  Connecting to table: res_users
 past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 13:46:28
+
+
+
+2025.01.26 13:47:45
+
+
+
+2025.01.26 13:50:15
+
+
+
+2025.01.26 13:50:25
+
+
+
+2025.01.26 13:59:25
+
+
+
+2025.01.26 14:03:37
+
+
+
+2025.01.26 14:05:15
+
+
+
+2025.01.26 14:05:45
+
+
+
+2025.01.26 14:07:23
+
+
+
+2025.01.26 14:09:35
+
+
+
+2025.01.26 14:13:23
+
+
+
+2025.01.26 14:56:59
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 15:06:33
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 15:08:45
+
+Error in running formuser aborted
+
+2025.01.26 15:09:32
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data call
+
+2025.01.26 15:59:47
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 17:22:28
+
+
+
+2025.01.26 17:23:39
+
+Inside the get data callConnected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local

@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"dbVisualizer.com/localdb"
-	"dbVisualizer.com/views"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -62,9 +61,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.selected[m.cursor] = struct{}{}
 			}
 
-			// Display the selected option
-			// selectedOption := m.choices[m.cursor]
-
+			fmt.Println("Beggining the quest for data!")
 			var isSchema bool
 
 			if m.cursor == 1 {
@@ -75,19 +72,25 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 			name, table, userName := m.SchemaView()
 
-			dbd := localdb.CreateDbDetails(isSchema, name, table, userName, m.logger)
+			m.Dbd.Name = name
+			m.Dbd.Table = table
+			m.Dbd.UserName = userName
+			m.Dbd.IsSchema = isSchema
 
-			err := localdb.Walk(dbd)
+			fmt.Println("Connecting")
+
+			err := localdb.Walk(m.Dbd)
 			if err != nil {
-				m.logger.Log("Was an error returned from walk: " + err.Error())
+				m.Logger.Log("Was an error returned from walk: " + err.Error())
 				os.Exit(1)
 			}
 
-			views.TemplWriteToFile(m.logger, ""+dbd.Name+"_"+dbd.Table, dbd.Schema)
+			fmt.Println("Done searching: please go to localhost:42069")
 
-			string_to_print := "Finished writing html file: " + dbd.Name + "_" + dbd.Table
-
-			fmt.Print(string_to_print)
+			// TODO: remove or finish this. This app now has a react frontend that
+			// can serve the data. For devs this will be built out, for non-devs
+			// a more frendly ui will be built.
+			// views.TemplWriteToFile(m.logger, ""+dbd.Name+"_"+dbd.Table, dbd.Schema)
 
 		}
 	}

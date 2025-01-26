@@ -2,10 +2,11 @@ package appstate
 
 import (
 	locallogger "dbVisualizer.com/localLogger"
+	"dbVisualizer.com/localdb"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-func InitialModel(l *locallogger.Logger) Model {
+func InitialModel(l *locallogger.Logger, dbd *localdb.DBDetails) Model {
 	return Model{
 		// Our to-do list is a grocery list
 		choices: []string{"db schema", "table row"},
@@ -14,7 +15,8 @@ func InitialModel(l *locallogger.Logger) Model {
 		// the  map like a mathematical set. The keys refer to the indexes
 		// of the `choices` slice, above.
 		selected: make(map[int]struct{}),
-		logger:   l,
+		Logger:   l,
+		Dbd:      dbd,
 	}
 }
 
