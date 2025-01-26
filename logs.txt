@@ -160,3 +160,28 @@ past initial schema walk: calling child_walk on: res_companycalling child_walk o
 Inside the get data callConnected to database: local
  Connecting to table: res_users
 past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.01.26 17:56:14
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.01.26 18:14:40
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: local
+
+2025.01.26 19:59:55
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: local
+
+2025.01.26 20:10:27
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsError getting schema details for: local
+Table: res_users

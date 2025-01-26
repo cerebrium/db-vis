@@ -1,8 +1,10 @@
+import { DBDetails } from "../App";
+
 export type Response = {
   Name: string;
 };
 
-export async function get(path: string): Promise<null | Response> {
+export async function get(path: string): Promise<DBDetails | null> {
   const current_domain = window.location.origin + "/api/";
 
   const res = await fetch(current_domain + path, {

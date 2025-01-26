@@ -10,23 +10,23 @@ import (
 )
 
 type ColumnSchema struct {
-	ColumnName             string
-	DataType               string
-	IsNullable             string
-	ReferencesAnotherTable bool
-	ReferencedTableName    *string
-	Children               []*ColumnSchema
+	ColumnName             string          `json:"column_name"`
+	DataType               string          `json:"data_type"`
+	IsNullable             string          `json:"is_nullable"`
+	ReferencesAnotherTable bool            `json:"references_another_table"`
+	ReferencedTableName    *string         `json:"referenced_table_name,omitempty"`
+	Children               []*ColumnSchema `json:"children,omitempty"`
 }
 
 type DBDetails struct {
-	Name          string
-	Table         string
-	IsSchema      bool
-	UserName      string
+	Name          string `json:"name"`
+	Table         string `json:"table"`
+	IsSchema      bool   `json:"is_schema"`
+	UserName      string `json:"user_name"`
 	dbConn        *sql.DB
 	Logger        *locallogger.Logger // Anywhere there is state, there are logs
 	visitedTables []string
-	Schema        []*ColumnSchema
+	Schema        []*ColumnSchema `json:"schema"`
 }
 
 func CreateDbDetails(isSchema bool, name string, table string, userName string, logger *locallogger.Logger) *DBDetails {
