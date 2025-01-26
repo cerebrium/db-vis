@@ -10,29 +10,33 @@ import (
 )
 
 type ColumnSchema struct {
-	ColumnName string
-	DataType   string
-	IsNullable string
-	Child      *ColumnSchema
+	ColumnName             string
+	DataType               string
+	IsNullable             string
+	ReferencesAnotherTable bool
+	ReferencedTableName    *string
+	Children               []*ColumnSchema
 }
 
 type DBDetails struct {
-	name     string
-	table    string
-	isSchema bool
-	userName string
-	dbConn   *sql.DB
-	logger   *locallogger.Logger // Anywhere there is state, there are logs
-	Schema   []*ColumnSchema
+	name          string
+	table         string
+	isSchema      bool
+	userName      string
+	dbConn        *sql.DB
+	logger        *locallogger.Logger // Anywhere there is state, there are logs
+	visitedTables []string
+	Schema        []*ColumnSchema
 }
 
 func CreateDbDetails(isSchema bool, name string, table string, userName string, logger *locallogger.Logger) *DBDetails {
 	DbD := DBDetails{
-		isSchema: isSchema,
-		name:     name,
-		table:    table,
-		userName: userName,
-		logger:   logger,
+		isSchema:      isSchema,
+		name:          name,
+		table:         table,
+		userName:      userName,
+		logger:        logger,
+		visitedTables: []string{},
 	}
 
 	return &DbD
