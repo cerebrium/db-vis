@@ -1,7 +1,11 @@
 package appstate
 
 import (
+	"fmt"
+	"os"
+
 	"dbVisualizer.com/localdb"
+	"dbVisualizer.com/views"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -73,7 +77,18 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 			dbd := localdb.CreateDbDetails(isSchema, name, table, userName, m.logger)
 
-			localdb.Walk(dbd)
+			err := localdb.Walk(dbd)
+			if err != nil {
+				m.logger.Log("Was an error returned from walk: " + err.Error())
+				os.Exit(1)
+			}
+
+			views.TemplWriteToFile(m.logger, ""+dbd.Name+"_"+dbd.Table, dbd.Schema)
+
+			string_to_print := "Finished writing html file: " + dbd.Name + "_" + dbd.Table
+
+			fmt.Print(string_to_print)
+
 		}
 	}
 

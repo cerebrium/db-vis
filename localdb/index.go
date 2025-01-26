@@ -19,8 +19,8 @@ type ColumnSchema struct {
 }
 
 type DBDetails struct {
-	name          string
-	table         string
+	Name          string
+	Table         string
 	isSchema      bool
 	userName      string
 	dbConn        *sql.DB
@@ -32,8 +32,8 @@ type DBDetails struct {
 func CreateDbDetails(isSchema bool, name string, table string, userName string, logger *locallogger.Logger) *DBDetails {
 	DbD := DBDetails{
 		isSchema:      isSchema,
-		name:          name,
-		table:         table,
+		Name:          name,
+		Table:         table,
 		userName:      userName,
 		logger:        logger,
 		visitedTables: []string{},
@@ -49,7 +49,7 @@ func (dbd *DBDetails) connect() {
 	)
 
 	dsn := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable",
-		host, port, dbd.userName, dbd.name)
+		host, port, dbd.userName, dbd.Name)
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {

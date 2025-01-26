@@ -1,49 +1,37 @@
 package localdb
 
 import (
-	"fmt"
 	"os"
 	"slices"
 )
 
-func Walk(dbd *DBDetails) {
+func Walk(dbd *DBDetails) error {
 	dbd.connect()
 
 	// Internal logging
-	dbd.logger.Log("Connected to database: " + dbd.name + "\n Connecting to table: " + dbd.table + "\n")
+	dbd.logger.Log("Connected to database: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
 
 	// Actually write to the struct
-	dbd.schemaWalk(&dbd.Schema, dbd.table)
+	dbd.schemaWalk(&dbd.Schema, dbd.Table)
 
 	// Append the top level table to visited
-	dbd.visitedTables = append(dbd.visitedTables, dbd.table)
+	dbd.visitedTables = append(dbd.visitedTables, dbd.Table)
 
 	dbd.logger.Log("past initial schema walk: ")
-	fmt.Println("what is the length of the length of dbd schems: ", len(dbd.Schema))
 
 	// Walk the children of the first query
 	for i := 0; i < len(dbd.Schema); i++ {
 		if dbd.Schema[i].ReferencesAnotherTable {
 
 			dbd.logger.Log("calling child_walk on: " + *dbd.Schema[i].ReferencedTableName)
-			go dbd.child_walk(*dbd.Schema[i].ReferencedTableName, &dbd.Schema[i].Children)
-		}
-	}
-
-	fmt.Println("past the child walk loop")
-
-	for i := 0; i < len(dbd.Schema); i++ {
-
-		fmt.Println("children length: ", len(dbd.Schema[i].Children))
-		if len(dbd.Schema[i].Children) > 0 {
-			for c := 0; c < len(dbd.Schema[i].Children); c++ {
-				dbd.logger.Log("child val: " + dbd.Schema[i].Children[c].ColumnName)
-			}
+			dbd.child_walk(*dbd.Schema[i].ReferencedTableName, &dbd.Schema[i].Children)
 		}
 	}
 
 	// Close after walking
 	defer dbd.dbConn.Close()
+
+	return nil
 }
 
 // TODO: We don't want circular queries, it will be forever... literally, however,
@@ -61,7 +49,7 @@ func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
 	// Walk its children and recursively grab all data
 	for i := 0; i < len(*children); i++ {
 		if (*children)[i].ReferencesAnotherTable {
-			go dbd.child_walk(*(*children)[i].ReferencedTableName, &(*children)[i].Children)
+			dbd.child_walk(*(*children)[i].ReferencedTableName, &(*children)[i].Children)
 		}
 	}
 }
@@ -97,7 +85,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 	// Execute the query
 	rows, err := dbd.dbConn.Query(query, table_name)
 	if err != nil {
-		dbd.logger.Log("Error getting schema details for: " + dbd.name + "\nTable: " + dbd.table)
+		dbd.logger.Log("Error getting schema details for: " + dbd.Name + "\nTable: " + dbd.Table)
 		rows.Close()
 		os.Exit(1)
 	}
@@ -116,7 +104,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 			&col.ReferencedTableName)
 		// &col.ColumnName, &col.DataType, &col.IsNullable)
 		if err != nil {
-			dbd.logger.Log("Error scanning rows: " + dbd.name + "\n Table: " + dbd.table + "\n Error: " + err.Error())
+			dbd.logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
 			os.Exit(1)
 		}
 
@@ -128,7 +116,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 
 	// Check for any error encountered during iteration
 	if err := rows.Err(); err != nil {
-		dbd.logger.Log("Error scanning rows: " + dbd.name + "\n Table: " + dbd.table + "\n Error: " + err.Error())
+		dbd.logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
 		os.Exit(1)
 	}
 }

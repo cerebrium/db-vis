@@ -57,7 +57,6 @@ func (m Model) SchemaView() (string, string, string) {
 
 	form := huh.NewForm(
 		huh.NewGroup(
-
 			huh.NewInput().Title("What is the db name").Value(&name),
 		),
 		huh.NewGroup(
