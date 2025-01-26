@@ -68,3 +68,13 @@ past initial schema walk: calling child_walk on: res_companycalling child_walk o
 Connected to database: local
  Connecting to table: res_users
 past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 13:29:40
+
+Error in running formuser aborted
+
+2025.01.26 13:31:50
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
