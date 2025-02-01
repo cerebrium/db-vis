@@ -1,54 +1,55 @@
 package localdb
 
 import (
-	"fmt"
 	"os"
 	"slices"
+
+	"github.com/gorilla/websocket"
 )
 
-func Walk(dbd *DBDetails) {
+func Walk(dbd *DBDetails) error {
+	dbd.Conn.WriteMessage(websocket.TextMessage, []byte("Fetching data"))
 	dbd.connect()
 
 	// Internal logging
-	dbd.logger.Log("Connected to database: " + dbd.name + "\n Connecting to table: " + dbd.table + "\n")
+	dbd.Logger.Log("Connected to database: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
 
 	// Actually write to the struct
-	dbd.schemaWalk(&dbd.Schema, dbd.table)
+	dbd.schemaWalk(&dbd.Schema, dbd.Table)
 
 	// Append the top level table to visited
-	dbd.visitedTables = append(dbd.visitedTables, dbd.table)
+	dbd.visitedTables = append(dbd.visitedTables, dbd.Table)
 
-	dbd.logger.Log("past initial schema walk: ")
-	fmt.Println("what is the length of the length of dbd schems: ", len(dbd.Schema))
+	dbd.Logger.Log("past initial schema walk: ")
 
 	// Walk the children of the first query
 	for i := 0; i < len(dbd.Schema); i++ {
 		if dbd.Schema[i].ReferencesAnotherTable {
 
-			dbd.logger.Log("calling child_walk on: " + *dbd.Schema[i].ReferencedTableName)
-			go dbd.child_walk(*dbd.Schema[i].ReferencedTableName, &dbd.Schema[i].Children)
-		}
-	}
-
-	fmt.Println("past the child walk loop")
-
-	for i := 0; i < len(dbd.Schema); i++ {
-
-		fmt.Println("children length: ", len(dbd.Schema[i].Children))
-		if len(dbd.Schema[i].Children) > 0 {
-			for c := 0; c < len(dbd.Schema[i].Children); c++ {
-				dbd.logger.Log("child val: " + dbd.Schema[i].Children[c].ColumnName)
-			}
+			dbd.Logger.Log("calling child_walk on: " + *dbd.Schema[i].ReferencedTableName)
+			dbd.child_walk(*dbd.Schema[i].ReferencedTableName, &dbd.Schema[i].Children)
 		}
 	}
 
 	// Close after walking
 	defer dbd.dbConn.Close()
+
+	dbd.Logger.Log("Inside the get data call")
+	// The cli process is not done yet
+
+	dbd.Logger.Log("The name: " + dbd.Name)
+
+	dbd.Conn.WriteJSON(dbd)
+
+	return nil
 }
 
 // TODO: We don't want circular queries, it will be forever... literally, however,
 // multiple children might reference a table differently, we still want to
 // represent that.
+//
+// This means that we have cases where there are potential circular references in
+// the referencesOtherTables, but not in the children
 func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
 	if slices.Contains(dbd.visitedTables, table_name) {
 		return
@@ -61,7 +62,7 @@ func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
 	// Walk its children and recursively grab all data
 	for i := 0; i < len(*children); i++ {
 		if (*children)[i].ReferencesAnotherTable {
-			go dbd.child_walk(*(*children)[i].ReferencedTableName, &(*children)[i].Children)
+			dbd.child_walk(*(*children)[i].ReferencedTableName, &(*children)[i].Children)
 		}
 	}
 }
@@ -97,7 +98,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 	// Execute the query
 	rows, err := dbd.dbConn.Query(query, table_name)
 	if err != nil {
-		dbd.logger.Log("Error getting schema details for: " + dbd.name + "\nTable: " + dbd.table)
+		dbd.Logger.Log("Error getting schema details for: " + dbd.Name + "\nTable: " + dbd.Table)
 		rows.Close()
 		os.Exit(1)
 	}
@@ -114,11 +115,12 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 			&col.IsNullable,
 			&col.ReferencesAnotherTable,
 			&col.ReferencedTableName)
-		// &col.ColumnName, &col.DataType, &col.IsNullable)
 		if err != nil {
-			dbd.logger.Log("Error scanning rows: " + dbd.name + "\n Table: " + dbd.table + "\n Error: " + err.Error())
+			dbd.Logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
 			os.Exit(1)
 		}
+
+		col.Table = table_name
 
 		// In case we need to add children always append this
 		col.Children = []*ColumnSchema{}
@@ -128,7 +130,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 
 	// Check for any error encountered during iteration
 	if err := rows.Err(); err != nil {
-		dbd.logger.Log("Error scanning rows: " + dbd.name + "\n Table: " + dbd.table + "\n Error: " + err.Error())
+		dbd.Logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
 		os.Exit(1)
 	}
 }

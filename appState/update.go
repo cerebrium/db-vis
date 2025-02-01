@@ -1,6 +1,9 @@
 package appstate
 
 import (
+	"fmt"
+	"os"
+
 	"dbVisualizer.com/localdb"
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -58,9 +61,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.selected[m.cursor] = struct{}{}
 			}
 
-			// Display the selected option
-			// selectedOption := m.choices[m.cursor]
-
+			fmt.Println("Beggining the quest for data!")
 			var isSchema bool
 
 			if m.cursor == 1 {
@@ -71,9 +72,24 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 			name, table, userName := m.SchemaView()
 
-			dbd := localdb.CreateDbDetails(isSchema, name, table, userName, m.logger)
+			m.Dbd.Name = name
+			m.Dbd.Table = table
+			m.Dbd.UserName = userName
+			m.Dbd.IsSchema = isSchema
 
-			localdb.Walk(dbd)
+			fmt.Println("Connecting")
+
+			err := localdb.Walk(m.Dbd)
+			if err != nil {
+				m.Logger.Log("Was an error returned from walk: " + err.Error())
+				os.Exit(1)
+			}
+
+			fmt.Println("Done searching: please go to localhost:42069")
+
+			// TODO: make an infinite loop that lets the user search for more
+			// queries. It will take the schema name only
+
 		}
 	}
 

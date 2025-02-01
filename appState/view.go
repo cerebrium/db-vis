@@ -57,7 +57,6 @@ func (m Model) SchemaView() (string, string, string) {
 
 	form := huh.NewForm(
 		huh.NewGroup(
-
 			huh.NewInput().Title("What is the db name").Value(&name),
 		),
 		huh.NewGroup(
@@ -70,7 +69,7 @@ func (m Model) SchemaView() (string, string, string) {
 
 	err := form.Run()
 	if err != nil {
-		m.logger.Log("Error in running form" + err.Error())
+		m.Logger.Log("Error in running form" + err.Error())
 		os.Exit(1)
 	}
 

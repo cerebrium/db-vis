@@ -44,3 +44,180 @@ past initial schema walk: calling child_walk on: res_companycalling child_walk o
 Connected to database: local
  Connecting to table: res_users
 past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotschild val: idchild val: namechild val: partner_idchild val: currency_idchild val: sequencechild val: create_datechild val: parent_idchild val: report_headerchild val: report_footerchild val: company_detailschild val: logo_webchild val: emailchild val: phonechild val: mobilechild val: company_registrychild val: paperformat_idchild val: external_report_layout_idchild val: base_onboarding_company_statechild val: fontchild val: primary_colorchild val: secondary_colorchild val: layout_backgroundchild val: create_uidchild val: write_uidchild val: write_datechild val: resource_calendar_idchild val: hr_presence_control_email_amountchild val: hr_presence_control_ip_listchild val: partner_gidchild val: iap_enrich_auto_donechild val: snailmail_colorchild val: snailmail_coverchild val: snailmail_duplexchild val: sign_termschild val: sign_terms_typechild val: sign_terms_htmlchild val: fiscalyear_last_daychild val: fiscalyear_last_monthchild val: period_lock_datechild val: fiscalyear_lock_datechild val: tax_lock_datechild val: transfer_account_idchild val: expects_chart_of_accountschild val: chart_template_idchild val: bank_account_code_prefixchild val: cash_account_code_prefixchild val: default_cash_difference_income_account_idchild val: default_cash_difference_expense_account_idchild val: account_journal_suspense_account_idchild val: account_journal_payment_debit_account_idchild val: account_journal_payment_credit_account_idchild val: transfer_account_code_prefixchild val: account_sale_tax_idchild val: account_purchase_tax_idchild val: tax_calculation_rounding_methodchild val: currency_exchange_journal_idchild val: income_currency_exchange_account_idchild val: expense_currency_exchange_account_idchild val: anglo_saxon_accountingchild val: property_stock_account_input_categ_idchild val: property_stock_account_output_categ_idchild val: property_stock_valuation_account_idchild val: incoterm_idchild val: qr_codechild val: invoice_is_emailchild val: invoice_is_printchild val: account_opening_move_idchild val: account_opening_datechild val: account_setup_bank_data_statechild val: account_setup_fy_data_statechild val: account_setup_coa_statechild val: account_setup_taxes_statechild val: account_onboarding_invoice_layout_statechild val: account_onboarding_create_invoice_statechild val: account_onboarding_sale_tax_statechild val: account_invoice_onboarding_statechild val: account_dashboard_onboarding_statechild val: invoice_termschild val: terms_typechild val: invoice_terms_htmlchild val: account_setup_bill_statechild val: account_default_pos_receivable_account_idchild val: expense_accrual_account_idchild val: revenue_accrual_account_idchild val: automatic_entry_default_journal_idchild val: account_fiscal_country_idchild val: tax_exigibilitychild val: tax_cash_basis_journal_idchild val: account_cash_basis_base_account_idchild val: payment_acquirer_onboarding_statechild val: payment_onboarding_payment_methodchild val: invoice_is_snailmailchild val: portal_confirmation_signchild val: portal_confirmation_paychild val: quotation_validity_dayschild val: sale_quotation_onboarding_statechild val: sale_onboarding_order_confirmation_statechild val: sale_onboarding_sample_quotation_statechild val: sale_onboarding_payment_methodchild val: extra_hourchild val: extra_daychild val: min_extra_hourchild val: extra_productchild val: nomenclature_idchild val: internal_transit_location_idchild val: stock_move_email_validationchild val: stock_mail_confirmation_template_idchild val: annual_inventory_monthchild val: annual_inventory_daychild val: stock_move_sms_validationchild val: stock_sms_confirmation_template_idchild val: has_received_warning_stock_smschild val: security_leadchild val: rental_loc_idchild val: padding_timechild val: social_twitterchild val: social_facebookchild val: social_githubchild val: social_linkedinchild val: social_youtubechild val: social_instagramchild val: website_idchild val: lessor_namechild val: last_send_timechild val: last_send_bychild val: slip_sequencechild val: next_yearchild val: trash_durationchild val: trash_duration_uomchild val: trash_filter_modechild val: trash_screenshotchild val: idchild val: namechild val: descriptionchild val: description_motivationalchild val: karma_minchild val: create_uidchild val: create_datechild val: write_uidchild val: write_date
+
+2025.01.26 11:49:47
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsCould not write create file: open /Users/nicholasshankland/Desktop/code/local/res_users: no such file or directory
+
+2025.01.26 11:53:51
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 11:54:56
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsCould not write create file: open /Users/nicholasshankland/Desktop/code/db-visualizer/local_res_users/.html: no such file or directory
+
+2025.01.26 11:55:40
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 13:29:40
+
+Error in running formuser aborted
+
+2025.01.26 13:31:50
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 13:46:28
+
+
+
+2025.01.26 13:47:45
+
+
+
+2025.01.26 13:50:15
+
+
+
+2025.01.26 13:50:25
+
+
+
+2025.01.26 13:59:25
+
+
+
+2025.01.26 14:03:37
+
+
+
+2025.01.26 14:05:15
+
+
+
+2025.01.26 14:05:45
+
+
+
+2025.01.26 14:07:23
+
+
+
+2025.01.26 14:09:35
+
+
+
+2025.01.26 14:13:23
+
+
+
+2025.01.26 14:56:59
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 15:06:33
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 15:08:45
+
+Error in running formuser aborted
+
+2025.01.26 15:09:32
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data call
+
+2025.01.26 15:59:47
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depots
+
+2025.01.26 17:22:28
+
+
+
+2025.01.26 17:23:39
+
+Inside the get data callConnected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.01.26 17:56:14
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.01.26 18:14:40
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: local
+
+2025.01.26 19:59:55
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: localInside the get data callThe name: localInside the get data callThe name: local
+
+2025.01.26 20:10:27
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsError getting schema details for: local
+Table: res_users
+
+2025.02.01 14:40:27
+
+Error in upgrading connection: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header
+
+2025.02.01 14:42:25
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.02.01 14:43:54
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.02.01 16:02:41
+
+
+
+2025.02.01 16:03:05
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.02.01 16:12:44
+
+
+
+2025.02.01 16:13:45
+
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
