@@ -6,6 +6,7 @@ import (
 	"os"
 
 	locallogger "dbVisualizer.com/localLogger"
+	"github.com/gorilla/websocket"
 	_ "github.com/lib/pq" // Import the PostgreSQL driver
 )
 
@@ -15,6 +16,7 @@ type ColumnSchema struct {
 	IsNullable             string          `json:"is_nullable"`
 	ReferencesAnotherTable bool            `json:"references_another_table"`
 	ReferencedTableName    *string         `json:"referenced_table_name,omitempty"`
+	Table                  string          `jsxon:"table"`
 	Children               []*ColumnSchema `json:"children,omitempty"`
 }
 
@@ -27,6 +29,7 @@ type DBDetails struct {
 	Logger        *locallogger.Logger // Anywhere there is state, there are logs
 	visitedTables []string
 	Schema        []*ColumnSchema `json:"schema"`
+	Conn          *websocket.Conn
 }
 
 func CreateDbDetails(isSchema bool, name string, table string, userName string, logger *locallogger.Logger) *DBDetails {

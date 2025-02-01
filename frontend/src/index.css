@@ -1,6 +1,6 @@
 body {
   position: relative;
-  width: 100vw;
+  min-width: 100vw;
   height: 100vh;
   margin: 0px;
   padding: 0px;
@@ -18,5 +18,30 @@ body {
 }
 
 .sect {
+  position: relative;
+  max-width: 300px;
+  margin-top: 10px;
+}
+
+.chart_container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
   border: 1px solid black;
+}
+
+.nested_chart_container {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 20px;
+  border: 1px solid black;
+}
+
+.text_box {
+  display: flex;
+  border-right: 1px solid black;
+  padding: 5px;
 }

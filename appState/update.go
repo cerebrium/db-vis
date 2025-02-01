@@ -87,10 +87,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 			fmt.Println("Done searching: please go to localhost:42069")
 
-			// TODO: remove or finish this. This app now has a react frontend that
-			// can serve the data. For devs this will be built out, for non-devs
-			// a more frendly ui will be built.
-			// views.TemplWriteToFile(m.logger, ""+dbd.Name+"_"+dbd.Table, dbd.Schema)
+			// TODO: make an infinite loop that lets the user search for more
+			// queries. It will take the schema name only
 
 		}
 	}

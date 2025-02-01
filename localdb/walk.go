@@ -3,9 +3,12 @@ package localdb
 import (
 	"os"
 	"slices"
+
+	"github.com/gorilla/websocket"
 )
 
 func Walk(dbd *DBDetails) error {
+	dbd.Conn.WriteMessage(websocket.TextMessage, []byte("Fetching data"))
 	dbd.connect()
 
 	// Internal logging
@@ -31,12 +34,22 @@ func Walk(dbd *DBDetails) error {
 	// Close after walking
 	defer dbd.dbConn.Close()
 
+	dbd.Logger.Log("Inside the get data call")
+	// The cli process is not done yet
+
+	dbd.Logger.Log("The name: " + dbd.Name)
+
+	dbd.Conn.WriteJSON(dbd)
+
 	return nil
 }
 
 // TODO: We don't want circular queries, it will be forever... literally, however,
 // multiple children might reference a table differently, we still want to
 // represent that.
+//
+// This means that we have cases where there are potential circular references in
+// the referencesOtherTables, but not in the children
 func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
 	if slices.Contains(dbd.visitedTables, table_name) {
 		return
@@ -102,11 +115,12 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 			&col.IsNullable,
 			&col.ReferencesAnotherTable,
 			&col.ReferencedTableName)
-		// &col.ColumnName, &col.DataType, &col.IsNullable)
 		if err != nil {
 			dbd.Logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
 			os.Exit(1)
 		}
+
+		col.Table = table_name
 
 		// In case we need to add children always append this
 		col.Children = []*ColumnSchema{}

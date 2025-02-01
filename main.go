@@ -88,8 +88,36 @@ func main() {
 			return c.File(filepath.Join("frontend", "dist", "index.html"))
 		})
 
+		// We want to make this be a websocket so that each time
+		// the user updates the cli, the data is sent to the fe.
 		app.GET("/api/get_data", func(c echo.Context) error {
-			return routes.GetDbData(c, dbd)
+			// Upgrade to websocket, and return ref to conn
+			conn, err := routes.UpgradeConnection(c, dbd.Logger)
+			if err != nil {
+				dbd.Logger.Log("Error from upgrade: " + err.Error())
+				os.Exit(1)
+			}
+
+			defer conn.Close()
+
+			dbd.Conn = conn
+			for {
+				// We don't expect the fe to make any requests. Those are handled by the cli
+				// But for local dev, want to just get the data
+				_, a, err := conn.ReadMessage()
+				if err != nil {
+					break
+				}
+
+				if a != nil {
+					fmt.Println("requesting data")
+
+					if dbd.Schema != nil {
+						dbd.Conn.WriteJSON(dbd)
+					}
+				}
+			}
+			return nil
 		})
 
 		app.Logger.Fatal(app.Start(":42069"))

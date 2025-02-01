@@ -7,15 +7,17 @@ type colProps = {
 export const Rows: React.FC<colProps> = ({ col }) => {
   return (
     <section className="sect">
-      <h4>{col.column_name}</h4>
-      <h4>{col.data_type}</h4>
+      <div className="text_box">
+        <h4>Name: {col.column_name}</h4>
+        <h4>Type: {col.data_type}</h4>
+      </div>
       {col.children ? (
-        <ul>
+        <div className="nested_chart_container">
           {col.children &&
             col.children.map((el) => {
               return <Rows col={el} />;
             })}
-        </ul>
+        </div>
       ) : (
         <></>
       )}

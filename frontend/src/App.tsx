@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import { get } from "./requests/get";
 import { Rows } from "./components/rows";
+import { useDbVizData } from "./features/db_viz_data/db_viz_hook";
+import { useDbVizDataMethods } from "./features/db_viz_data/db_viz_data";
 
 export type ColumnSchema = {
   column_name: string;
@@ -10,6 +10,7 @@ export type ColumnSchema = {
   references_another_table: boolean;
   referenced_table_name?: string | null; // Optional and can be null
   children?: ColumnSchema[]; // Optional recursive array of ColumnSchema
+  table: string;
 };
 
 export type DBDetails = {
@@ -22,28 +23,21 @@ export type DBDetails = {
 };
 
 function App() {
-  const [data, setData] = useState<DBDetails | null>(null);
+  // Set up the websocket
+  useDbVizData();
 
-  useEffect(() => {
-    get("get_data").then((res) => {
-      if (res) {
-        setData(res);
-        console.log("what is the res: ", res);
-      }
-    });
-  }, []);
+  const [data, _, __] = useDbVizDataMethods();
 
   if (!data) return <div>Loading...</div>;
   return (
     <main className="main">
       <h3>Displaying DB: {data.name}</h3>
       <h4>Displaying DB: {data.table}</h4>
-      <ul>
+      <div className="chart_container">
         {data.schema.map((el) => {
-          console.log("what is the el: ", el);
           return <Rows col={el} />;
         })}
-      </ul>
+      </div>
     </main>
   );
 }
