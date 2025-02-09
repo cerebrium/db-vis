@@ -4,6 +4,7 @@ body {
   height: 100vh;
   margin: 0px;
   padding: 0px;
+  background-color: black;
 }
 
 #root {
@@ -26,22 +27,45 @@ body {
 .chart_container {
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
-  border: 1px solid black;
+  width: 250px;
+  margin-left: 1rem;
+  padding: 1rem;
 }
 
-.nested_chart_container {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  margin-top: 20px;
-  border: 1px solid black;
+p {
+  margin: 0px;
 }
 
 .text_box {
   display: flex;
-  border-right: 1px solid black;
+  border: 1px solid black;
   padding: 5px;
+}
+
+.nested_children {
+  margin-left: 80px;
+}
+
+.detail_display {
+  color: lightseagreen;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid lightseagreen;
+  width: 220px;
+  overflow-y: ellipsis;
+}
+
+summary {
+  white-space: nowrap;
+  color: lightslategray;
+  margin: 20px 0px;
+}
+
+.details_container {
+  margin: 10px 0px;
 }
