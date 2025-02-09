@@ -221,3 +221,55 @@ past initial schema walk: calling child_walk on: res_companycalling child_walk o
 Connected to database: local
  Connecting to table: res_users
 past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.02.09 18:49:35
+
+Error in running formuser aborted
+
+2025.02.09 18:49:54
+
+
+
+2025.02.09 18:50:19
+
+
+
+2025.02.09 18:52:47
+
+
+
+2025.02.09 18:54:41
+
+before db connect: local
+ Connecting to table: res_users
+
+
+2025.02.09 18:55:32
+
+before db connect: local
+ Connecting to table: res_users
+before db connect: local
+ Connecting to table: res_users
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.02.09 18:57:39
+
+before db connect: local
+ Connecting to table: res_users
+before db connect: local
+ Connecting to table: res_users
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local
+
+2025.02.09 19:31:38
+
+before db connect: local
+ Connecting to table: res_users
+before db connect: local
+ Connecting to table: res_users
+Connected to database: local
+ Connecting to table: res_users
+past initial schema walk: calling child_walk on: res_companycalling child_walk on: res_partnercalling child_walk on: res_userscalling child_walk on: res_userscalling child_walk on: crm_teamcalling child_walk on: gamification_karma_rankcalling child_walk on: gamification_karma_rankcalling child_walk on: websitecalling child_walk on: prefered_depotsInside the get data callThe name: local

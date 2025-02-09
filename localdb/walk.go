@@ -8,7 +8,13 @@ import (
 )
 
 func Walk(dbd *DBDetails) error {
-	dbd.Conn.WriteMessage(websocket.TextMessage, []byte("Fetching data"))
+	dbd.Logger.Log("before db connect: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
+	if dbd.Conn != nil {
+		dbd.Conn.WriteMessage(websocket.TextMessage, []byte("Fetching data"))
+	}
+
+	dbd.Logger.Log("before db connect: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
+
 	dbd.connect()
 
 	// Internal logging
@@ -39,7 +45,9 @@ func Walk(dbd *DBDetails) error {
 
 	dbd.Logger.Log("The name: " + dbd.Name)
 
-	dbd.Conn.WriteJSON(dbd)
+	if dbd.Conn != nil {
+		dbd.Conn.WriteJSON(dbd)
+	}
 
 	return nil
 }

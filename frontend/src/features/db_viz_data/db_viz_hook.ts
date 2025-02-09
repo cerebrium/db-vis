@@ -6,7 +6,8 @@ import { update_data } from "./db_viz_slice";
 export const useDbVizData = () => {
   const dispatch = useAppDispatch();
   const ws = useRef<WebSocket | null>(null);
-  let current_domain = window.location.origin + "/api/get_data";
+  // TODO: make this be correct
+  let current_domain = "http://localhost:42069" + "/api/get_data";
   current_domain = current_domain.replace("http", "ws");
 
   useEffect(() => {
