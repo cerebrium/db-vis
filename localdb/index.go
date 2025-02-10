@@ -11,12 +11,13 @@ import (
 )
 
 type ColumnSchema struct {
+	Id                     string          `json:"id"`
 	ColumnName             string          `json:"column_name"`
 	DataType               string          `json:"data_type"`
 	IsNullable             string          `json:"is_nullable"`
 	ReferencesAnotherTable bool            `json:"references_another_table"`
 	ReferencedTableName    *string         `json:"referenced_table_name,omitempty"`
-	Table                  string          `jsxon:"table"`
+	Table                  string          `json:"table"`
 	Children               []*ColumnSchema `json:"children,omitempty"`
 }
 

@@ -4,6 +4,7 @@ import (
 	"os"
 	"slices"
 
+	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 )
 
@@ -124,11 +125,12 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 			&col.ReferencesAnotherTable,
 			&col.ReferencedTableName)
 		if err != nil {
-			dbd.Logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
+			dbd.Logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + table_name + "\n Error: " + err.Error())
 			os.Exit(1)
 		}
 
-		col.Table = table_name
+		col.Table = table_name // TODO: might not need this
+		col.Id = uuid.New().String()
 
 		// In case we need to add children always append this
 		col.Children = []*ColumnSchema{}
@@ -138,7 +140,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 
 	// Check for any error encountered during iteration
 	if err := rows.Err(); err != nil {
-		dbd.Logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + dbd.Table + "\n Error: " + err.Error())
+		dbd.Logger.Log("Error scanning rows: " + dbd.Name + "\n Table: " + table_name + "\n Error: " + err.Error())
 		os.Exit(1)
 	}
 }

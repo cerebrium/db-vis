@@ -6,6 +6,8 @@ require (
 	github.com/a-h/templ v0.3.819
 	github.com/charmbracelet/bubbletea v1.2.4
 	github.com/charmbracelet/huh v0.6.0
+	github.com/google/uuid v1.6.0
+	github.com/gorilla/websocket v1.5.3
 	github.com/labstack/echo-contrib v0.17.2
 	github.com/labstack/echo/v4 v4.13.3
 	github.com/lib/pq v1.10.9
@@ -25,7 +27,6 @@ require (
 	github.com/charmbracelet/x/term v0.2.1 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/erikgeiser/coninput v0.0.0-20211004153227-1c3628e74d0f // indirect
-	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/klauspost/compress v1.17.11 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect

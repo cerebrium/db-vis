@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
-import type { DBDetails } from "../../App";
+import type { DBDetails } from "../../types";
 
 // Define a type for the slice state
-interface CounterState {
+export interface CounterState {
   value: DBDetails | null;
 }
+
+type SelectSubtree = {
+  table: string;
+};
 
 // Define the initial state using that type
 const initialState: CounterState = {

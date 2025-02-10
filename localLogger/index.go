@@ -52,7 +52,8 @@ func CreateLogger() (*Logger, error) {
 }
 
 func (l *Logger) Log(str string) {
-	_, err := l.File.Write([]byte(str))
+	new_line_str := str + "\n\r"
+	_, err := l.File.Write([]byte(new_line_str))
 	if err != nil {
 		fmt.Println("Error in writer: ", err)
 		os.Exit(1)

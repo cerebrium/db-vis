@@ -1,4 +1,4 @@
-import { DBDetails } from "../App";
+import type { DBDetails } from "../types";
 
 export type Response = {
   Name: string;

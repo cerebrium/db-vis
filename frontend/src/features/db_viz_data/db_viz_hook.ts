@@ -1,11 +1,12 @@
 import { useEffect, useRef } from "react";
-import type { DBDetails } from "../../App";
 import { useAppDispatch } from "../../app/hooks";
 import { update_data } from "./db_viz_slice";
+import type { DBDetails } from "../../types";
 
 export const useDbVizData = () => {
   const dispatch = useAppDispatch();
   const ws = useRef<WebSocket | null>(null);
+
   // TODO: make this be correct
   let current_domain = "http://localhost:42069" + "/api/get_data";
   current_domain = current_domain.replace("http", "ws");
@@ -14,12 +15,10 @@ export const useDbVizData = () => {
     ws.current = new WebSocket(current_domain);
 
     ws.current.onopen = function () {
-      console.log("Websocket is opened");
       ws.current?.send("hello");
     };
 
     ws.current.onmessage = function (event: MessageEvent) {
-      console.log("What is the message: ", event.data);
       if (event.data === "Fetching data") {
         alert("Data is being fetched");
       } else {
@@ -47,7 +46,7 @@ export const useDbVizData = () => {
       ws.current?.close();
     };
     // We shouldn't need this here
-  }, [update_data]);
+  }, []);
 
   return ws.current;
 };

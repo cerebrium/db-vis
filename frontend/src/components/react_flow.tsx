@@ -1,6 +1,6 @@
 import { ReactFlow } from "@xyflow/react";
-import { ColumnSchema } from "../App";
 import { GraphData } from "../utils/format_column_data";
+import type { ColumnSchema } from "../types";
 
 export type ReactFlowComponentProps = {
   data: ColumnSchema[];

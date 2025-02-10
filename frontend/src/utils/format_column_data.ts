@@ -1,4 +1,4 @@
-import { ColumnSchema } from "../App";
+import type { ColumnSchema } from "../types";
 
 export type FlowNode = {
   id: string;
