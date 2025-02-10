@@ -129,7 +129,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 			os.Exit(1)
 		}
 
-		col.Table = table_name // TODO: might not need this
+		col.Table = table_name
 		col.Id = uuid.New().String()
 
 		// In case we need to add children always append this

@@ -112,8 +112,14 @@ func main() {
 				if a != nil {
 					fmt.Println("requesting data")
 
+					// print the cycles --> this is infinite
+					// spew.Dump(dbd.Schema)
+
 					if dbd.Schema != nil {
-						dbd.Conn.WriteJSON(dbd)
+						err := dbd.Conn.WriteJSON(dbd)
+						if err != nil {
+							dbd.Logger.Log("json error: " + err.Error())
+						}
 					}
 				}
 			}

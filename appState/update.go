@@ -85,6 +85,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				os.Exit(1)
 			}
 
+			fmt.Println("the struct: ", m.Dbd.Schema)
+
+			// spew.Dump(m.Dbd.Schema)
+
 			fmt.Println("Done searching: please go to localhost:42069")
 
 			// TODO: make an infinite loop that lets the user search for more

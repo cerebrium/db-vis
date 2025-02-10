@@ -911,3 +911,420 @@ ____________________________________O/_______
 {"time":"2025-02-10T11:03:56.168697Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1588250,"latency_human":"1.58825ms","bytes_in":0,"bytes_out":0}
 {"time":"2025-02-10T11:17:23.812457Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":807635727375,"latency_human":"13m27.635727375s","bytes_in":0,"bytes_out":0}
 {"time":"2025-02-10T11:18:27.748149Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":456416,"latency_human":"456.416µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T11:30:34.643273Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":726881643625,"latency_human":"12m6.881643625s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T11:30:34.785412Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":37106000,"latency_human":"37.106ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T15:13:16.509018Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":543583,"latency_human":"543.583µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T15:13:17.170306Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":653436708,"latency_human":"653.436708ms","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T15:13:17.286952Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":141958,"latency_human":"141.958µs","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T15:18:02.579574Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":528416,"latency_human":"528.416µs","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T15:36:08.772015Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1289982792,"latency_human":"1.289982792s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T15:36:08.837464Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":526542,"latency_human":"526.542µs","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T17:53:36.691969Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":26367755583,"latency_human":"26.367755583s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T17:54:08.808716Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":32115409750,"latency_human":"32.11540975s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T17:54:13.349219Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":4539742917,"latency_human":"4.539742917s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T17:54:26.970749Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":13617904667,"latency_human":"13.617904667s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T17:54:27.069635Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":808708,"latency_human":"808.708µs","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T17:57:44.947325Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":26867240875,"latency_human":"26.867240875s","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:04:17.610554Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":304,"error":"","latency":263209,"latency_human":"263.209µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T18:04:17.619271Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-BWHqHq1q.js","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":304,"error":"","latency":315292,"latency_human":"315.292µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T18:04:17.629056Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-BWHwLnNL.css","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":304,"error":"","latency":9728167,"latency_human":"9.728167ms","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T18:04:17.928264Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/vite.svg","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":304,"error":"","latency":197125,"latency_human":"197.125µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T18:04:20.851439Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-BWHwLnNL.css","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":6464417,"latency_human":"6.464417ms","bytes_in":0,"bytes_out":492}
+{"time":"2025-02-10T18:04:23.586736Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":304,"error":"","latency":530417,"latency_human":"530.417µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T18:04:23.592677Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":5665618208,"latency_human":"5.665618208s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T18:04:23.597002Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-BWHwLnNL.css","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":257042,"latency_human":"257.042µs","bytes_in":0,"bytes_out":492}
+{"time":"2025-02-10T18:04:41.460988Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":17843641875,"latency_human":"17.843641875s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T18:06:32.373238Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":878416,"latency_human":"878.416µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T18:06:37.828594Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":5445300459,"latency_human":"5.445300459s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T18:06:37.894031Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":3568458,"latency_human":"3.568458ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:10:01.113866Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1179292,"latency_human":"1.179292ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:11:19.922741Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1569166,"latency_human":"1.569166ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:17:28.122772Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1825458,"latency_human":"1.825458ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:25:19.267249Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1117458,"latency_human":"1.117458ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:26:42.926273Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1224542,"latency_human":"1.224542ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:31:57.007925Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1094666,"latency_human":"1.094666ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:32:30.478696Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":992667,"latency_human":"992.667µs","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:34:32.253549Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1168708,"latency_human":"1.168708ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:37:57.888678Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":881792,"latency_human":"881.792µs","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:41:39.511568Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1114750,"latency_human":"1.11475ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:46:15.843548Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1216958,"latency_human":"1.216958ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T18:58:29.96858Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1093041,"latency_human":"1.093041ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-10T19:14:08.984071Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1855708,"latency_human":"1.855708ms","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:15:00.973856Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":51991862875,"latency_human":"51.991862875s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:22:06.926435Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":425960814250,"latency_human":"7m5.96081425s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:22:10.117471Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":3190125500,"latency_human":"3.1901255s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:22:23.11402Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":12995357958,"latency_human":"12.995357958s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:22:54.181456Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":31066739542,"latency_human":"31.066739542s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:23:40.27597Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":46091743417,"latency_human":"46.091743417s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:23:43.372439Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":3094864208,"latency_human":"3.094864208s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:23:43.421816Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1676875,"latency_human":"1.676875ms","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:25:04.301437Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":80868760875,"latency_human":"1m20.868760875s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:25:06.604202Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":2301094333,"latency_human":"2.301094333s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:25:09.261355Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":2655781791,"latency_human":"2.655781791s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:25:09.326133Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":751875,"latency_human":"751.875µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:25:37.464032Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":28125919459,"latency_human":"28.125919459s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:25:40.613135Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":3146894209,"latency_human":"3.146894209s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:25:40.676436Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":152625,"latency_human":"152.625µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:25:53.78077Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":13093389167,"latency_human":"13.093389167s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:26:17.156739Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":23375312167,"latency_human":"23.375312167s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:26:57.788315Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":40630965208,"latency_human":"40.630965208s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:27:11.133298Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":13344151625,"latency_human":"13.344151625s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:27:14.938229Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":3804263666,"latency_human":"3.804263666s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:27:15.002375Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":811084,"latency_human":"811.084µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:27:41.112474Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":26097985750,"latency_human":"26.09798575s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:28:25.666638Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":44553684667,"latency_human":"44.553684667s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:28:35.27977Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":9611825542,"latency_human":"9.611825542s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:29:01.408844Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":26127496250,"latency_human":"26.12749625s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:29:04.649424Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":3239651333,"latency_human":"3.239651333s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:29:19.805742Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":15154669916,"latency_human":"15.154669916s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:32:13.877008Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":174069423125,"latency_human":"2m54.069423125s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:33:42.157107Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":4119500,"latency_human":"4.1195ms","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:35:18.621287Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":96455575667,"latency_human":"1m36.455575667s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:35:20.835338Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":2213281125,"latency_human":"2.213281125s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:35:35.744433Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":14792116542,"latency_human":"14.792116542s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:35:35.806778Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":4481666,"latency_human":"4.481666ms","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:35:58.512659Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":22698071791,"latency_human":"22.698071791s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:36:02.428001Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":3914468041,"latency_human":"3.914468041s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:36:02.523529Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":94882459,"latency_human":"94.882459ms","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:36:05.77339Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":3249192500,"latency_human":"3.2491925s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:36:07.914356Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":2140497666,"latency_human":"2.140497666s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:36:25.20852Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":17293730292,"latency_human":"17.293730292s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:37:13.682737Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":48473800458,"latency_human":"48.473800458s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:37:15.58277Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1898974625,"latency_human":"1.898974625s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:37:15.660655Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":576125,"latency_human":"576.125µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:37:54.381003Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":38709093542,"latency_human":"38.709093542s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:38:03.039962Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":8657903083,"latency_human":"8.657903083s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:38:22.683621Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":19641781792,"latency_human":"19.641781792s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:38:43.381714Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":20697339000,"latency_human":"20.697339s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:39:08.288004Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":24905630625,"latency_human":"24.905630625s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:39:12.738052Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":4449248375,"latency_human":"4.449248375s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:39:38.958968Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":26219789750,"latency_human":"26.21978975s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:40:05.994814Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":27035274625,"latency_human":"27.035274625s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:40:10.927182Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":4931599333,"latency_human":"4.931599333s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:40:32.100639Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":21172678167,"latency_human":"21.172678167s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:40:38.372177Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":6270697458,"latency_human":"6.270697458s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:41:07.835457Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":29462148667,"latency_human":"29.462148667s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:41:10.114262Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":2278000042,"latency_human":"2.278000042s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:41:19.281453Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":9165302417,"latency_human":"9.165302417s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:41:26.953136Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":7657636042,"latency_human":"7.657636042s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:41:38.285002Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":11320176291,"latency_human":"11.320176291s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:41:43.783984Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":5494850291,"latency_human":"5.494850291s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:41:56.895161Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":13105636166,"latency_human":"13.105636166s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:42:36.03188Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":39132792417,"latency_human":"39.132792417s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:42:39.001103Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":2967530792,"latency_human":"2.967530792s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:42:39.066645Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":613500,"latency_human":"613.5µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:43:08.802465Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":29723560333,"latency_human":"29.723560333s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:43:12.249225Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":3445328333,"latency_human":"3.445328333s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:43:12.328126Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1148208,"latency_human":"1.148208ms","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:43:55.883197Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":43542857750,"latency_human":"43.54285775s","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-10T19:43:56.794788Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":910997000,"latency_human":"910.997ms","bytes_in":0,"bytes_out":0}
