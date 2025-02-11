@@ -1,7 +1,7 @@
 import { configureStore, createListenerMiddleware } from "@reduxjs/toolkit";
-import type { CounterState } from "../features/db_viz_data/db_viz_slice";
 import db_viz_slice, {
   update_table,
+  update_path_and_sub_tree,
 } from "../features/db_viz_data/db_viz_slice";
 import { find_subtree } from "../features/db_viz_data/dfs";
 
@@ -24,10 +24,7 @@ listenerMiddleware.startListening({
 
     const [subtree, path] = res;
 
-    console.log("subtree: ", subtree, "\n path: ", path);
-
-    state.db_viz_data.current_sub_tree = subtree;
-    state.db_viz_data.current_sub_tree_path = path;
+    listenerApi.dispatch(update_path_and_sub_tree({ path, subtree }));
   },
 });
 

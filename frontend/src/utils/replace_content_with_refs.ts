@@ -1,4 +1,5 @@
 import type { ColumnSchema, DBDetails } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  *
@@ -12,6 +13,7 @@ import type { ColumnSchema, DBDetails } from "../types";
  *
  */
 export function replace_content_with_refs(data: DBDetails): void {
+  // Don't want to mutate yet
   let que = [...data.schema];
   let curr_q_idx: number = 0;
 
@@ -34,6 +36,7 @@ export function replace_content_with_refs(data: DBDetails): void {
     curr_q_idx++;
   }
 
+  // Mutate now
   // With all nodes, replace those that should have children
   // We need to do this df style, and check for back references.
   for (let i = 0; i < data.schema.length; i++) {
@@ -55,6 +58,9 @@ export function replace_content_with_refs(data: DBDetails): void {
       );
     }
   }
+
+  // FIXME: this is terrible and innefficient. Find a better way to do this
+  give_new_ids(data);
 }
 
 function replace_nested_nodes(
@@ -69,7 +75,14 @@ function replace_nested_nodes(
 
   current_used_list.push(curr_node.referenced_table_name!);
 
-  curr_node.children = replacment.children;
+  // We are making references to the same underlying objects
+  // here. This is leading to the id's being duplicated, and
+  // trying to just update the id's is updating the underlying
+  // val.
+  // FIXME: this is the root of the id problem
+  curr_node.children = structuredClone(replacment.children!);
+
+  // We have to give everything that is nested here new ids
 
   const children = curr_node.children;
   if (!children) {
@@ -88,6 +101,25 @@ function replace_nested_nodes(
         nested_ref_map,
         ref_val,
       );
+    }
+  }
+}
+
+function give_new_ids(curr_node: DBDetails) {
+  for (let i = 0; i < curr_node.schema.length; i++) {
+    give_new_ids_helper(curr_node.schema, curr_node.schema[i], i);
+  }
+}
+
+function give_new_ids_helper(
+  parent_arr: ColumnSchema[],
+  curr_node: ColumnSchema,
+  idx: number,
+) {
+  parent_arr[idx].id = uuidv4();
+  if (curr_node.children) {
+    for (let i = 0; i < curr_node.children.length; i++) {
+      give_new_ids_helper(curr_node.children, curr_node.children[i], i);
     }
   }
 }

@@ -34,8 +34,6 @@ export function find_subtree(state: DBDetails, id: string): DFSRes | null {
     }
   }
 
-  console.log("subtree: ", subtree, "\n path: ", path);
-
   if (!path.length || !subtree) {
     return null;
   }
@@ -52,7 +50,6 @@ function dfs_helper(
   visited: Set<string>,
 ): null | ColumnSchema {
   if (curr_node.id === id) {
-    console.log("FOUND THE NODE: ", curr_node.column_name, "\t id: ", id);
     return curr_node;
   }
 
@@ -66,14 +63,14 @@ function dfs_helper(
     return null;
   }
 
-  // pre
-  path.push(curr_node.column_name);
-
   // If not the node we are looking for, and is a terminal
   // than remove from the path
   if (!curr_node.children) {
     return null;
   }
+
+  // pre
+  path.push(curr_node.column_name);
 
   for (let i = 0; i < curr_node.children.length; i++) {
     const found_node = dfs_helper(curr_node.children[i], id, path, visited);
@@ -83,5 +80,6 @@ function dfs_helper(
   }
 
   path.pop();
+
   return null;
 }

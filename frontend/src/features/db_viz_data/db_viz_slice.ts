@@ -12,6 +12,7 @@ export interface CounterState {
 }
 
 export type UpdateFieldPayload = { id: string };
+export type UpdatePathAndSubTree = { path: string[]; subtree: ColumnSchema };
 
 const initialState: CounterState = {
   value: null,
@@ -31,10 +32,18 @@ export const db_viz_slice = createSlice({
       console.log("update table being called: ", action);
       state.nested_id = action.payload.id;
     },
+    update_path_and_sub_tree: (
+      state,
+      action: PayloadAction<UpdatePathAndSubTree>,
+    ) => {
+      state.current_sub_tree = action.payload.subtree;
+      state.current_sub_tree_path = action.payload.path;
+    },
   },
 });
 
-export const { update_data, update_table } = db_viz_slice.actions;
+export const { update_data, update_table, update_path_and_sub_tree } =
+  db_viz_slice.actions;
 
 export const select_db_viz_data = (state: RootState) => state.db_viz_data.value;
 
