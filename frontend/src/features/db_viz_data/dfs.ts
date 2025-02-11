@@ -21,18 +21,26 @@ export function find_subtree(state: DBDetails, id: string): DFSRes | null {
   // Table names are unique, so we can just traverse down from the root
   const path: string[] = [];
   let subtree: ColumnSchema | null = null;
+  const visited: Set<string> = new Set();
 
   for (let i = 0; i < state.schema.length; i++) {
-    if (!state.schema[i].children) {
+    if (!state.schema[i].references_another_table) {
       continue;
     }
 
-    dfs_helper(state.schema[i], id, path, subtree);
+    subtree = dfs_helper(state.schema[i], id, path, visited);
+    if (subtree) {
+      break;
+    }
   }
+
+  console.log("subtree: ", subtree, "\n path: ", path);
 
   if (!path.length || !subtree) {
     return null;
   }
+
+  path.unshift("res_users");
 
   return [subtree!, path];
 }
@@ -41,28 +49,39 @@ function dfs_helper(
   curr_node: ColumnSchema,
   id: string,
   path: string[],
-  subtree: null | ColumnSchema,
-): boolean {
-  // pre
-  path.push(curr_node.table);
-
+  visited: Set<string>,
+): null | ColumnSchema {
   if (curr_node.id === id) {
-    subtree = curr_node;
-    return true;
+    console.log("FOUND THE NODE: ", curr_node.column_name, "\t id: ", id);
+    return curr_node;
   }
+
+  if (visited.has(curr_node.id)) {
+    return null;
+  }
+
+  visited.add(curr_node.id);
+
+  if (!curr_node.references_another_table) {
+    return null;
+  }
+
+  // pre
+  path.push(curr_node.column_name);
 
   // If not the node we are looking for, and is a terminal
   // than remove from the path
   if (!curr_node.children) {
-    return false;
+    return null;
   }
 
   for (let i = 0; i < curr_node.children.length; i++) {
-    if (dfs_helper(curr_node.children[i], id, path, subtree)) {
-      return true;
+    const found_node = dfs_helper(curr_node.children[i], id, path, visited);
+    if (found_node) {
+      return found_node;
     }
   }
 
   path.pop();
-  return false;
+  return null;
 }

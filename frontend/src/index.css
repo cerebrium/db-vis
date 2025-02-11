@@ -43,9 +43,9 @@ p {
   padding: 5px;
 }
 
-.nested_children {
-  margin-left: 80px;
-}
+/*.nested_children {*/
+/*  margin-left: 1rem;*/
+/*}*/
 
 .detail_display {
   font-size: 16px;
@@ -56,13 +56,19 @@ p {
 }
 
 summary {
+  position: relative;
   white-space: nowrap;
   color: lightslategray;
-  margin: 20px 0px;
+  padding: 20px 0px;
 }
 
 summary:hover {
   color: lightsteelblue;
+}
+
+summary:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
 .details_container {
@@ -79,7 +85,9 @@ h1 {
 }
 
 .nested_data {
-  margin-left: 25px;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 1px dotted lightseagreen;
 }
 
 th {
@@ -93,7 +101,9 @@ table {
   padding: 1rem;
   table-layout: fixed;
   border-collapse: collapse;
+  min-width: 400px;
 }
+
 td {
   padding: 5px 1rem;
   border-bottom: 0.5px dotted lightseagreen;
@@ -105,4 +115,44 @@ td {
 
 .red {
   color: #ef5350;
+}
+
+.tooltip {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  top: -1.5rem;
+  margin: auto 0px;
+  background-color: lightslategray;
+  color: black;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+
+  transition: opacity 0.6s;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* Position it at the bottom center */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: lightslategray transparent transparent transparent; /* Triangle shape */
+}
+
+.tooltip:hover {
+  background-color: lightsteelblue;
+  transition: background-color 0.3s;
+}
+
+.tooltip:hover::after {
+  border-color: lightsteelblue transparent transparent transparent; /* Triangle shape */
+  transition: background-color 1.8s;
 }
