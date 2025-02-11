@@ -34,43 +34,60 @@ export function replace_content_with_refs(data: DBDetails): void {
     curr_q_idx++;
   }
 
-  // Create a list of all the possible nodes
-
-  const all_nodes: ColumnSchema[] = [];
-  get_all_nodes(data, all_nodes);
-
   // With all nodes, replace those that should have children
-  for (let i = 0; i < all_nodes.length; i++) {
-    const ref = nested_ref_map.get(all_nodes[i].column_name);
-
-    if (ref && !all_nodes[i].children) {
-      all_nodes[i] = ref;
-    }
-  }
-
-  // data.schema = all_nodes;
-  console.log("is finished: ", nested_ref_map);
-}
-
-function get_all_nodes(data: DBDetails, all_nodes: ColumnSchema[]) {
+  // We need to do this df style, and check for back references.
   for (let i = 0; i < data.schema.length; i++) {
-    all_nodes.push(data.schema[i]);
+    if (data.schema[i].column_name === "res_users") {
+      continue;
+    }
 
-    if (data.schema[i].children) {
-      get_all_nodes_helper(data.schema[i], all_nodes);
+    if (!data.schema[i].referenced_table_name) {
+      continue;
+    }
+
+    const ref_val = nested_ref_map.get(data.schema[i].referenced_table_name!);
+    if (!data.schema[i].children && ref_val) {
+      replace_nested_nodes(
+        ["res_users"],
+        data.schema[i],
+        nested_ref_map,
+        ref_val,
+      );
     }
   }
 }
 
-function get_all_nodes_helper(
-  data: ColumnSchema,
-  all_nodes: ColumnSchema[],
+function replace_nested_nodes(
+  current_used_list: string[],
+  curr_node: ColumnSchema,
+  nested_ref_map: Map<string, ColumnSchema>,
+  replacment: ColumnSchema,
 ): void {
-  for (let i = 0; i < data.children!.length; i++) {
-    all_nodes.push(data.children![i]);
+  if (current_used_list.includes(curr_node.referenced_table_name!)) {
+    return;
+  }
 
-    if (data.children![i].children) {
-      get_all_nodes_helper(data.children![i], all_nodes);
+  current_used_list.push(curr_node.referenced_table_name!);
+
+  curr_node.children = replacment.children;
+
+  const children = curr_node.children;
+  if (!children) {
+    return;
+  }
+
+  for (let i = 0; i < children.length; i++) {
+    if (!children[i].referenced_table_name) {
+      continue;
+    }
+    const ref_val = nested_ref_map.get(children[i].referenced_table_name!);
+    if (!children[i].children && ref_val) {
+      replace_nested_nodes(
+        current_used_list,
+        children[i],
+        nested_ref_map,
+        ref_val,
+      );
     }
   }
 }

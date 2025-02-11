@@ -8,7 +8,7 @@ function App() {
   // Set up the websocket
   useDbVizData();
 
-  const [data, _, __] = useDbVizDataMethods(null);
+  const [data] = useDbVizDataMethods();
 
   if (!data)
     return (

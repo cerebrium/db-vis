@@ -17,22 +17,17 @@ import type { ColumnSchema, DBDetails } from "../../types";
 
 export type DFSRes = [ColumnSchema, string[]];
 
-export function find_subtree(state: DBDetails, table: string): DFSRes | null {
+export function find_subtree(state: DBDetails, id: string): DFSRes | null {
   // Table names are unique, so we can just traverse down from the root
   const path: string[] = [];
   let subtree: ColumnSchema | null = null;
-
-  // Not found returns the root
-  if (table === state.table) {
-    return null;
-  }
 
   for (let i = 0; i < state.schema.length; i++) {
     if (!state.schema[i].children) {
       continue;
     }
 
-    dfs_helper(state.schema[i], table, path, subtree);
+    dfs_helper(state.schema[i], id, path, subtree);
   }
 
   if (!path.length || !subtree) {
@@ -44,14 +39,14 @@ export function find_subtree(state: DBDetails, table: string): DFSRes | null {
 
 function dfs_helper(
   curr_node: ColumnSchema,
-  table: string,
+  id: string,
   path: string[],
   subtree: null | ColumnSchema,
 ): boolean {
   // pre
-  path.push(table);
+  path.push(curr_node.table);
 
-  if (table === curr_node.Table) {
+  if (curr_node.id === id) {
     subtree = curr_node;
     return true;
   }
@@ -63,7 +58,7 @@ function dfs_helper(
   }
 
   for (let i = 0; i < curr_node.children.length; i++) {
-    if (dfs_helper(curr_node.children[i], table, path, subtree)) {
+    if (dfs_helper(curr_node.children[i], id, path, subtree)) {
       return true;
     }
   }
