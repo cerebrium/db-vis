@@ -1,7 +1,9 @@
-logs.txt
+*.txt
 *.bin
 debug.log
 dbVisualizer.com
+./logs.txt
+
 
 
 
