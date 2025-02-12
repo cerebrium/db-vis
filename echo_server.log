@@ -2526,3 +2526,13 @@ ____________________________________O/_______
 {"time":"2025-02-12T18:29:26.695528Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-ls75OO1K.js","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1322625,"latency_human":"1.322625ms","bytes_in":0,"bytes_out":177325}
 {"time":"2025-02-12T18:29:26.705792Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-Cs2rTlO4.css","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":11274291,"latency_human":"11.274291ms","bytes_in":0,"bytes_out":2543}
 {"time":"2025-02-12T18:29:26.716825Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/dbimg.svg","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":155334,"latency_human":"155.334µs","bytes_in":0,"bytes_out":453}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069

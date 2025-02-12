@@ -31,7 +31,7 @@ type DBDetails struct {
 	visitedTables map[string]bool     // we have cases where much higher than 30, so map more optimized
 	Schema        []*ColumnSchema     `json:"schema"`
 	Conn          *websocket.Conn
-	mu            sync.RWMutex
+	mu            sync.Mutex
 	wg            sync.WaitGroup
 	Password      string
 }

@@ -72,19 +72,15 @@ func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
 	// So far, there have been no circular issues experienced, but it is a risk, however
 	// the mutex will slow things down, and could be unnecessary.
 	// @Code Review extra focus
-	dbd.mu.RLock()
+	dbd.mu.Lock()
 
 	// We can read lots
 	if dbd.visitedTables[table_name] {
-		dbd.mu.RUnlock()
+		dbd.mu.Unlock()
 		return
 	}
 
-	dbd.mu.RUnlock()
-
 	// Before the visitedTables is mutated, write lock
-	dbd.mu.Lock()
-
 	dbd.visitedTables[table_name] = true
 
 	dbd.mu.Unlock()
