@@ -218,3 +218,7 @@ td {
 .slash {
   color: lightseagreen;
 }
+
+.chart_container--with-navigation {
+  height: 85%;
+}
