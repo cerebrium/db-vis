@@ -1,5 +1,12 @@
 import type { ColumnSchema } from "../types";
 
+/*
+ *
+ * FILE NOT IN USE at the moment. Will be making a graph
+ * view later for a nice visualization, but right now is
+ * just a wip. Focusing on the table view.
+ *
+ */
 export type FlowNode = {
   id: string;
   type?: string;
@@ -130,6 +137,7 @@ export class GraphData {
     }
   }
 
+  // @ts-ignore -> will be used later
   private get_subnode_centers(
     middle: [number, number],
     idx: number,
@@ -236,9 +244,12 @@ export class GraphData {
 
     This only works if there aren't circular references. There cannot 
     be because we handled that on the backend, therefore this is a 
-    DAG.
+    DAG. 
+
+    FIXME: Is not true anymore due to fe fiddling
 
    */
+  // @ts-ignore -> will be used later
   private top_sort_node_groupings(curr_node: string) {
     // We want to start at the table that was queried
 

@@ -118,7 +118,7 @@ function App() {
             })
           : ""}
       </h2>
-      <div className="chart_container">
+      <div className="chart_container chart_container--with-navigation">
         <section className="nested_children">
           <section className="nested_data">
             {nested.map((el) => {

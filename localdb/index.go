@@ -3,6 +3,7 @@ package localdb
 import (
 	"database/sql"
 	"fmt"
+	"sync"
 
 	locallogger "dbVisualizer.com/localLogger"
 	"github.com/gorilla/websocket"
@@ -27,9 +28,12 @@ type DBDetails struct {
 	UserName      string `json:"user_name"`
 	dbConn        *sql.DB
 	Logger        *locallogger.Logger // Anywhere there is state, there are logs
-	visitedTables []string
-	Schema        []*ColumnSchema `json:"schema"`
+	visitedTables map[string]bool     // we have cases where much higher than 30, so map more optimized
+	Schema        []*ColumnSchema     `json:"schema"`
 	Conn          *websocket.Conn
+	mu            sync.Mutex
+	wg            sync.WaitGroup
+	Password      string
 }
 
 func CreateDbDetails(isSchema bool, name string, table string, userName string, logger *locallogger.Logger) *DBDetails {
@@ -39,7 +43,7 @@ func CreateDbDetails(isSchema bool, name string, table string, userName string, 
 		Table:         table,
 		UserName:      userName,
 		Logger:        logger,
-		visitedTables: []string{},
+		visitedTables: make(map[string]bool),
 	}
 
 	return &DbD
@@ -51,8 +55,8 @@ func (dbd *DBDetails) connect() error {
 		port int    = 5432
 	)
 
-	dsn := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable",
-		host, port, dbd.UserName, dbd.Name)
+	dsn := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable password=%s",
+		host, port, dbd.UserName, dbd.Name, dbd.Password)
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {

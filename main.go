@@ -16,7 +16,6 @@ import (
 	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"golang.org/x/time/rate"
 )
 
 type GlobalState struct {
@@ -70,19 +69,11 @@ func main() {
 		// Allow panics not to crash the server
 		app.Use(middleware.Recover())
 
-		// Just start with a blocker for many requests
-		app.Use(middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(rate.Limit(20))))
-
-		// CORS
-		app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-			AllowOrigins: []string{"http://localhost:42069"},
-			AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
-		}))
-
 		// adds middleware to gather metrics
 		app.Use(echoprometheus.NewMiddleware("prate"))
 
 		app.Static("/assets", "frontend/dist/assets")
+		app.Static("/", "frontend/dist")
 
 		app.GET("/*", func(c echo.Context) error {
 			return c.File(filepath.Join("frontend", "dist", "index.html"))
