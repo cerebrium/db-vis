@@ -3,7 +3,6 @@ package localdb
 import (
 	"database/sql"
 	"fmt"
-	"os"
 
 	locallogger "dbVisualizer.com/localLogger"
 	"github.com/gorilla/websocket"
@@ -46,7 +45,7 @@ func CreateDbDetails(isSchema bool, name string, table string, userName string, 
 	return &DbD
 }
 
-func (dbd *DBDetails) connect() {
+func (dbd *DBDetails) connect() error {
 	const (
 		host string = "localhost"
 		port int    = 5432
@@ -58,13 +57,14 @@ func (dbd *DBDetails) connect() {
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
 		dbd.Logger.Log("Error in opening db connection" + err.Error())
-		os.Exit(1)
+		return err
 	}
 
 	if err = db.Ping(); err != nil {
 		dbd.Logger.Log("Error in pinging db: " + err.Error())
-		os.Exit(1)
+		return err
 	}
 
 	dbd.dbConn = db
+	return nil
 }

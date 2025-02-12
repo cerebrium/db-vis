@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch } from "../../app/hooks";
 import { update_data } from "./db_viz_slice";
 import type { DBDetails } from "../../types";
+import { replace_content_with_refs } from "../../utils/replace_content_with_refs";
 
 export const useDbVizData = () => {
   const dispatch = useAppDispatch();
@@ -27,8 +28,11 @@ export const useDbVizData = () => {
           if (!parsed_data || !update_data) {
             throw new Error("No parsed data");
           }
+
+          replace_content_with_refs(parsed_data);
           dispatch(update_data(parsed_data));
         } catch (e) {
+          console.log(e);
           console.error("Error parsing data from websocket");
         }
       }

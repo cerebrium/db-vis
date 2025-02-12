@@ -79,17 +79,39 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 			fmt.Println("Connecting")
 
+			// Handle typos
 			err := localdb.Walk(m.Dbd)
-			if err != nil {
+			for err != nil {
 				m.Logger.Log("Was an error returned from walk: " + err.Error())
-				os.Exit(1)
+				fmt.Println("Could not connect to database. Please try again")
+
+				name, table, userName := m.SchemaView()
+
+				m.Dbd.Name = name
+				m.Dbd.Table = table
+				m.Dbd.UserName = userName
+				m.Dbd.IsSchema = isSchema
+
+				fmt.Println("Connecting")
+				err = localdb.Walk(m.Dbd)
 			}
 
 			fmt.Println("Done searching: please go to localhost:42069")
 
-			// TODO: make an infinite loop that lets the user search for more
-			// queries. It will take the schema name only
+			for {
+				table := m.SameDbSchemaView()
 
+				m.Dbd.Table = table
+
+				err := localdb.Walk(m.Dbd)
+				if err != nil {
+					m.Logger.Log("Was an error returned from walk: " + err.Error())
+					os.Exit(1)
+				}
+
+				fmt.Println("New table fetched")
+
+			}
 		}
 	}
 

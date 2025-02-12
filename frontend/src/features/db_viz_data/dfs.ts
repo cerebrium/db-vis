@@ -11,63 +11,76 @@ import type { ColumnSchema, DBDetails } from "../../types";
  * We will need to also return the path from where we
  * are to the node so that we can make breadcrumbs.
  *
- * @returns [subtree: WritableDraft<ColumnSchema>, [tables: string]]
+ * @returns [subtree: WritableDraft<ColumnSchema>, [path: [string, string]] // path is 'column name', id
  *
  */
 
-export type DFSRes = [ColumnSchema, string[]];
+export type DFSRes = [ColumnSchema, Array<[string, string | null]>];
 
-export function find_subtree(state: DBDetails, table: string): DFSRes | null {
+export function find_subtree(state: DBDetails, id: string): DFSRes | null {
   // Table names are unique, so we can just traverse down from the root
-  const path: string[] = [];
+  const path: Array<[string, string | null]> = [];
   let subtree: ColumnSchema | null = null;
-
-  // Not found returns the root
-  if (table === state.table) {
-    return null;
-  }
+  const visited: Set<string> = new Set();
 
   for (let i = 0; i < state.schema.length; i++) {
-    if (!state.schema[i].children) {
+    if (!state.schema[i].references_another_table) {
       continue;
     }
 
-    dfs_helper(state.schema[i], table, path, subtree);
+    subtree = dfs_helper(state.schema[i], id, path, visited);
+    if (subtree) {
+      break;
+    }
   }
 
   if (!path.length || !subtree) {
     return null;
   }
 
+  path.unshift(["res_users", null]);
+
   return [subtree!, path];
 }
 
 function dfs_helper(
   curr_node: ColumnSchema,
-  table: string,
-  path: string[],
-  subtree: null | ColumnSchema,
-): boolean {
-  // pre
-  path.push(table);
+  id: string,
+  path: Array<[string, string | null]>,
+  visited: Set<string>,
+): null | ColumnSchema {
+  if (curr_node.id === id) {
+    path.push([curr_node.column_name, curr_node.id]);
+    return curr_node;
+  }
 
-  if (table === curr_node.Table) {
-    subtree = curr_node;
-    return true;
+  if (visited.has(curr_node.id)) {
+    return null;
+  }
+
+  visited.add(curr_node.id);
+
+  if (!curr_node.references_another_table) {
+    return null;
   }
 
   // If not the node we are looking for, and is a terminal
   // than remove from the path
   if (!curr_node.children) {
-    return false;
+    return null;
   }
 
+  // pre
+  path.push([curr_node.column_name, curr_node.id]);
+
   for (let i = 0; i < curr_node.children.length; i++) {
-    if (dfs_helper(curr_node.children[i], table, path, subtree)) {
-      return true;
+    const found_node = dfs_helper(curr_node.children[i], id, path, visited);
+    if (found_node) {
+      return found_node;
     }
   }
 
   path.pop();
-  return false;
+
+  return null;
 }

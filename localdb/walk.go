@@ -16,7 +16,10 @@ func Walk(dbd *DBDetails) error {
 
 	dbd.Logger.Log("before db connect: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
 
-	dbd.connect()
+	err := dbd.connect()
+	if err != nil {
+		return err
+	}
 
 	// Internal logging
 	dbd.Logger.Log("Connected to database: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
@@ -129,7 +132,7 @@ func (dbd *DBDetails) schemaWalk(current_schema_arr *[]*ColumnSchema, table_name
 			os.Exit(1)
 		}
 
-		col.Table = table_name // TODO: might not need this
+		col.Table = table_name
 		col.Id = uuid.New().String()
 
 		// In case we need to add children always append this

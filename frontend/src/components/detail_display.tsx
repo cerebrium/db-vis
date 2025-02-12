@@ -15,13 +15,8 @@ export const DetailDisplay: React.FC<DetailDisplayProps> = ({
       <td className="left_border">
         {data_type
           .split(" ")
-          .map((w) => {
-            return w
-              .split("")
-              .map((v, i) => (!i ? v.toLocaleUpperCase() : v))
-              .join("");
-          })
-          .join("")}
+          .map((w) => w.charAt(0).toLocaleUpperCase() + w.substring(1))
+          .join(" ")}
       </td>
       <td className={`${is_nullable === "true" ? "red" : ""} left_border`}>
         {is_nullable
