@@ -55,6 +55,21 @@ function App() {
     dispatch(update_table({ id: "" }));
   };
 
+  const set_breadcrumb_id = (
+    e: React.MouseEvent<HTMLSpanElement>,
+    id: string | null,
+  ) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (!id) {
+      reset_to_main();
+      return;
+    }
+
+    dispatch(update_table({ id: id }));
+  };
+
   // We want to make coherent tables, seperate the non-nested from the nested
   const [non_nested, nested]: [ColumnSchema[], ColumnSchema[]] = [[], []];
   for (let i = 0; i < data.children!.length; i++) {
@@ -77,10 +92,17 @@ function App() {
       </h1>
       <h2 className="path_container">
         {path
-          ? path.map((name, i) => {
+          ? path.map((val, i) => {
               const end_char = i !== path.length - 1 ? "/" : "";
+
+              const name = val[0];
+              const id = val[1];
+
               return (
-                <span>
+                <span
+                  onClick={(e) => set_breadcrumb_id(e, id)}
+                  className="breadcrumb"
+                >
                   {name
                     .split("_")
                     .map((v, _) =>
@@ -90,7 +112,7 @@ function App() {
                         .join(""),
                     )
                     .join(" ")}{" "}
-                  {end_char}{" "}
+                  <span className="slash">{end_char}</span>{" "}
                 </span>
               );
             })

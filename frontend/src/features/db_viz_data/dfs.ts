@@ -11,15 +11,15 @@ import type { ColumnSchema, DBDetails } from "../../types";
  * We will need to also return the path from where we
  * are to the node so that we can make breadcrumbs.
  *
- * @returns [subtree: WritableDraft<ColumnSchema>, [tables: string]]
+ * @returns [subtree: WritableDraft<ColumnSchema>, [path: [string, string]] // path is 'column name', id
  *
  */
 
-export type DFSRes = [ColumnSchema, string[]];
+export type DFSRes = [ColumnSchema, Array<[string, string | null]>];
 
 export function find_subtree(state: DBDetails, id: string): DFSRes | null {
   // Table names are unique, so we can just traverse down from the root
-  const path: string[] = [];
+  const path: Array<[string, string | null]> = [];
   let subtree: ColumnSchema | null = null;
   const visited: Set<string> = new Set();
 
@@ -38,7 +38,7 @@ export function find_subtree(state: DBDetails, id: string): DFSRes | null {
     return null;
   }
 
-  path.unshift("res_users");
+  path.unshift(["res_users", null]);
 
   return [subtree!, path];
 }
@@ -46,11 +46,11 @@ export function find_subtree(state: DBDetails, id: string): DFSRes | null {
 function dfs_helper(
   curr_node: ColumnSchema,
   id: string,
-  path: string[],
+  path: Array<[string, string | null]>,
   visited: Set<string>,
 ): null | ColumnSchema {
   if (curr_node.id === id) {
-    path.push(curr_node.column_name);
+    path.push([curr_node.column_name, curr_node.id]);
     return curr_node;
   }
 
@@ -71,7 +71,7 @@ function dfs_helper(
   }
 
   // pre
-  path.push(curr_node.column_name);
+  path.push([curr_node.column_name, curr_node.id]);
 
   for (let i = 0; i < curr_node.children.length; i++) {
     const found_node = dfs_helper(curr_node.children[i], id, path, visited);

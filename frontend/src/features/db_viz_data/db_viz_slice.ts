@@ -8,12 +8,13 @@ export interface CounterState {
   value: DBDetails | null;
   nested_id: string | null;
   current_sub_tree: ColumnSchema | null;
-  current_sub_tree_path: null | string[];
+  current_sub_tree_path: Array<[string, string | null]> | null;
 }
 
 export type UpdateFieldPayload = { id: string };
+
 export type UpdatePathAndSubTree = {
-  path: string[] | null;
+  path: Array<[string, string | null]> | null;
   subtree: ColumnSchema | null;
 };
 

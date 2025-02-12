@@ -3,7 +3,7 @@ import type { ColumnSchema, DBDetails } from "../../types.ts";
 
 export type UseDbVizDataMethodsReturn = [
   ColumnSchema | (DBDetails | null),
-  null | string[],
+  Array<[string, string | null]> | null,
 ];
 
 export function useDbVizDataMethods(): UseDbVizDataMethodsReturn {

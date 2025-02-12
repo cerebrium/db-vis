@@ -204,3 +204,17 @@ td {
 .path_container {
   margin-left: 2rem;
 }
+
+.breadcrumb {
+  cursor: pointer;
+  font-weight: 12;
+}
+
+.breadcrumb:hover {
+  color: lightsteelblue;
+  transition: color 0.3s;
+}
+
+.slash {
+  color: lightseagreen;
+}
