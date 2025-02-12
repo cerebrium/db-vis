@@ -1,14 +1,24 @@
 import { useAppSelector } from "../../app/hooks.ts";
-import { find_subtree } from "./dfs.ts";
+import type { ColumnSchema, DBDetails } from "../../types.ts";
 
-export function useDbVizDataMethods() {
+export type UseDbVizDataMethodsReturn = [
+  ColumnSchema | (DBDetails | null),
+  null | string[],
+];
+
+export function useDbVizDataMethods(): UseDbVizDataMethodsReturn {
   const db_viz_data = useAppSelector((state) => {
     if (!state.db_viz_data.current_sub_tree) {
-      return state.db_viz_data.value;
+      return [state.db_viz_data.value, null];
     }
 
-    return state.db_viz_data.current_sub_tree;
+    return [
+      state.db_viz_data.current_sub_tree,
+      state.db_viz_data.current_sub_tree_path,
+    ];
   });
 
-  return [db_viz_data];
+  // TODO: Fix this type
+  // @ts-ignore -> For now, this is being odd
+  return db_viz_data;
 }

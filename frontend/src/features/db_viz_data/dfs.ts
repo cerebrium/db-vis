@@ -50,6 +50,7 @@ function dfs_helper(
   visited: Set<string>,
 ): null | ColumnSchema {
   if (curr_node.id === id) {
+    path.push(curr_node.column_name);
     return curr_node;
   }
 

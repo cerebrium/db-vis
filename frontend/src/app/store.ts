@@ -12,6 +12,14 @@ listenerMiddleware.startListening({
   effect: (action, listenerApi) => {
     const state = listenerApi.getState() as RootState;
 
+    // Reset to null
+    if (action.payload.id === "") {
+      listenerApi.dispatch(
+        update_path_and_sub_tree({ path: null, subtree: null }),
+      );
+      return;
+    }
+
     if (!state.db_viz_data.value || !action.payload.id) {
       return;
     }

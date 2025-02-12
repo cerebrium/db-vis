@@ -12,7 +12,10 @@ export interface CounterState {
 }
 
 export type UpdateFieldPayload = { id: string };
-export type UpdatePathAndSubTree = { path: string[]; subtree: ColumnSchema };
+export type UpdatePathAndSubTree = {
+  path: string[] | null;
+  subtree: ColumnSchema | null;
+};
 
 const initialState: CounterState = {
   value: null,
@@ -29,7 +32,6 @@ export const db_viz_slice = createSlice({
       state.value = action.payload;
     },
     update_table: (state, action: PayloadAction<UpdateFieldPayload>) => {
-      console.log("update table being called: ", action);
       state.nested_id = action.payload.id;
     },
     update_path_and_sub_tree: (

@@ -75,3 +75,21 @@ func (m Model) SchemaView() (string, string, string) {
 
 	return name, table, userName
 }
+
+func (m Model) SameDbSchemaView() string {
+	var table string
+
+	form := huh.NewForm(
+		huh.NewGroup(
+			huh.NewInput().Title("Search new table").Value(&table),
+		),
+	)
+
+	err := form.Run()
+	if err != nil {
+		m.Logger.Log("Error in running form: " + err.Error())
+		os.Exit(1)
+	}
+
+	return table
+}

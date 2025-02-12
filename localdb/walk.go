@@ -16,7 +16,10 @@ func Walk(dbd *DBDetails) error {
 
 	dbd.Logger.Log("before db connect: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
 
-	dbd.connect()
+	err := dbd.connect()
+	if err != nil {
+		return err
+	}
 
 	// Internal logging
 	dbd.Logger.Log("Connected to database: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")

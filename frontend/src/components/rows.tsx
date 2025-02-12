@@ -32,7 +32,6 @@ export const Rows: React.FC<colProps> = ({ col }) => {
     }
 
     dispatch(update_table({ id: id }));
-    console.log("is clicked: ", id);
   };
 
   return (
