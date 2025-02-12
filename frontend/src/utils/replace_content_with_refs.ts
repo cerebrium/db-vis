@@ -60,6 +60,7 @@ export function replace_content_with_refs(data: DBDetails): void {
   }
 
   // FIXME: this is terrible and innefficient. Find a better way to do this
+  console.log("triggering review?");
   give_new_ids(data);
 }
 
