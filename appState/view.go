@@ -48,11 +48,12 @@ func (m Model) View() string {
 	return s
 }
 
-func (m Model) SchemaView() (string, string, string) {
+func (m Model) SchemaView() (string, string, string, string) {
 	var (
 		name     string
 		table    string
 		userName string
+		password string
 	)
 
 	form := huh.NewForm(
@@ -65,6 +66,9 @@ func (m Model) SchemaView() (string, string, string) {
 		huh.NewGroup(
 			huh.NewInput().Title("What is the db user name").Value(&userName),
 		),
+		huh.NewGroup(
+			huh.NewInput().Title("What is the db password? If no password leave blank").Value(&password),
+		),
 	)
 
 	err := form.Run()
@@ -73,7 +77,7 @@ func (m Model) SchemaView() (string, string, string) {
 		os.Exit(1)
 	}
 
-	return name, table, userName
+	return name, table, userName, password
 }
 
 func (m Model) SameDbSchemaView() string {

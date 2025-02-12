@@ -33,6 +33,7 @@ type DBDetails struct {
 	Conn          *websocket.Conn
 	mu            sync.RWMutex
 	wg            sync.WaitGroup
+	Password      string
 }
 
 func CreateDbDetails(isSchema bool, name string, table string, userName string, logger *locallogger.Logger) *DBDetails {
@@ -54,8 +55,8 @@ func (dbd *DBDetails) connect() error {
 		port int    = 5432
 	)
 
-	dsn := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable",
-		host, port, dbd.UserName, dbd.Name)
+	dsn := fmt.Sprintf("host=%s port=%d user=%s dbname=%s sslmode=disable password=%s",
+		host, port, dbd.UserName, dbd.Name, dbd.Password)
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {

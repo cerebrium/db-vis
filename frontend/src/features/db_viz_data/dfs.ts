@@ -1,5 +1,6 @@
 import type { ColumnSchema, DBDetails } from "../../types";
 
+export type DFSRes = [ColumnSchema, Array<[string, string | null]>];
 /**
  *
  * @param state WritableDraft<CounterState>
@@ -14,9 +15,6 @@ import type { ColumnSchema, DBDetails } from "../../types";
  * @returns [subtree: WritableDraft<ColumnSchema>, [path: [string, string]] // path is 'column name', id
  *
  */
-
-export type DFSRes = [ColumnSchema, Array<[string, string | null]>];
-
 export function find_subtree(state: DBDetails, id: string): DFSRes | null {
   // Table names are unique, so we can just traverse down from the root
   const path: Array<[string, string | null]> = [];
@@ -38,6 +36,8 @@ export function find_subtree(state: DBDetails, id: string): DFSRes | null {
     return null;
   }
 
+  // Innefficient to use unshift. But this array's length
+  // should never be significantly large enough to matter.
   path.unshift(["res_users", null]);
 
   return [subtree!, path];
@@ -49,6 +49,7 @@ function dfs_helper(
   path: Array<[string, string | null]>,
   visited: Set<string>,
 ): null | ColumnSchema {
+  // Pre
   if (curr_node.id === id) {
     path.push([curr_node.column_name, curr_node.id]);
     return curr_node;
@@ -70,9 +71,9 @@ function dfs_helper(
     return null;
   }
 
-  // pre
   path.push([curr_node.column_name, curr_node.id]);
 
+  // Recurse
   for (let i = 0; i < curr_node.children.length; i++) {
     const found_node = dfs_helper(curr_node.children[i], id, path, visited);
     if (found_node) {
@@ -80,6 +81,7 @@ function dfs_helper(
     }
   }
 
+  // Post
   path.pop();
 
   return null;

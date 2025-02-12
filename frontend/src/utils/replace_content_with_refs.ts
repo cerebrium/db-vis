@@ -60,7 +60,11 @@ export function replace_content_with_refs(data: DBDetails): void {
   }
 
   // FIXME: this is terrible and innefficient. Find a better way to do this
-  console.log("triggering review?");
+  // The passing once all are done isn't so bad, its the overall strategy
+  // here that seems non-ideal. Using just references instead of
+  // structuredClone doesn't work, because of the id's the subtree view
+  // (If you run it and then click in a sub-node on the tooltip zoom in)
+  // it finds the first available path to that table, not the one clicked.
   give_new_ids(data);
 }
 
@@ -106,21 +110,37 @@ function replace_nested_nodes(
   }
 }
 
-function give_new_ids(curr_node: DBDetails) {
-  for (let i = 0; i < curr_node.schema.length; i++) {
-    give_new_ids_helper(curr_node.schema, curr_node.schema[i], i);
-  }
-}
+// This is still a wildly innefficient way of solving this problem. We would
+// like to not have to replace the id's. We are cloning objects in the structuredClone
+// call in replace_nested_nodes. For viewing subtrees we need to ensure that
+// all id's are unique. Iterative > recursive for this, but not existing is
+// better.
+function give_new_ids(curr_node: DBDetails): void {
+  const que: ColumnSchema[] = [...curr_node.schema];
+  let current_q_idx: number = 0;
+  const used_ids: Set<string> = new Set();
 
-function give_new_ids_helper(
-  parent_arr: ColumnSchema[],
-  curr_node: ColumnSchema,
-  idx: number,
-) {
-  parent_arr[idx].id = uuidv4();
-  if (curr_node.children) {
-    for (let i = 0; i < curr_node.children.length; i++) {
-      give_new_ids_helper(curr_node.children, curr_node.children[i], i);
+  while (current_q_idx < que.length) {
+    if (used_ids.has(que[current_q_idx].id)) {
+      que[current_q_idx].id = uuidv4();
+
+      if (que[current_q_idx].children) {
+        for (const child of que[current_q_idx].children!) {
+          que.push(child);
+        }
+      }
+
+      current_q_idx++;
+      continue;
     }
+
+    used_ids.add(que[current_q_idx].id);
+
+    if (que[current_q_idx].children) {
+      for (const child of que[current_q_idx].children!) {
+        que.push(child);
+      }
+    }
+    current_q_idx++;
   }
 }

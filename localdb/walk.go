@@ -1,5 +1,6 @@
 package localdb
 
+// CODE REVIEW
 import (
 	"os"
 
@@ -65,7 +66,14 @@ func Walk(dbd *DBDetails) error {
 func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
 	defer dbd.wg.Done()
 
+	// TODO: Think about this mutex. The map shouldn't have conflicting values, however,
+	// if we could have circular issues if a thread gets ahead of another thread and then
+	// we look into tables that we shouldn't.
+	// So far, there have been no circular issues experienced, but it is a risk, however
+	// the mutex will slow things down, and could be unnecessary.
+	// @Code Review extra focus
 	dbd.mu.RLock()
+
 	// We can read lots
 	if dbd.visitedTables[table_name] {
 		dbd.mu.RUnlock()

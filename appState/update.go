@@ -70,12 +70,13 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				isSchema = false
 			}
 
-			name, table, userName := m.SchemaView()
+			name, table, userName, password := m.SchemaView()
 
 			m.Dbd.Name = name
 			m.Dbd.Table = table
 			m.Dbd.UserName = userName
 			m.Dbd.IsSchema = isSchema
+			m.Dbd.Password = password
 
 			fmt.Println("Connecting")
 
@@ -85,12 +86,13 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.Logger.Log("Was an error returned from walk: " + err.Error())
 				fmt.Println("Could not connect to database. Please try again")
 
-				name, table, userName := m.SchemaView()
+				name, table, userName, password := m.SchemaView()
 
 				m.Dbd.Name = name
 				m.Dbd.Table = table
 				m.Dbd.UserName = userName
 				m.Dbd.IsSchema = isSchema
+				m.Dbd.Password = password
 
 				fmt.Println("Connecting")
 				err = localdb.Walk(m.Dbd)
