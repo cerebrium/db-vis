@@ -2,7 +2,6 @@ package localdb
 
 import (
 	"os"
-	"slices"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
@@ -28,18 +27,20 @@ func Walk(dbd *DBDetails) error {
 	dbd.schemaWalk(&dbd.Schema, dbd.Table)
 
 	// Append the top level table to visited
-	dbd.visitedTables = append(dbd.visitedTables, dbd.Table)
+	dbd.visitedTables[dbd.Table] = true
 
 	dbd.Logger.Log("past initial schema walk: ")
 
-	// Walk the children of the first query
+	// We want to be able to perform child walks concurrently.
 	for i := 0; i < len(dbd.Schema); i++ {
 		if dbd.Schema[i].ReferencesAnotherTable {
 
-			dbd.Logger.Log("calling child_walk on: " + *dbd.Schema[i].ReferencedTableName)
-			dbd.child_walk(*dbd.Schema[i].ReferencedTableName, &dbd.Schema[i].Children)
+			dbd.wg.Add(1)
+			go dbd.child_walk(*dbd.Schema[i].ReferencedTableName, &dbd.Schema[i].Children)
 		}
 	}
+
+	dbd.wg.Wait()
 
 	// Close after walking
 	defer dbd.dbConn.Close()
@@ -56,25 +57,39 @@ func Walk(dbd *DBDetails) error {
 	return nil
 }
 
-// TODO: We don't want circular queries, it will be forever... literally, however,
-// multiple children might reference a table differently, we still want to
-// represent that.
-//
 // This means that we have cases where there are potential circular references in
-// the referencesOtherTables, but not in the children
+// the referencesOtherTables, but not in the children... On the frontend, we will
+// have some circular references that are not handled by the ref replacment. With
+// those we need to say 'if x.references_another_table && not x.children -> hightlight
+// integer as being incomplete'
 func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
-	if slices.Contains(dbd.visitedTables, table_name) {
+	defer dbd.wg.Done()
+
+	dbd.mu.RLock()
+	// We can read lots
+	if dbd.visitedTables[table_name] {
+		dbd.mu.RUnlock()
 		return
 	}
 
-	dbd.visitedTables = append(dbd.visitedTables, table_name)
+	dbd.mu.RUnlock()
+
+	// Before the visitedTables is mutated, write lock
+	dbd.mu.Lock()
+
+	dbd.visitedTables[table_name] = true
+
+	dbd.mu.Unlock()
 
 	dbd.schemaWalk(children, table_name)
 
 	// Walk its children and recursively grab all data
 	for i := 0; i < len(*children); i++ {
 		if (*children)[i].ReferencesAnotherTable {
-			dbd.child_walk(*(*children)[i].ReferencedTableName, &(*children)[i].Children)
+			dbd.wg.Add(1)
+
+			dbd.Logger.Log("added a wg ")
+			go dbd.child_walk(*(*children)[i].ReferencedTableName, &(*children)[i].Children)
 		}
 	}
 }

@@ -2281,3 +2281,33 @@ ____________________________________O/_______
 {"time":"2025-02-12T11:05:30.164074Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":35998383583,"latency_human":"35.998383583s","bytes_in":0,"bytes_out":0}
 {"time":"2025-02-12T11:05:54.243829Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":24890974667,"latency_human":"24.890974667s","bytes_in":0,"bytes_out":0}
 {"time":"2025-02-12T11:05:54.308692Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/api/get_data","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1523083,"latency_human":"1.523083ms","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069

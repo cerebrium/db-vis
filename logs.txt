@@ -1,1 +1,812 @@
 
+
+
+2025.02.12 16:32:56
+
+before db connect: local
+ Connecting to table: res_users
+
+before db connect: local
+ Connecting to table: res_users
+
+Connected to database: local
+ Connecting to table: res_users
+
+past initial schema walk: 
+calling child_walk on: res_company
+calling child_walk on: res_partner
+calling child_walk on: res_users
+calling child_walk on: res_users
+calling child_walk on: crm_team
+calling child_walk on: gamification_karma_rank
+calling child_walk on: gamification_karma_rank
+calling child_walk on: website
+calling child_walk on: prefered_depots
+Inside the get data call
+The name: local
+Error getting schema details for: local
+Table: res_users
+Error getting schema details for: local
+Table: res_users
+Error getting schema details for: local
+Table: res_users
+Error getting schema details for: local
+Table: res_users
+
+
+2025.02.12 16:51:47
+
+before db connect: local
+ Connecting to table: res_users
+
+before db connect: local
+ Connecting to table: res_users
+
+Connected to database: local
+ Connecting to table: res_users
+
+past initial schema walk: 
+
+
+2025.02.12 16:57:01
+
+before db connect: local
+ Connecting to table: res_users
+
+before db connect: local
+ Connecting to table: res_users
+
+Connected to database: local
+ Connecting to table: res_users
+
+past initial schema walk: 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+added a wg 
+Inside the get data call
+The name: local
+Error in running form: user aborted
+
