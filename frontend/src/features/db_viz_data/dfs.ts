@@ -38,7 +38,7 @@ export function find_subtree(state: DBDetails, id: string): DFSRes | null {
 
   // Innefficient to use unshift. But this array's length
   // should never be significantly large enough to matter.
-  path.unshift(["res_users", null]);
+  path = [["res_users", null], ...path];
 
   return [subtree!, path];
 }
