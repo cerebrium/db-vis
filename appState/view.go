@@ -67,7 +67,7 @@ func (m Model) SchemaView() (string, string, string, string) {
 			huh.NewInput().Title("What is the db user name").Value(&userName),
 		),
 		huh.NewGroup(
-			huh.NewInput().Title("What is the db password? If no password leave blank").Value(&password),
+			huh.NewInput().Title("What is the db password? If no password leave blank").Value(&password).Password(true),
 		),
 	)
 
