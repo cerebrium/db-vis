@@ -17,7 +17,7 @@ export type DFSRes = [ColumnSchema, Array<[string, string | null]>];
  */
 export function find_subtree(state: DBDetails, id: string): DFSRes | null {
   // Table names are unique, so we can just traverse down from the root
-  const path: Array<[string, string | null]> = [];
+  let path: Array<[string, string | null]> = [];
   let subtree: ColumnSchema | null = null;
   const visited: Set<string> = new Set();
 
@@ -38,7 +38,7 @@ export function find_subtree(state: DBDetails, id: string): DFSRes | null {
 
   // Innefficient to use unshift. But this array's length
   // should never be significantly large enough to matter.
-  path = [["res_users", null], ...path];
+  path = [[state.table, null], ...path];
 
   return [subtree!, path];
 }

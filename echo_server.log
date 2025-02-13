@@ -2536,3 +2536,41 @@ https://echo.labstack.com
 ____________________________________O/_______
                                     O\
 ⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-13T20:08:57.123677Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":304,"error":"","latency":331375,"latency_human":"331.375µs","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-13T20:08:57.151696Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-Cs2rTlO4.css","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":304,"error":"","latency":14736125,"latency_human":"14.736125ms","bytes_in":0,"bytes_out":0}
+{"time":"2025-02-13T20:08:57.153627Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-ls75OO1K.js","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":17132084,"latency_human":"17.132084ms","bytes_in":0,"bytes_out":177325}
+{"time":"2025-02-13T20:08:57.399662Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/dbimg.svg","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":304,"error":"","latency":764792,"latency_human":"764.792µs","bytes_in":0,"bytes_out":0}
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+
+   ____    __
+  / __/___/ /  ___
+ / _// __/ _ \/ _ \
+/___/\__/_//_/\___/ v4.13.3
+High performance, minimalist Go web framework
+https://echo.labstack.com
+____________________________________O/_______
+                                    O\
+⇨ http server started on [::]:42069
+{"time":"2025-02-13T20:11:55.509896Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":7442459,"latency_human":"7.442459ms","bytes_in":0,"bytes_out":453}
+{"time":"2025-02-13T20:11:55.523873Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-DlKcto_U.js","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":1553042,"latency_human":"1.553042ms","bytes_in":0,"bytes_out":177317}
+{"time":"2025-02-13T20:11:55.530444Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/assets/index-Dyvd4p5C.css","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":7791750,"latency_human":"7.79175ms","bytes_in":0,"bytes_out":2588}
+{"time":"2025-02-13T20:11:55.544311Z","id":"","remote_ip":"::1","host":"localhost:42069","method":"GET","uri":"/dbimg.svg","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36","status":200,"error":"","latency":179750,"latency_human":"179.75µs","bytes_in":0,"bytes_out":453}

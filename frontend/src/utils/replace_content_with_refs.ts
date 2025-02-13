@@ -40,7 +40,7 @@ export function replace_content_with_refs(data: DBDetails): void {
   // With all nodes, replace those that should have children
   // We need to do this df style, and check for back references.
   for (let i = 0; i < data.schema.length; i++) {
-    if (data.schema[i].column_name === "res_users") {
+    if (data.schema[i].column_name === data.table) {
       continue;
     }
 
@@ -51,7 +51,7 @@ export function replace_content_with_refs(data: DBDetails): void {
     const ref_val = nested_ref_map.get(data.schema[i].referenced_table_name!);
     if (!data.schema[i].children && ref_val) {
       replace_nested_nodes(
-        ["res_users"],
+        [data.table],
         data.schema[i],
         nested_ref_map,
         ref_val,
