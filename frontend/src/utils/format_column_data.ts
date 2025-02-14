@@ -29,6 +29,7 @@ export class GraphData {
   max_width: number;
   max_height: number;
   canvas: CanvasRenderingContext2D;
+  root: string;
 
   constructor(
     data: ColumnSchema | DBDetails,
@@ -39,6 +40,8 @@ export class GraphData {
     this.max_width = max_width;
     this.max_height = max_height;
     this.canvas = canvas;
+
+    this.root = data.table;
 
     // Allows for subtree view or tree view
     if ("schema" in data) {
@@ -71,17 +74,98 @@ export class GraphData {
     // Draw the nodes
 
     console.log("what is this", this);
+
+    this.draw_canvas_nodes();
   }
 
   private draw_canvas_nodes() {
     // We can go in columns based off the max width
+    const rows = this.create_rows_to_write();
+
+    /*
+     
+      Go to the middle (x) of the page. Start with the parent
+      node. Then fan out by a set distance based off the largest
+      set of children
+
+     */
+
+    const height = rows.length;
+    let max_width = 0;
+
+    for (const row of rows) {
+      max_width = Math.max(max_width, row.length);
+    }
+
+    const y_spacing = Math.floor(this.max_height / height);
+    const x_spacing = Math.floor(this.max_width / max_width);
+    const radius = Math.floor(x_spacing / 3);
+
+    const middle = Math.floor(this.max_width / 2);
+
+    let current_x = 1;
+    let row_idx = 1;
+
+    for (const row of rows) {
+      for (const item of row) {
+        this.canvas.fillRect(
+          current_x * x_spacing,
+          row_idx * y_spacing,
+          radius,
+          radius,
+        );
+      }
+
+      current_x = 1;
+    }
   }
 
-  private create_columns_to_write(): {};
+  private create_rows_to_write(): Array<string[]> {
+    const rows: Array<string[]> = [[]];
+    if (!this.adj_list?.size) {
+      return rows;
+    }
+
+    const top_level = this.adj_list.get(this.root);
+
+    if (!top_level) {
+      return rows;
+    }
+
+    const que: string[][] = [[]];
+    let curr_q_idx: number = 0;
+
+    for (let i = 0; i < top_level.length; i++) {
+      que[0].push(top_level[i]);
+      rows[0].push(top_level[i]);
+    }
+
+    // Loop through and get all decendents in a breadth first search
+    while (curr_q_idx < que.length) {
+      const next_column: string[] = [];
+      const current_column = que[curr_q_idx];
+
+      for (let i = 0; i < current_column.length; i++) {
+        const has_children = this.adj_list.get(current_column[i])!;
+        if (has_children.length) {
+          for (const child of has_children) {
+            next_column.push(child);
+          }
+        }
+      }
+
+      que.push(next_column);
+      rows.push(next_column);
+
+      curr_q_idx++;
+    }
+
+    return rows;
+  }
 
   /**
    *
-   * Loop over all the nodes, transform them into the shape for the
+   * Loop over all sthe nodes, transform them into the shape for the
    * display library.
    *
    * We also create an adjacency list of tablename, [childTableName, FlowNode[]]
@@ -117,7 +201,7 @@ export class GraphData {
       this.create_adj_list_helper(adj_list, this.data[i], this.data[0].table);
     }
 
-    adj_list.set(this.data[0].table, child_nodes);
+    adj_list.set(this.root, child_nodes);
 
     return adj_list;
   }
