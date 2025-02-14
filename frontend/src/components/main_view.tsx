@@ -3,12 +3,10 @@ import { DetailDisplay } from "./detail_display";
 import { Rows } from "./rows";
 
 export type MainViewProps = {
-  data: DBDetails | null;
+  data: DBDetails;
 };
 
 export const MainView: React.FC<MainViewProps> = ({ data }) => {
-  if (!data) return <div>Loading...</div>;
-
   // We want to make coherent tables, seperate the non-nested from the nested
   const [non_nested, nested]: [ColumnSchema[], ColumnSchema[]] = [[], []];
   for (let i = 0; i < data.schema.length; i++) {
