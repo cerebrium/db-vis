@@ -1,4 +1,4 @@
-import type { ColumnSchema } from "../types";
+import type { ColumnSchema, DBDetails } from "../types";
 
 /*
  *
@@ -7,268 +7,265 @@ import type { ColumnSchema } from "../types";
  * just a wip. Focusing on the table view.
  *
  */
-export type FlowNode = {
-  id: string;
-  type?: string;
-  data: { label: string };
-  position: { x: number; y: number };
-};
 
-export type Edge = {
-  id: string;
-  source: string;
-  target: string;
-};
+export type ColumnSchemaAdjList = Map<string, string[]>;
 
-export type ColumnSchemaAdjList = Map<string, [string, FlowNode[], string][]>;
+type DrawableShape = {
+  label: string;
+  x: number;
+  y: number;
+};
 
 export class GraphData {
-  data: ColumnSchema[];
   adj_list: ColumnSchemaAdjList;
-  parent_list: FlowNode[] = [];
-  groupings: Map<
-    string,
-    {
-      nodes: number;
-      group_radius: number;
-      middle: [number, number]; // x, y coordinates of the center of the group
+  number_of_nodes: number = 0;
+  max_width: number;
+  max_height: number;
+  canvas: CanvasRenderingContext2D;
+  root: string;
+  usedColors: Set<string> = new Set();
+  drawable_shapes: null = null;
+
+  constructor(
+    data: ColumnSchema | DBDetails,
+    max_width: number,
+    max_height: number,
+    canvas: CanvasRenderingContext2D,
+  ) {
+    this.max_width = max_width;
+    this.max_height = max_height;
+    this.canvas = canvas;
+
+    this.root = data.table;
+
+    // Allows for subtree view or tree view
+    if ("schema" in data) {
+      this.adj_list = this.create_adj_list([...data.schema]);
+    } else {
+      // We can only ever allow a ColumnSchema with children
+      if (!data.children) {
+        throw new Error("The data has no children. Invalid graph view");
+      }
+
+      this.adj_list = this.create_adj_list([...data.children]);
     }
-  > = new Map();
-  sub_node_radius: number = 40;
-  sub_node_spacing: number = this.sub_node_radius * 2 + 20;
-  top_sorted_groupings: string[] = [];
-  sub_node_gap: number = 150;
 
-  constructor(data: ColumnSchema[]) {
-    this.data = data;
+    this.number_of_nodes = this.adj_list.size;
 
-    if (!this.data.length) {
-      throw new Error("There is no data");
-    }
-
-    this.adj_list = this.create_adj_list();
+    // We can space the nodes based on the screen size
+    // and the number of overall nodes.
 
     if (!this.adj_list) {
       throw new Error();
     }
 
-    this.init();
+    // Draw the nodes
+    this.draw_canvas_nodes();
   }
 
-  private init() {
+  // Chat gpt function here... going to use it to generate colors
+  // that are slight variants of the lightseagreen to then color
+  // code parent-child relationship
+  private getColorVariant(baseColor: string = "#20B2AA"): string {
+    let variant: string;
+    do {
+      // Extract RGB from hex
+      const r = parseInt(baseColor.substring(1, 3), 16);
+      const g = parseInt(baseColor.substring(3, 5), 16);
+      const b = parseInt(baseColor.substring(5, 7), 16);
+
+      // Apply slight variation within a safe range
+      const newR = Math.min(255, Math.max(0, r + (Math.random() * 20 - 10)));
+      const newG = Math.min(255, Math.max(0, g + (Math.random() * 20 - 10)));
+      const newB = Math.min(255, Math.max(0, b + (Math.random() * 20 - 10)));
+
+      // Convert back to hex
+      variant =
+        `#${Math.round(newR).toString(16).padStart(2, "0")}` +
+        `${Math.round(newG).toString(16).padStart(2, "0")}` +
+        `${Math.round(newB).toString(16).padStart(2, "0")}`;
+    } while (this.usedColors.has(variant)); // Ensure uniqueness
+
+    this.usedColors.add(variant);
+    return variant;
+  }
+
+  private draw_canvas_nodes() {
+    // We can go in columns based off the max width
+    const rows = this.create_rows_to_write();
+
     /*
-
-      1. Top sort the adj_list, create our ordering of nodes -> this is not done 
-      becuase when I did it, i realized that i think its is redundant. but leaving 
-      it in because when I thought of it, it seemed correct.
-
-      2. Reconfigure the x,y coordinates of the groups to be 
-      in the top order, decending from [0, 0]
-
-     TODO:
-      3. Loop through each node in the group and arrange their 
-      centers to be equadistant from the center of the group. 
-      And in alternating groupings of 4 around the center.
-
-      4. Create the edges. 
-        - there should be id's of the nodes that connect to the 
-        other groupings. As the third argument in the tuples in 
-        the adj_list
-
-      5. loop through all the nodes and write them to the final 
-      nodes array. 
-      6. Return the nodes and edges
      
+      Go to the middle (x) of the page. Start with the parent
+      node. Then fan out by a set distance based off the largest
+      set of children
+
      */
 
-    // 2. Recofigure the middles
-    this.rework_middles_of_nodes();
-  }
+    const height = rows.length;
+    let max_width = 0;
 
-  private rework_middles_of_nodes() {
+    for (const row of rows) {
+      max_width = Math.max(max_width, row.length);
+    }
+
+    const y_spacing = Math.floor(this.max_height / height);
+    const x_spacing = Math.floor(this.max_width / (max_width * 1.2));
+    const radius = Math.floor(x_spacing / 4);
+    const middle = Math.floor(this.max_width / 2);
+
     /*
-     
-     We want to walk from the beggining to the end of the top sort. 
-     But, we want to establish node precedence based on children, in 
-     that way we can place the nodes that need to come next based 
-     relatively on their parent.
-    
+      
+      We want to start with the middle node. If even we go left and right. 
+      If odd we do the same. 
+
+      x = the offset from center is (max_widht / 2) +/- (row_node_length / max_width) +/- idx (from middle)
+      y = row * y_spacing 
+
     */
-    let node_que_idx = 0;
-    const node_que = [this.data[0].table];
 
-    // Make the first grouping
-    const root_node = this.groupings.get(node_que[0])!;
-    const roo_x_y =
-      Math.floor(root_node.nodes / 4) * this.sub_node_spacing + 20;
-    root_node.middle = [roo_x_y, roo_x_y];
+    this.canvas.fillStyle = "lightseagreen";
 
-    while (node_que_idx < node_que.length) {
-      const parent_node = node_que[node_que_idx];
-      const children = this.adj_list.get(parent_node);
-      const parent = this.groupings.get(parent_node)!;
+    let prev_nodes: Array<[number, number]> = [];
+    let curr_nodes: Array<[number, number]> = [];
 
-      if (!children || !children.length) {
-        node_que_idx++;
-        continue;
-      }
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const y = i === 0 ? y_spacing * 0.8 : y_spacing * ((i + 1) * 0.8);
+      let x = 0;
 
-      // For these on each one we eant to make a spanning effect.
-      // We can start in the middle, then go left and right.
-      //
-      // If there are more than a couple children this breaks.
-      //
-      //TODO: make the fanning work for multiple nodes (increase the gap)
-      for (let i = 0; i < children.length; i++) {
-        const [child, _, __] = children[i];
+      let written_nodes = 0;
+      const row_middle = Math.floor(rows[i].length / 2);
+      let curr_node = Math.floor(rows[i].length / 2) - 1;
 
-        const child_node = this.groupings.get(child)!;
+      // keep a ref to the previous array's x and y
 
-        // This should always exist because we add empty nodes
-        // to the adjacency list
-        if (!child_node) {
-          throw new Error("Child node does not exist");
+      prev_nodes = curr_nodes;
+      curr_nodes = new Array(rows[i].length);
+
+      // TODO: ugly code, think of a better way to do this
+      while (written_nodes < row.length) {
+        let local_y;
+        if (written_nodes % 2 === 0) {
+          local_y = y - Math.floor(y_spacing / 5);
+        } else {
+          local_y = y + Math.floor(y_spacing / 5);
+        }
+        if (curr_node < row_middle) {
+          x = middle - (row_middle - curr_node) * x_spacing;
+
+          // TODO: see if this can be more optimized
+          this.canvas.beginPath();
+          this.canvas.arc(x, local_y, radius, 0, Math.PI * 2);
+          this.canvas.fill();
+
+          curr_nodes[written_nodes] = [x, local_y];
+        } else {
+          x = middle + (curr_node - row_middle) * x_spacing;
+
+          // TODO: see if this can be more optimized
+          this.canvas.beginPath();
+          this.canvas.arc(x, local_y, radius, 0, Math.PI * 2);
+          this.canvas.fill();
+
+          curr_nodes[written_nodes] = [x, local_y];
         }
 
-        child_node.middle = this.find_correct_spacing(i, parent, child_node);
+        // Write the connection to parent node
+        if (i > 0) {
+          let q = row[written_nodes].length;
+          while (q > 0) {
+            if (row[written_nodes][q] === "+") {
+              break;
+            }
+            q--;
+          }
 
-        node_que.push(child);
+          const parent_idx = rows[i - 1].indexOf(
+            row[written_nodes].substring(0, q),
+          );
+
+          const [p_x, p_y] = prev_nodes[parent_idx];
+          const [x, y] = curr_nodes[written_nodes];
+
+          if (!p_x || !p_y || !x || !y) {
+            throw new Error("Could not find parent: " + p_x + p_y + x + y);
+          }
+
+          // Draw from previous to current
+          const cx = p_x,
+            cy = y;
+
+          this.canvas.beginPath();
+          this.canvas.moveTo(p_x, p_y);
+          this.canvas.quadraticCurveTo(cx, cy, x, y);
+          this.canvas.strokeStyle = "lightseagreen"; // Change the curve color
+          this.canvas.stroke();
+        }
+
+        if (curr_node === 0) {
+          // TODO: might be an off by one issue here
+          curr_node = Math.floor(rows[i].length / 2) + 1;
+        } else if (curr_node < row_middle) {
+          curr_node--;
+        } else {
+          curr_node++;
+        }
+
+        written_nodes++;
       }
     }
   }
 
-  // @ts-ignore -> will be used later
-  private get_subnode_centers(
-    middle: [number, number],
-    idx: number,
-  ): [
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-    [number, number],
-  ] {
-    const child_centers: [
-      [number, number],
-      [number, number],
-      [number, number],
-      [number, number],
-      [number, number],
-      [number, number],
-      [number, number],
-      [number, number],
-    ] = [
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-      [0, 0],
-    ];
-
-    const [x, y] = middle;
-
-    // We will go top, right, bottom, left
-    child_centers[0] = [x, y - this.sub_node_spacing * idx]; // top
-    child_centers[1] = [x + this.sub_node_spacing * idx, y]; // right
-    child_centers[2] = [x, y + this.sub_node_spacing * idx]; // bottom
-    child_centers[3] = [x - this.sub_node_spacing * idx, y]; // left
-
-    // Diagonals
-    child_centers[4] = [child_centers[0][0], child_centers[1][1]];
-    child_centers[5] = [child_centers[2][0], child_centers[1][1]];
-    child_centers[6] = [child_centers[2][0], child_centers[3][1]];
-    child_centers[7] = [child_centers[0][0], child_centers[3][1]];
-
-    return child_centers;
-  }
-
-  private find_correct_spacing(
-    idx: number,
-    parent: {
-      nodes: number;
-      group_radius: number;
-      middle: [number, number];
-    },
-    child: {
-      nodes: number;
-      group_radius: number;
-      middle: [number, number];
-    },
-  ): [number, number] {
-    const middles = [1, 4, 7];
-    const lefts = [2, 5, 8];
-    // const rights = [3, 6, 9]; for posterity
-
-    if (middles.includes(idx)) {
-      const x_y =
-        parent.middle[0] +
-        this.sub_node_gap +
-        parent.group_radius +
-        child.group_radius;
-
-      return [x_y, x_y];
+  private create_rows_to_write(): Array<string[]> {
+    const rows: Array<string[]> = [[]];
+    if (!this.adj_list?.size) {
+      return rows;
     }
 
-    if (lefts.includes(idx)) {
-      // left
-      const x = parent.middle[0] + 10; // Match the parent x
+    const top_level = this.adj_list.get(this.root);
 
-      const y =
-        parent.middle[1] +
-        this.sub_node_gap +
-        parent.group_radius +
-        child.group_radius;
-
-      return [x, y];
+    if (!top_level) {
+      return rows;
     }
 
-    // right
-    const y = parent.middle[1] + 10; // Match the parent x
+    const que: string[][] = [[]];
+    let curr_q_idx: number = 0;
 
-    const x =
-      parent.middle[0] +
-      this.sub_node_gap +
-      parent.group_radius +
-      child.group_radius;
-
-    return [x, y];
-  }
-
-  /*
-
-    This only works if there aren't circular references. There cannot 
-    be because we handled that on the backend, therefore this is a 
-    DAG. 
-
-    FIXME: Is not true anymore due to fe fiddling
-
-   */
-  // @ts-ignore -> will be used later
-  private top_sort_node_groupings(curr_node: string) {
-    // We want to start at the table that was queried
-
-    const children = this.adj_list.get(curr_node);
-    if (!children) {
-      this.top_sorted_groupings.push(curr_node);
-      return;
+    for (let i = 0; i < top_level.length; i++) {
+      que[0].push(top_level[i]);
+      rows[0].push(top_level[i]);
     }
 
-    for (const [child, _, __] of children) {
-      this.top_sort_node_groupings(child);
+    // Loop through and get all decendents in a breadth first search
+    while (curr_q_idx < que.length) {
+      const next_column: string[] = [];
+      const current_column = que[curr_q_idx];
+
+      for (let i = 0; i < current_column.length; i++) {
+        const has_children = this.adj_list.get(current_column[i])!;
+
+        if (has_children.length) {
+          for (const child of has_children) {
+            next_column.push(child);
+          }
+        }
+      }
+
+      if (next_column.length) {
+        que.push(next_column);
+        rows.push(next_column);
+      }
+
+      curr_q_idx++;
     }
 
-    this.top_sorted_groupings.push(curr_node);
+    return rows;
   }
 
   /**
    *
-   * Loop over all the nodes, transform them into the shape for the
+   * Loop over all sthe nodes, transform them into the shape for the
    * display library.
    *
    * We also create an adjacency list of tablename, [childTableName, FlowNode[]]
@@ -281,89 +278,63 @@ export class GraphData {
    * the 'references_another_table' does exist. This is perhaps information
    * that could be useful.
    *
-   * TODO: Add a circular dependency check for the references another table
-   * property.
    *
    */
-  private create_adj_list(): ColumnSchemaAdjList {
+  private create_adj_list(data: ColumnSchema[]): ColumnSchemaAdjList {
     const adj_list: ColumnSchemaAdjList = new Map();
 
-    adj_list.set(this.data[0].table, []);
+    const child_nodes: string[] = [];
 
-    for (let i = 0; i < this.data.length; i++) {
-      const new_node = {
-        id: `${this.data[i].table}_${i}`,
-        data: { label: `${this.data[i].column_name}` },
-        position: { x: 0, y: 0 },
-      };
-
-      this.parent_list.push(new_node);
-
-      if (this.data[i].children && this.data[i].children!.length > 0) {
-        const curr_list = adj_list.get(this.data[i].table)!;
-
-        // Pre set the initial child of this so that we can have a count
-        // at the end of the number of nodes.
-        adj_list.set(this.data[i].children![0].table, []);
-
-        curr_list.push([
-          this.data[i].children![0].table,
-          this.create_adj_list_helper(
-            adj_list,
-            this.data[i].children!,
-            this.data[i].children![0].table,
-          ),
-          `${new_node.id}++${this.data[i].children![0].table}_0`,
-        ]);
+    for (let i = 0; i < data.length; i++) {
+      // Only looking at nodes with children, or the child
+      if (!data[i].children || !data[i].references_another_table) {
+        continue;
       }
+
+      child_nodes.push(this.root + "+" + data[i].column_name);
+
+      this.create_adj_list_helper(adj_list, data[i], this.root);
     }
+
+    adj_list.set(this.root, child_nodes);
 
     return adj_list;
   }
 
   private create_adj_list_helper(
     adj_list: ColumnSchemaAdjList,
-    columns: ColumnSchema[],
-    table_name: string,
-  ): FlowNode[] {
-    const flow_nodes: FlowNode[] = [];
+    curr_node: ColumnSchema,
+    prefix: string,
+  ): void {
+    // The node already exists, we are therefore nested in a different
+    // parents tree. We need to now append the current_column_name
+    // to the nodes name
 
-    for (let i = 0; i < columns.length; i++) {
-      const new_node = {
-        id: `${table_name}_${i}`,
-        data: { label: `${this.data[i].column_name}` },
-        position: { x: 0, y: 0 },
-      };
+    const child_nodes: string[] = [];
 
-      flow_nodes.push(new_node);
+    let local_prefix = prefix + "+" + curr_node.column_name;
 
-      if (columns[i].children && columns[i].children!.length > 0) {
-        const curr_list = adj_list.get(columns[i].table)!;
-
-        // Before looking at more children add this ones label
-        // to the set as a parent
-        adj_list.set(columns[i].children![0].table, []);
-
-        curr_list.push([
-          columns[i].children![0].table,
-          this.create_adj_list_helper(
-            adj_list,
-            columns[i].children!,
-            columns[i].children![0].table,
-          ),
-          `${new_node.id}++${columns[i].children![0].table}_0`,
-        ]);
-
-        adj_list.set(columns[i].table, curr_list);
-      }
+    if (!curr_node.children) {
+      throw new Error("Does not have children");
     }
 
-    this.groupings.set(table_name, {
-      nodes: flow_nodes.length,
-      group_radius: Math.floor(flow_nodes.length / 4) * this.sub_node_radius,
-      middle: [0, 0], // We will top sort then create these
-    });
+    for (let i = 0; i < curr_node.children.length; i++) {
+      if (
+        !curr_node.children[i].children ||
+        !curr_node.children[i].references_another_table
+      ) {
+        continue;
+      }
 
-    return flow_nodes;
+      child_nodes.push(local_prefix + "+" + curr_node.children[i].column_name);
+
+      this.create_adj_list_helper(
+        adj_list,
+        curr_node.children![i],
+        local_prefix,
+      );
+    }
+
+    adj_list.set(local_prefix, child_nodes);
   }
 }
