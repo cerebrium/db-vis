@@ -21,8 +21,8 @@ export const Canvas: React.FC = () => {
     // Get screen width and height
 
     // Set canvas size
-    canvas.width = screen.width - 200;
-    canvas.height = screen.height - 100;
+    canvas.width = screen.width * 0.6;
+    canvas.height = screen.height * 0.6;
 
     if (!ctx) {
       throw new Error("There is no ctx element");
@@ -33,10 +33,14 @@ export const Canvas: React.FC = () => {
       return;
     }
 
-    const graph_data = new GraphData(data, canvas.width, canvas.height, ctx);
+    new GraphData(data, canvas.width, canvas.height, ctx);
 
     // Handle drawing the nodes
   }, [data]);
 
-  return <canvas ref={canvas_ref} />;
+  return (
+    <section className="canvas_container">
+      <canvas ref={canvas_ref} />
+    </section>
+  );
 };

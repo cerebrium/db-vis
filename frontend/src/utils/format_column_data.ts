@@ -7,29 +7,22 @@ import type { ColumnSchema, DBDetails } from "../types";
  * just a wip. Focusing on the table view.
  *
  */
-export type FlowNode = {
-  id: string;
-  type?: string;
-  data: { label: string };
-  position: { x: number; y: number };
-};
-
-export type Edge = {
-  id: string;
-  source: string;
-  target: string;
-};
 
 export type ColumnSchemaAdjList = Map<string, string[]>;
 
+type DrawableShape = {
+  x: number;
+  y: number;
+};
+
 export class GraphData {
-  data: ColumnSchema[];
   adj_list: ColumnSchemaAdjList;
   number_of_nodes: number = 0;
   max_width: number;
   max_height: number;
   canvas: CanvasRenderingContext2D;
   root: string;
+  drawable_shapes: null = null;
 
   constructor(
     data: ColumnSchema | DBDetails,
@@ -45,23 +38,16 @@ export class GraphData {
 
     // Allows for subtree view or tree view
     if ("schema" in data) {
-      this.data = [...data.schema];
+      this.adj_list = this.create_adj_list([...data.schema]);
     } else {
       // We can only ever allow a ColumnSchema with children
       if (!data.children) {
         throw new Error("The data has no children. Invalid graph view");
       }
 
-      // Shallow copies, will need to shallow copy in adj list as well
-      // for nesting
-      this.data = [...data.children];
+      this.adj_list = this.create_adj_list([...data.children]);
     }
 
-    if (!this.data.length) {
-      throw new Error("There is no data");
-    }
-
-    this.adj_list = this.create_adj_list();
     this.number_of_nodes = this.adj_list.size;
 
     // We can space the nodes based on the screen size
@@ -72,9 +58,6 @@ export class GraphData {
     }
 
     // Draw the nodes
-
-    console.log("what is this", this);
-
     this.draw_canvas_nodes();
   }
 
@@ -100,23 +83,64 @@ export class GraphData {
     const y_spacing = Math.floor(this.max_height / height);
     const x_spacing = Math.floor(this.max_width / max_width);
     const radius = Math.floor(x_spacing / 3);
-
     const middle = Math.floor(this.max_width / 2);
 
-    let current_x = 1;
-    let row_idx = 1;
+    console.log("what is the middle: ", middle);
 
-    for (const row of rows) {
-      for (const item of row) {
-        this.canvas.fillRect(
-          current_x * x_spacing,
-          row_idx * y_spacing,
-          radius,
-          radius,
-        );
+    // const middle = Math.floor(this.max_width / 2);
+
+    /*
+      
+      We want to start with the middle node. If even we go left and right. 
+      If odd we do the same. 
+
+      x = the offset from center is (max_widht / 2) +/- (row_node_length / max_width) +/- idx (from middle)
+      y = row * y_spacing 
+
+    */
+
+    this.canvas.fillStyle = "lightseagreen";
+
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const y = y_spacing * i + 1;
+      let x = 0;
+
+      let written_nodes = 0;
+      const row_middle = Math.floor(rows[i].length / 2);
+      let curr_node = Math.floor(rows[i].length / 2) - 1;
+
+      // Go left first, then right
+
+      // TODO: ugly code, think of a better way to do this
+      while (written_nodes < row.length) {
+        if (curr_node < row_middle) {
+          x = middle - (row_middle - curr_node) * x_spacing;
+
+          // TODO: see if this can be more optimized
+          this.canvas.beginPath();
+          this.canvas.arc(x, y, radius, 0, Math.PI * 2);
+          this.canvas.fill();
+        } else {
+          x = middle + (curr_node - row_middle) * x_spacing;
+
+          // TODO: see if this can be more optimized
+          this.canvas.beginPath();
+          this.canvas.arc(x, y, radius, 0, Math.PI * 2);
+          this.canvas.fill();
+        }
+
+        if (curr_node === 0) {
+          // TODO: might be an off by one issue here
+          curr_node = Math.floor(rows[i].length / 2) + 1;
+        } else if (curr_node < row_middle) {
+          curr_node--;
+        } else {
+          curr_node++;
+        }
+
+        written_nodes++;
       }
-
-      current_x = 1;
     }
   }
 
@@ -147,6 +171,7 @@ export class GraphData {
 
       for (let i = 0; i < current_column.length; i++) {
         const has_children = this.adj_list.get(current_column[i])!;
+
         if (has_children.length) {
           for (const child of has_children) {
             next_column.push(child);
@@ -154,8 +179,10 @@ export class GraphData {
         }
       }
 
-      que.push(next_column);
-      rows.push(next_column);
+      if (next_column.length) {
+        que.push(next_column);
+        rows.push(next_column);
+      }
 
       curr_q_idx++;
     }
@@ -178,27 +205,22 @@ export class GraphData {
    * the 'references_another_table' does exist. This is perhaps information
    * that could be useful.
    *
-   * TODO: Add a circular dependency check for the references another table
-   * property.
    *
    */
-  private create_adj_list(): ColumnSchemaAdjList {
+  private create_adj_list(data: ColumnSchema[]): ColumnSchemaAdjList {
     const adj_list: ColumnSchemaAdjList = new Map();
 
     const child_nodes: string[] = [];
 
-    for (let i = 0; i < this.data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       // Only looking at nodes with children, or the child
-      if (!this.data[i].children || !this.data[i].references_another_table) {
+      if (!data[i].children || !data[i].references_another_table) {
         continue;
       }
 
-      child_nodes.push(this.data[i].column_name);
+      child_nodes.push(this.root + "+" + data[i].column_name);
 
-      const visited: Set<string> = new Set();
-      visited.add(this.data[0].table);
-
-      this.create_adj_list_helper(adj_list, this.data[i], this.data[0].table);
+      this.create_adj_list_helper(adj_list, data[i], this.root);
     }
 
     adj_list.set(this.root, child_nodes);
@@ -217,23 +239,29 @@ export class GraphData {
 
     const child_nodes: string[] = [];
 
-    for (let i = 0; i < curr_node.children!.length; i++) {
+    let local_prefix = prefix + "+" + curr_node.column_name;
+
+    if (!curr_node.children) {
+      throw new Error("Does not have children");
+    }
+
+    for (let i = 0; i < curr_node.children.length; i++) {
       if (
-        !curr_node.children![i].children ||
-        !curr_node.children![i].references_another_table
+        !curr_node.children[i].children ||
+        !curr_node.children[i].references_another_table
       ) {
         continue;
       }
 
-      child_nodes.push(curr_node.children![i].column_name);
+      child_nodes.push(local_prefix + "+" + curr_node.children[i].column_name);
 
       this.create_adj_list_helper(
         adj_list,
         curr_node.children![i],
-        prefix + curr_node.children![0].table,
+        local_prefix,
       );
     }
 
-    adj_list.set(prefix, child_nodes);
+    adj_list.set(local_prefix, child_nodes);
   }
 }

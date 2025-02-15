@@ -246,3 +246,10 @@ td {
   color: #3ec8c1;
   transition: 0.5s;
 }
+
+.canvas_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
