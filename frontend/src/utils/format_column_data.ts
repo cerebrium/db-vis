@@ -81,13 +81,9 @@ export class GraphData {
     }
 
     const y_spacing = Math.floor(this.max_height / height);
-    const x_spacing = Math.floor(this.max_width / max_width);
-    const radius = Math.floor(x_spacing / 3);
+    const x_spacing = Math.floor(this.max_width / (max_width * 1.2));
+    const radius = Math.floor(x_spacing / 4);
     const middle = Math.floor(this.max_width / 2);
-
-    console.log("what is the middle: ", middle);
-
-    // const middle = Math.floor(this.max_width / 2);
 
     /*
       
@@ -99,35 +95,87 @@ export class GraphData {
 
     */
 
+    console.log("what is the rows: ", rows);
+
     this.canvas.fillStyle = "lightseagreen";
+
+    let prev_nodes: Array<[number, number]> = [];
+    let curr_nodes: Array<[number, number]> = [];
 
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
-      const y = y_spacing * i + 1;
+      const y = i === 0 ? y_spacing * 0.8 : y_spacing * ((i + 1) * 0.8);
       let x = 0;
 
       let written_nodes = 0;
       const row_middle = Math.floor(rows[i].length / 2);
       let curr_node = Math.floor(rows[i].length / 2) - 1;
 
-      // Go left first, then right
+      // keep a ref to the previous array's x and y
+
+      prev_nodes = curr_nodes;
+      curr_nodes = new Array(rows[i].length);
 
       // TODO: ugly code, think of a better way to do this
       while (written_nodes < row.length) {
+        let local_y;
+        if (written_nodes % 2 === 0) {
+          local_y = y - Math.floor(y_spacing / 5);
+        } else {
+          local_y = y + Math.floor(y_spacing / 5);
+        }
         if (curr_node < row_middle) {
           x = middle - (row_middle - curr_node) * x_spacing;
 
           // TODO: see if this can be more optimized
           this.canvas.beginPath();
-          this.canvas.arc(x, y, radius, 0, Math.PI * 2);
+          this.canvas.arc(x, local_y, radius, 0, Math.PI * 2);
           this.canvas.fill();
+
+          curr_nodes[written_nodes] = [x, local_y];
         } else {
           x = middle + (curr_node - row_middle) * x_spacing;
 
           // TODO: see if this can be more optimized
           this.canvas.beginPath();
-          this.canvas.arc(x, y, radius, 0, Math.PI * 2);
+          this.canvas.arc(x, local_y, radius, 0, Math.PI * 2);
           this.canvas.fill();
+
+          curr_nodes[written_nodes] = [x, local_y];
+        }
+
+        // Write the connection to parent node
+        if (i > 0) {
+          let q = row[written_nodes].length;
+          while (q > 0) {
+            if (row[written_nodes][q] === "+") {
+              break;
+            }
+            q--;
+          }
+
+          const parent_idx = rows[i - 1].indexOf(
+            row[written_nodes].substring(0, q),
+          );
+
+          const [p_x, p_y] = prev_nodes[parent_idx];
+          const [x, y] = curr_nodes[written_nodes];
+
+          if (!p_x || !p_y || !x || !y) {
+            throw new Error("Could not find parent: " + p_x + p_y + x + y);
+          }
+
+          // Draw from previous to current
+          const cx = p_x,
+            cy = y;
+
+          console.log("what is the p_x: ", p_x, "\n x: ", x);
+
+          this.canvas.beginPath();
+          this.canvas.moveTo(p_x, p_y);
+          this.canvas.quadraticCurveTo(cx, cy, x, y);
+          this.canvas.strokeStyle = "lightseagreen"; // Change the curve color
+          this.canvas.stroke();
         }
 
         if (curr_node === 0) {

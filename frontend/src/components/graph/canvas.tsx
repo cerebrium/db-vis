@@ -21,8 +21,8 @@ export const Canvas: React.FC = () => {
     // Get screen width and height
 
     // Set canvas size
-    canvas.width = screen.width * 0.6;
-    canvas.height = screen.height * 0.6;
+    canvas.width = screen.width * 0.8;
+    canvas.height = screen.height * 0.8;
 
     if (!ctx) {
       throw new Error("There is no ctx element");
@@ -40,6 +40,7 @@ export const Canvas: React.FC = () => {
 
   return (
     <section className="canvas_container">
+      <h3>{data?.table}</h3>
       <canvas ref={canvas_ref} />
     </section>
   );
