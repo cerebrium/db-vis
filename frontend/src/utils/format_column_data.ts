@@ -10,7 +10,7 @@ import type { ColumnSchema, DBDetails } from "../types";
 
 export type ColumnSchemaAdjList = Map<string, string[]>;
 
-type DrawableShape = {
+export type DrawableShape = {
   label: string;
   x: number;
   y: number;
@@ -66,7 +66,8 @@ export class GraphData {
   // Chat gpt function here... going to use it to generate colors
   // that are slight variants of the lightseagreen to then color
   // code parent-child relationship
-  private getColorVariant(baseColor: string = "#20B2AA"): string {
+  // TODO: make private after use
+  public getColorVariant(baseColor: string = "#20B2AA"): string {
     let variant: string;
     do {
       // Extract RGB from hex
@@ -111,7 +112,7 @@ export class GraphData {
 
     const y_spacing = Math.floor(this.max_height / height);
     const x_spacing = Math.floor(this.max_width / (max_width * 1.2));
-    const radius = Math.floor(x_spacing / 4);
+    const radius = Math.floor(10);
     const middle = Math.floor(this.max_width / 2);
 
     /*
@@ -131,7 +132,7 @@ export class GraphData {
 
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
-      const y = i === 0 ? y_spacing * 0.8 : y_spacing * ((i + 1) * 0.8);
+      const y = i === 0 ? y_spacing * 0.2 : y_spacing * ((i + 1) * 0.7);
       let x = 0;
 
       let written_nodes = 0;
@@ -145,12 +146,15 @@ export class GraphData {
 
       // TODO: ugly code, think of a better way to do this
       while (written_nodes < row.length) {
-        let local_y;
-        if (written_nodes % 2 === 0) {
-          local_y = y - Math.floor(y_spacing / 5);
-        } else {
-          local_y = y + Math.floor(y_spacing / 5);
+        let local_y = y;
+        if (i !== 0) {
+          if (written_nodes % 2 === 0) {
+            local_y = y - Math.floor(y_spacing / 5);
+          } else {
+            local_y = y + Math.floor(y_spacing / 5);
+          }
         }
+
         if (curr_node < row_middle) {
           x = middle - (row_middle - curr_node) * x_spacing;
 
