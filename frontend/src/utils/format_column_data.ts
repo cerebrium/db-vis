@@ -11,6 +11,7 @@ import type { ColumnSchema, DBDetails } from "../types";
 export type ColumnSchemaAdjList = Map<string, string[]>;
 
 type DrawableShape = {
+  label: string;
   x: number;
   y: number;
 };
@@ -22,6 +23,7 @@ export class GraphData {
   max_height: number;
   canvas: CanvasRenderingContext2D;
   root: string;
+  usedColors: Set<string> = new Set();
   drawable_shapes: null = null;
 
   constructor(
@@ -61,6 +63,33 @@ export class GraphData {
     this.draw_canvas_nodes();
   }
 
+  // Chat gpt function here... going to use it to generate colors
+  // that are slight variants of the lightseagreen to then color
+  // code parent-child relationship
+  private getColorVariant(baseColor: string = "#20B2AA"): string {
+    let variant: string;
+    do {
+      // Extract RGB from hex
+      const r = parseInt(baseColor.substring(1, 3), 16);
+      const g = parseInt(baseColor.substring(3, 5), 16);
+      const b = parseInt(baseColor.substring(5, 7), 16);
+
+      // Apply slight variation within a safe range
+      const newR = Math.min(255, Math.max(0, r + (Math.random() * 20 - 10)));
+      const newG = Math.min(255, Math.max(0, g + (Math.random() * 20 - 10)));
+      const newB = Math.min(255, Math.max(0, b + (Math.random() * 20 - 10)));
+
+      // Convert back to hex
+      variant =
+        `#${Math.round(newR).toString(16).padStart(2, "0")}` +
+        `${Math.round(newG).toString(16).padStart(2, "0")}` +
+        `${Math.round(newB).toString(16).padStart(2, "0")}`;
+    } while (this.usedColors.has(variant)); // Ensure uniqueness
+
+    this.usedColors.add(variant);
+    return variant;
+  }
+
   private draw_canvas_nodes() {
     // We can go in columns based off the max width
     const rows = this.create_rows_to_write();
@@ -94,8 +123,6 @@ export class GraphData {
       y = row * y_spacing 
 
     */
-
-    console.log("what is the rows: ", rows);
 
     this.canvas.fillStyle = "lightseagreen";
 
@@ -168,8 +195,6 @@ export class GraphData {
           // Draw from previous to current
           const cx = p_x,
             cy = y;
-
-          console.log("what is the p_x: ", p_x, "\n x: ", x);
 
           this.canvas.beginPath();
           this.canvas.moveTo(p_x, p_y);
