@@ -44,6 +44,12 @@ steps to use:
 
 ![Screenshot 2025-02-12 at 18 45 22](https://github.com/user-attachments/assets/b41ce613-90c6-4e96-9d7f-182a0dcb84c3)
 
+13. If you want to view the current subtree in a graph format, click graph
+![Screenshot 2025-02-15 at 18 56 29](https://github.com/user-attachments/assets/6248ab01-abe4-45ca-8503-cedb76515c4d)
+
+
+   
+
 13. There are now breadcrumbs that are clickable
 14. To go back to the main view click reset, or the left-most breadcrumb
 15. To change tables, enter a new table name in the cli
