@@ -10,11 +10,7 @@ import type { ColumnSchema, DBDetails } from "../types";
 
 export type ColumnSchemaAdjList = Map<string, string[]>;
 
-export type DrawableShape = {
-  label: string;
-  x: number;
-  y: number;
-};
+export type DrawableShape = [number, number, string][];
 
 export class GraphData {
   adj_list: ColumnSchemaAdjList;
@@ -23,18 +19,25 @@ export class GraphData {
   max_height: number;
   canvas: CanvasRenderingContext2D;
   root: string;
-  usedColors: Set<string> = new Set();
-  drawable_shapes: null = null;
+  drawable_shapes: DrawableShape = [];
+  canvas_container: HTMLCanvasElement;
+  current_radius: number = 0;
 
   constructor(
     data: ColumnSchema | DBDetails,
     max_width: number,
     max_height: number,
     canvas: CanvasRenderingContext2D,
+    canvas_container: HTMLCanvasElement,
   ) {
     this.max_width = max_width;
     this.max_height = max_height;
     this.canvas = canvas;
+    this.canvas_container = canvas_container;
+    console.log("max_width: ", max_width, "\n max height: ", max_height);
+    const rect = this.canvas_container.getBoundingClientRect();
+
+    console.log("rect: ", rect);
 
     this.root = data.table;
 
@@ -63,35 +66,45 @@ export class GraphData {
     this.draw_canvas_nodes();
   }
 
-  // Chat gpt function here... going to use it to generate colors
-  // that are slight variants of the lightseagreen to then color
-  // code parent-child relationship
-  // TODO: make private after use
-  public getColorVariant(baseColor: string = "#20B2AA"): string {
-    let variant: string;
-    do {
-      // Extract RGB from hex
-      const r = parseInt(baseColor.substring(1, 3), 16);
-      const g = parseInt(baseColor.substring(3, 5), 16);
-      const b = parseInt(baseColor.substring(5, 7), 16);
+  private add_pointer_listener() {
+    /*
 
-      // Apply slight variation within a safe range
-      const newR = Math.min(255, Math.max(0, r + (Math.random() * 20 - 10)));
-      const newG = Math.min(255, Math.max(0, g + (Math.random() * 20 - 10)));
-      const newB = Math.min(255, Math.max(0, b + (Math.random() * 20 - 10)));
+      Thoughts for optimization... sort the node list, then use binary search 
+      to get close enough -> maybe that crystal ball algorithm
 
-      // Convert back to hex
-      variant =
-        `#${Math.round(newR).toString(16).padStart(2, "0")}` +
-        `${Math.round(newG).toString(16).padStart(2, "0")}` +
-        `${Math.round(newB).toString(16).padStart(2, "0")}`;
-    } while (this.usedColors.has(variant)); // Ensure uniqueness
+     */
+    this.canvas_container.addEventListener("click", (e) => {
+      const rect = this.canvas_container.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
 
-    this.usedColors.add(variant);
-    return variant;
+      console.log("what is the x and y", mouseX, mouseY, this.current_radius);
+      console.log("dataa:", this.drawable_shapes);
+
+      for (let i = 0; i < this.drawable_shapes.length; i++) {
+        const [x, y, label] = this.drawable_shapes[i];
+
+        if (
+          mouseX < x + this.current_radius &&
+          mouseX > x - this.current_radius &&
+          mouseY > y - this.current_radius &&
+          mouseY < y + this.current_radius
+        ) {
+          console.log("node found: ", this.drawable_shapes[i]);
+        }
+      }
+    });
   }
 
+  /*
+
+    We want to be able to add color hightlighting from 
+    parent to children on hover. Additionally we want 
+    the table name of the hovered element to appear. 
+
+  */
   private draw_canvas_nodes() {
+    this.drawable_shapes = [];
     // We can go in columns based off the max width
     const rows = this.create_rows_to_write();
 
@@ -114,6 +127,8 @@ export class GraphData {
     const x_spacing = Math.floor(this.max_width / (max_width * 1.2));
     const radius = Math.floor(10);
     const middle = Math.floor(this.max_width / 2);
+
+    this.current_radius = radius;
 
     /*
       
@@ -207,6 +222,8 @@ export class GraphData {
           this.canvas.stroke();
         }
 
+        this.drawable_shapes.push([x, y, row[written_nodes]]);
+
         if (curr_node === 0) {
           // TODO: might be an off by one issue here
           curr_node = Math.floor(rows[i].length / 2) + 1;
@@ -219,6 +236,13 @@ export class GraphData {
         written_nodes++;
       }
     }
+
+    // Sort the drawable shapes here for faster search later.
+    this.drawable_shapes.sort((a, b) => {
+      return a[0] > b[0] ? 1 : -1;
+    });
+
+    this.add_pointer_listener();
   }
 
   private create_rows_to_write(): Array<string[]> {

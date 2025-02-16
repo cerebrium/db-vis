@@ -33,7 +33,7 @@ export const Canvas: React.FC = () => {
       return;
     }
 
-    new GraphData(data, canvas.width, canvas.height, ctx);
+    new GraphData(data, canvas.width, canvas.height, ctx, canvas);
 
     // Handle drawing the nodes
   }, [data]);
