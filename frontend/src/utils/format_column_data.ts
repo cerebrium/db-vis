@@ -2,7 +2,7 @@ import type { ColumnSchema, DBDetails } from "../types";
 
 export type ColumnSchemaAdjList = Map<string, string[]>;
 
-export type DrawableShape = [number, number, string];
+export type DrawableShape = [number, number, string, [number, number][]];
 
 export class GraphData {
   adj_list: ColumnSchemaAdjList;
@@ -102,6 +102,10 @@ export class GraphData {
         hovered_element = null;
       }
 
+      if (hovered_element) {
+        return;
+      }
+
       for (let i = 0; i < this.drawable_shapes.length; i++) {
         const [x, y, label] = this.drawable_shapes[i];
 
@@ -111,29 +115,26 @@ export class GraphData {
           mouseY > y - this.current_radius &&
           mouseY < y + this.current_radius
         ) {
-          this.canvas.clearRect(
-            this.drawable_shapes[i][0],
-            this.drawable_shapes[i][1],
-            10,
-            10,
-          );
+          this.canvas.clearRect(x, y, 10, 10);
           this.canvas.fillStyle = "green";
           this.canvas.beginPath();
 
-          this.canvas.arc(
-            this.drawable_shapes[i][0],
-            this.drawable_shapes[i][1],
-            10,
-            0,
-            Math.PI * 2,
-          );
+          this.canvas.arc(x, y, 10, 0, Math.PI * 2);
           this.canvas.fill();
 
-          // Make the label appear
-          this.canvas.fillStyle = "lightseagreen"; // Text color
-          this.canvas.font = "16px Arial";
-          this.canvas.textAlign = "center";
+          // Make the child connections all light up
+          for (const [l_x, l_y] of this.drawable_shapes[i][3]) {
+            const cx = x,
+              cy = l_y;
 
+            this.canvas.beginPath();
+            this.canvas.moveTo(x, y);
+            this.canvas.quadraticCurveTo(cx, cy, l_x, l_y);
+            this.canvas.strokeStyle = "green"; // Change the curve color
+            this.canvas.stroke();
+          }
+
+          // Make the label appear
           const split_label = this.drawable_shapes[i][2].split("+");
           const table = split_label[split_label.length - 1]
             .split("_")
@@ -178,6 +179,7 @@ export class GraphData {
 
     const height = rows.length;
     let max_width = 0;
+    let current_drawable_shape_offset = 0;
 
     for (const row of rows) {
       max_width = Math.max(max_width, row.length);
@@ -207,6 +209,9 @@ export class GraphData {
 
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
+      if (i > 0) {
+        current_drawable_shape_offset += rows[i - 1].length - 1;
+      }
       const y = i === 0 ? y_spacing * 0.2 : y_spacing * ((i + 1) * 0.7);
       let x = 0;
 
@@ -250,6 +255,8 @@ export class GraphData {
           curr_nodes[written_nodes] = [x, local_y];
         }
 
+        const lines_to_parent: [number, number][] = [];
+
         // Write the connection to parent node
         if (i > 0) {
           let q = row[written_nodes].length;
@@ -265,24 +272,48 @@ export class GraphData {
           );
 
           const [p_x, p_y] = prev_nodes[parent_idx];
-          const [x, y] = curr_nodes[written_nodes];
+          const [l_x, l_y] = curr_nodes[written_nodes];
 
-          if (!p_x || !p_y || !x || !y) {
-            throw new Error("Could not find parent: " + p_x + p_y + x + y);
+          if (!p_x || !p_y || !l_x || !l_y) {
+            throw new Error("Could not find parent: " + p_x + p_y + l_x + l_y);
           }
 
           // Draw from previous to current
           const cx = p_x,
-            cy = y;
+            cy = l_y;
 
           this.canvas.beginPath();
           this.canvas.moveTo(p_x, p_y);
-          this.canvas.quadraticCurveTo(cx, cy, x, y);
+          this.canvas.quadraticCurveTo(cx, cy, l_x, l_y);
           this.canvas.strokeStyle = "lightseagreen"; // Change the curve color
           this.canvas.stroke();
+
+          lines_to_parent.push([p_x, p_y]);
+
+          if (i !== 0) {
+            console.log(
+              "what is the value: ",
+              current_drawable_shape_offset + parent_idx,
+            );
+            console.log(
+              "what are the drawable_shapes: ",
+              this.drawable_shapes.length,
+            );
+            if (
+              this.drawable_shapes.length - 1 >
+              current_drawable_shape_offset + parent_idx
+            ) {
+              this.drawable_shapes[
+                current_drawable_shape_offset + parent_idx - 1
+              ][3].push([l_x, l_y]);
+            }
+          }
         }
 
-        this.drawable_shapes.push([x, local_y, row[written_nodes]]);
+        // We need to add the child [x, y] to the parents
+        // 3 indexed drawable_shapes.
+
+        this.drawable_shapes.push([x, local_y, row[written_nodes], []]);
 
         if (curr_node === 0) {
           // TODO: might be an off by one issue here
