@@ -1,16 +1,8 @@
 import type { ColumnSchema, DBDetails } from "../types";
 
-/*
- *
- * FILE NOT IN USE at the moment. Will be making a graph
- * view later for a nice visualization, but right now is
- * just a wip. Focusing on the table view.
- *
- */
-
 export type ColumnSchemaAdjList = Map<string, string[]>;
 
-export type DrawableShape = [number, number, string][];
+export type DrawableShape = [number, number, string];
 
 export class GraphData {
   adj_list: ColumnSchemaAdjList;
@@ -19,9 +11,10 @@ export class GraphData {
   max_height: number;
   canvas: CanvasRenderingContext2D;
   root: string;
-  drawable_shapes: DrawableShape = [];
+  drawable_shapes: DrawableShape[] = [];
   canvas_container: HTMLCanvasElement;
   current_radius: number = 0;
+  set_node: React.Dispatch<React.SetStateAction<string>>;
 
   constructor(
     data: ColumnSchema | DBDetails,
@@ -29,7 +22,9 @@ export class GraphData {
     max_height: number,
     canvas: CanvasRenderingContext2D,
     canvas_container: HTMLCanvasElement,
+    setNode: React.Dispatch<React.SetStateAction<string>>,
   ) {
+    this.set_node = setNode;
     this.max_width = max_width;
     this.max_height = max_height;
     this.canvas = canvas;
@@ -73,13 +68,39 @@ export class GraphData {
       to get close enough -> maybe that crystal ball algorithm
 
      */
-    this.canvas_container.addEventListener("click", (e) => {
-      const rect = this.canvas_container.getBoundingClientRect();
+
+    const rect = this.canvas_container.getBoundingClientRect();
+    let hovered_element: null | DrawableShape = null;
+
+    this.canvas_container.addEventListener("mousemove", (e) => {
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
 
-      console.log("what is the x and y", mouseX, mouseY, this.current_radius);
-      console.log("dataa:", this.drawable_shapes);
+      // Not hovering node anymore
+      if (
+        hovered_element &&
+        (mouseX > hovered_element[0] + this.current_radius ||
+          mouseX < hovered_element[0] - this.current_radius ||
+          mouseY < hovered_element[1] - this.current_radius ||
+          mouseY > hovered_element[1] + this.current_radius)
+      ) {
+        this.canvas.clearRect(hovered_element[0], hovered_element[1], 10, 10);
+        this.canvas.fillStyle = "lightseagreen";
+        this.canvas.beginPath();
+
+        this.canvas.arc(
+          hovered_element[0],
+          hovered_element[1],
+          10,
+          0,
+          Math.PI * 2,
+        );
+        this.canvas.fill();
+
+        this.set_node(() => "");
+
+        hovered_element = null;
+      }
 
       for (let i = 0; i < this.drawable_shapes.length; i++) {
         const [x, y, label] = this.drawable_shapes[i];
@@ -90,7 +111,46 @@ export class GraphData {
           mouseY > y - this.current_radius &&
           mouseY < y + this.current_radius
         ) {
-          console.log("node found: ", this.drawable_shapes[i]);
+          this.canvas.clearRect(
+            this.drawable_shapes[i][0],
+            this.drawable_shapes[i][1],
+            10,
+            10,
+          );
+          this.canvas.fillStyle = "green";
+          this.canvas.beginPath();
+
+          this.canvas.arc(
+            this.drawable_shapes[i][0],
+            this.drawable_shapes[i][1],
+            10,
+            0,
+            Math.PI * 2,
+          );
+          this.canvas.fill();
+
+          // Make the label appear
+          this.canvas.fillStyle = "lightseagreen"; // Text color
+          this.canvas.font = "16px Arial";
+          this.canvas.textAlign = "center";
+
+          const split_label = this.drawable_shapes[i][2].split("+");
+          const table = split_label[split_label.length - 1]
+            .split("_")
+            .map((w) => {
+              return w
+                .split("")
+                .map((l, i) => {
+                  return !i ? l.toLocaleUpperCase() : l;
+                })
+                .join("");
+            })
+            .join(" ");
+
+          // Write current hovering label
+          this.set_node(() => table);
+
+          hovered_element = this.drawable_shapes[i];
         }
       }
     });
@@ -222,7 +282,7 @@ export class GraphData {
           this.canvas.stroke();
         }
 
-        this.drawable_shapes.push([x, y, row[written_nodes]]);
+        this.drawable_shapes.push([x, local_y, row[written_nodes]]);
 
         if (curr_node === 0) {
           // TODO: might be an off by one issue here
