@@ -29,10 +29,6 @@ export class GraphData {
     this.max_height = max_height;
     this.canvas = canvas;
     this.canvas_container = canvas_container;
-    console.log("max_width: ", max_width, "\n max height: ", max_height);
-    const rect = this.canvas_container.getBoundingClientRect();
-
-    console.log("rect: ", rect);
 
     this.root = data.table;
 
@@ -88,14 +84,22 @@ export class GraphData {
         this.canvas.fillStyle = "lightseagreen";
         this.canvas.beginPath();
 
-        this.canvas.arc(
-          hovered_element[0],
-          hovered_element[1],
-          10,
-          0,
-          Math.PI * 2,
-        );
+        const [x, y, _, children] = hovered_element;
+
+        this.canvas.arc(x, y, 10, 0, Math.PI * 2);
         this.canvas.fill();
+
+        // Make the child connections all light up
+        for (const [l_x, l_y] of children) {
+          const cx = x,
+            cy = l_y;
+
+          this.canvas.beginPath();
+          this.canvas.moveTo(x, y);
+          this.canvas.quadraticCurveTo(cx, cy, l_x, l_y);
+          this.canvas.strokeStyle = "lightseagreen";
+          this.canvas.stroke();
+        }
 
         this.set_node(() => "");
 
@@ -116,7 +120,7 @@ export class GraphData {
           mouseY < y + this.current_radius
         ) {
           this.canvas.clearRect(x, y, 10, 10);
-          this.canvas.fillStyle = "green";
+          this.canvas.fillStyle = "grey";
           this.canvas.beginPath();
 
           this.canvas.arc(x, y, 10, 0, Math.PI * 2);
@@ -130,12 +134,12 @@ export class GraphData {
             this.canvas.beginPath();
             this.canvas.moveTo(x, y);
             this.canvas.quadraticCurveTo(cx, cy, l_x, l_y);
-            this.canvas.strokeStyle = "green"; // Change the curve color
+            this.canvas.strokeStyle = "grey"; // Change the curve color
             this.canvas.stroke();
           }
 
           // Make the label appear
-          const split_label = this.drawable_shapes[i][2].split("+");
+          const split_label = label.split("+");
           const table = split_label[split_label.length - 1]
             .split("_")
             .map((w) => {
@@ -257,8 +261,6 @@ export class GraphData {
           curr_nodes[written_nodes] = [x, local_y];
         }
 
-        const lines_to_parent: [number, number][] = [];
-
         // Write the connection to parent node
         if (i > 0) {
           let q = row[written_nodes].length;
@@ -290,24 +292,26 @@ export class GraphData {
           this.canvas.strokeStyle = "lightseagreen"; // Change the curve color
           this.canvas.stroke();
 
-          lines_to_parent.push([p_x, p_y]);
-
-          if (i !== 0) {
-            if (
-              this.drawable_shapes.length - 1 >
-              current_drawable_shape_offset + parent_idx - 1
-            ) {
-              this.drawable_shapes[
-                current_drawable_shape_offset + parent_idx - 2
-              ][3].push([l_x, l_y]);
-            }
+          const parent_drawable_shape = drawable_nodes_map.get(`${p_x}_${p_y}`);
+          if (parent_drawable_shape === undefined) {
+            throw new Error("no drawable shape parent");
           }
+
+          this.drawable_shapes[parent_drawable_shape][3].push([x, local_y]);
         }
+
+        // Get the parent idx from the map, then write the
+        // child [x, y] to the lines
 
         // We need to add the child [x, y] to the parents
         // 3 indexed drawable_shapes.
 
         this.drawable_shapes.push([x, local_y, row[written_nodes], []]);
+
+        drawable_nodes_map.set(
+          `${x}_${local_y}`,
+          this.drawable_shapes.length - 1,
+        );
 
         if (curr_node === 0) {
           // TODO: might be an off by one issue here
