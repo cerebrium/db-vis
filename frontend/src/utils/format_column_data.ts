@@ -165,6 +165,8 @@ export class GraphData {
 
   */
   private draw_canvas_nodes() {
+    const drawable_nodes_map: Map<string, number> = new Map();
+
     this.drawable_shapes = [];
     // We can go in columns based off the max width
     const rows = this.create_rows_to_write();
@@ -291,20 +293,12 @@ export class GraphData {
           lines_to_parent.push([p_x, p_y]);
 
           if (i !== 0) {
-            console.log(
-              "what is the value: ",
-              current_drawable_shape_offset + parent_idx,
-            );
-            console.log(
-              "what are the drawable_shapes: ",
-              this.drawable_shapes.length,
-            );
             if (
               this.drawable_shapes.length - 1 >
-              current_drawable_shape_offset + parent_idx
+              current_drawable_shape_offset + parent_idx - 1
             ) {
               this.drawable_shapes[
-                current_drawable_shape_offset + parent_idx - 1
+                current_drawable_shape_offset + parent_idx - 2
               ][3].push([l_x, l_y]);
             }
           }
