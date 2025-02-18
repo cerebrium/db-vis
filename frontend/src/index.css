@@ -43,10 +43,6 @@ p {
   padding: 5px;
 }
 
-/*.nested_children {*/
-/*  margin-left: 1rem;*/
-/*}*/
-
 .detail_display {
   font-size: 16px;
 }
@@ -56,6 +52,7 @@ p {
 }
 
 summary {
+  cursor: pointer;
   position: relative;
   white-space: nowrap;
   color: lightslategray;
@@ -214,10 +211,8 @@ td {
   align-items: center;
   justify-content: space-between;
   padding-right: 1rem;
-  /*box-shadow: 1px 1px 5px #0d2d2b;*/
   border-bottom: 0.5px solid lightseagreen;
   height: 4rem;
-  /*background-color: #0e1111;*/
 }
 
 .image_title_container {

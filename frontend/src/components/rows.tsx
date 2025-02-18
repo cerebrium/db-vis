@@ -9,7 +9,6 @@ type colProps = {
 
 export const Rows: React.FC<colProps> = ({ col }) => {
   const dispatch = useDispatch();
-  // We want to make coherent tables, seperate the non-nested from the nested
   const [non_nested, nested]: [ColumnSchema[], ColumnSchema[]] = [[], []];
   for (let i = 0; i < col.length; i++) {
     if (col[i].children) {

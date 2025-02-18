@@ -1,4 +1,5 @@
 import type { ColumnSchema, DBDetails } from "../types";
+import { make_capital } from "./make_capital";
 
 export type ColumnSchemaAdjList = Map<string, string[]>;
 
@@ -171,42 +172,23 @@ export class GraphData {
 
           // Make the label appear
           const split_label = label.split("+");
-          const table = split_label[split_label.length - 1]
-            .split("_")
-            .map((w) => {
-              return w
-                .split("")
-                .map((l, i) => {
-                  return !i ? l.toLocaleUpperCase() : l;
-                })
-                .join("");
-            })
-            .join(" ");
+          const table = make_capital(split_label[split_label.length - 1]);
 
           // Write current hovering label
           this.set_node(() => table);
 
           hovered_element = this.drawable_shapes[i];
 
-          // If find node, we don't need to keep searching
           break;
         }
       }
     });
   }
 
-  /*
-
-    We want to be able to add color hightlighting from 
-    parent to children on hover. Additionally we want 
-    the table name of the hovered element to appear. 
-
-  */
   private draw_canvas_nodes() {
     const drawable_nodes_map: Map<string, number> = new Map();
 
     this.drawable_shapes = [];
-    // We can go in columns based off the max width
     const rows = this.create_rows_to_write();
 
     /*
@@ -278,7 +260,6 @@ export class GraphData {
         if (curr_node < row_middle) {
           x = middle - (row_middle - curr_node) * x_spacing;
 
-          // TODO: see if this can be more optimized
           this.canvas.beginPath();
           this.canvas.arc(x, local_y, radius, 0, Math.PI * 2);
           this.canvas.fill();
@@ -287,7 +268,6 @@ export class GraphData {
         } else {
           x = middle + (curr_node - row_middle) * x_spacing;
 
-          // TODO: see if this can be more optimized
           this.canvas.beginPath();
           this.canvas.arc(x, local_y, radius, 0, Math.PI * 2);
           this.canvas.fill();
@@ -373,6 +353,11 @@ export class GraphData {
     this.add_pointer_listener();
   }
 
+  /**
+   *
+   * Split the nodes into rows based off the level of descendence
+   *
+   */
   private create_rows_to_write(): Array<string[]> {
     const rows: Array<string[]> = [[]];
     if (!this.adj_list?.size) {
@@ -421,19 +406,8 @@ export class GraphData {
 
   /**
    *
-   * Loop over all sthe nodes, transform them into the shape for the
-   * display library.
-   *
-   * We also create an adjacency list of tablename, [childTableName, FlowNode[]]
-   *
-   * The child nodes are all next to the refs in the adj_list, except
-   * for the top level which is kept in the parent list.
-   *
-   * We have cases where in the backend we have not fetched circularly
-   * referenced tables. The children array then does not exist, however
-   * the 'references_another_table' does exist. This is perhaps information
-   * that could be useful.
-   *
+   * We want to only look at the nodes that have children. Turn the full
+   * data into an easily displayable adjacency list.
    *
    */
   private create_adj_list(data: ColumnSchema[]): ColumnSchemaAdjList {

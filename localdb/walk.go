@@ -21,10 +21,8 @@ func Walk(dbd *DBDetails) error {
 		return err
 	}
 
-	// Internal logging
 	dbd.Logger.Log("Connected to database: " + dbd.Name + "\n Connecting to table: " + dbd.Table + "\n")
 
-	// Actually write to the struct
 	dbd.schemaWalk(&dbd.Schema, dbd.Table)
 
 	// Append the top level table to visited
@@ -32,7 +30,6 @@ func Walk(dbd *DBDetails) error {
 
 	dbd.Logger.Log("past initial schema walk: ")
 
-	// We want to be able to perform child walks concurrently.
 	for i := 0; i < len(dbd.Schema); i++ {
 		if dbd.Schema[i].ReferencesAnotherTable {
 
@@ -47,7 +44,6 @@ func Walk(dbd *DBDetails) error {
 	defer dbd.dbConn.Close()
 
 	dbd.Logger.Log("Inside the get data call")
-	// The cli process is not done yet
 
 	dbd.Logger.Log("The name: " + dbd.Name)
 
@@ -74,20 +70,17 @@ func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
 	// @Code Review extra focus
 	dbd.mu.Lock()
 
-	// We can read lots
 	if dbd.visitedTables[table_name] {
 		dbd.mu.Unlock()
 		return
 	}
 
-	// Before the visitedTables is mutated, write lock
 	dbd.visitedTables[table_name] = true
 
 	dbd.mu.Unlock()
 
 	dbd.schemaWalk(children, table_name)
 
-	// Walk its children and recursively grab all data
 	for i := 0; i < len(*children); i++ {
 		if (*children)[i].ReferencesAnotherTable {
 			dbd.wg.Add(1)
