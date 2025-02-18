@@ -14,6 +14,7 @@ export class GraphData {
   drawable_shapes: DrawableShape[] = [];
   canvas_container: HTMLCanvasElement;
   current_radius: number = 0;
+  drawable_shapes_root: number = 0;
   set_node: React.Dispatch<React.SetStateAction<string>>;
 
   constructor(
@@ -82,7 +83,8 @@ export class GraphData {
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
 
-      // Not hovering node anymore
+      // This is an O(1) check, it isn't too expensive and can't
+      // be changed much.
       if (
         hovered_element &&
         (mouseX > hovered_element[0] + this.current_radius ||
@@ -120,7 +122,26 @@ export class GraphData {
         return;
       }
 
-      for (let i = 0; i < this.drawable_shapes.length; i++) {
+      // We are going to use the crystal ball strategy to search
+      // this sorted list. It should allow for O(sqrt(n)) time
+      // searching, on an already throttled mouseove.
+      let idx = 0;
+      while (idx < this.drawable_shapes.length) {
+        if (this.drawable_shapes[idx][0] > mouseX) {
+          if (idx > this.drawable_shapes_root) {
+            idx -= this.drawable_shapes_root;
+            break;
+          } else {
+            idx = 0;
+            break;
+          }
+        }
+
+        idx += this.drawable_shapes_root;
+      }
+
+      // Search from idx close to node
+      for (let i = idx; i < this.drawable_shapes.length; i++) {
         const [x, y, label] = this.drawable_shapes[i];
 
         if (
@@ -166,6 +187,9 @@ export class GraphData {
           this.set_node(() => table);
 
           hovered_element = this.drawable_shapes[i];
+
+          // If find node, we don't need to keep searching
+          break;
         }
       }
     });
@@ -340,6 +364,11 @@ export class GraphData {
     this.drawable_shapes.sort((a, b) => {
       return a[0] > b[0] ? 1 : -1;
     });
+
+    // Add the sqrt length so we don't have to compute sqrt every 16 ms
+    this.drawable_shapes_root = Math.floor(
+      Math.sqrt(this.drawable_shapes.length),
+    );
 
     this.add_pointer_listener();
   }
