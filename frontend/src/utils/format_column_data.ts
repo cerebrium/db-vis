@@ -68,7 +68,17 @@ export class GraphData {
     const rect = this.canvas_container.getBoundingClientRect();
     let hovered_element: null | DrawableShape = null;
 
+    let last_mouse_check = 0;
+    const throttle_time = 16;
+
     this.canvas_container.addEventListener("mousemove", (e) => {
+      const now = performance.now();
+      if (now - throttle_time < last_mouse_check) {
+        return;
+      }
+
+      last_mouse_check = now;
+
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
 
