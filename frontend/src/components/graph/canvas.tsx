@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { GraphData } from "../../utils/format_column_data";
 import { useDbVizDataMethods } from "../../features/db_viz_data/db_viz_data";
 import { useNavigate } from "react-router";
+import { make_capital } from "../../utils/make_capital";
 
 export const Canvas: React.FC = () => {
   const [currNode, setCurrNode] = useState("");
@@ -19,9 +20,6 @@ export const Canvas: React.FC = () => {
 
     const ctx = canvas.getContext("2d");
 
-    // Get screen width and height
-
-    // Set canvas size
     canvas.width = screen.width * 0.8;
     canvas.height = screen.height * 0.8;
 
@@ -35,13 +33,11 @@ export const Canvas: React.FC = () => {
     }
 
     new GraphData(data, canvas.width, canvas.height, ctx, canvas, setCurrNode);
-
-    // Handle drawing the nodes
   }, [data]);
 
   return (
     <section className="canvas_container">
-      <h3>{currNode ? currNode : data?.table}</h3>
+      <h3>{currNode ? currNode : make_capital(data?.table)}</h3>
       <canvas ref={canvas_ref} />
     </section>
   );

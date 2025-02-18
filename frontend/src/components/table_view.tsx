@@ -7,6 +7,7 @@ import { Rows } from "./rows";
 import { DetailDisplay } from "./detail_display";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import { make_capital } from "../utils/make_capital";
 
 export const TableView: React.FC = () => {
   const dispatch = useDispatch();
@@ -74,16 +75,7 @@ export const TableView: React.FC = () => {
                   onClick={(e) => set_breadcrumb_id(e, id)}
                   className="breadcrumb"
                 >
-                  {name
-                    .split("_")
-                    .map((v, _) =>
-                      v
-                        .split("")
-                        .map((v, i) => (i === 0 ? v.toLocaleUpperCase() : v))
-                        .join(""),
-                    )
-                    .join(" ")}{" "}
-                  <span className="slash">{end_char}</span>{" "}
+                  {make_capital(name)} <span className="slash">{end_char}</span>{" "}
                 </span>
               );
             })
