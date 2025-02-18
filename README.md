@@ -53,3 +53,7 @@ steps to use:
 17. If you want to view the current subtree in a graph format, click graph
 
 ![Screenshot 2025-02-15 at 18 56 29](https://github.com/user-attachments/assets/6248ab01-abe4-45ca-8503-cedb76515c4d)
+
+18. On hover of item it will display the node and subnodes
+
+![Screenshot 2025-02-17 at 13 10 38](https://github.com/user-attachments/assets/0ca32708-ffd8-44e7-8b19-422b5b7b915e)
