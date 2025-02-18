@@ -1,20 +1,8 @@
 import type { ColumnSchema, DBDetails } from "../types";
 
-/*
- *
- * FILE NOT IN USE at the moment. Will be making a graph
- * view later for a nice visualization, but right now is
- * just a wip. Focusing on the table view.
- *
- */
-
 export type ColumnSchemaAdjList = Map<string, string[]>;
 
-export type DrawableShape = {
-  label: string;
-  x: number;
-  y: number;
-};
+export type DrawableShape = [number, number, string, [number, number][]];
 
 export class GraphData {
   adj_list: ColumnSchemaAdjList;
@@ -23,18 +11,24 @@ export class GraphData {
   max_height: number;
   canvas: CanvasRenderingContext2D;
   root: string;
-  usedColors: Set<string> = new Set();
-  drawable_shapes: null = null;
+  drawable_shapes: DrawableShape[] = [];
+  canvas_container: HTMLCanvasElement;
+  current_radius: number = 0;
+  set_node: React.Dispatch<React.SetStateAction<string>>;
 
   constructor(
     data: ColumnSchema | DBDetails,
     max_width: number,
     max_height: number,
     canvas: CanvasRenderingContext2D,
+    canvas_container: HTMLCanvasElement,
+    setNode: React.Dispatch<React.SetStateAction<string>>,
   ) {
+    this.set_node = setNode;
     this.max_width = max_width;
     this.max_height = max_height;
     this.canvas = canvas;
+    this.canvas_container = canvas_container;
 
     this.root = data.table;
 
@@ -63,35 +57,131 @@ export class GraphData {
     this.draw_canvas_nodes();
   }
 
-  // Chat gpt function here... going to use it to generate colors
-  // that are slight variants of the lightseagreen to then color
-  // code parent-child relationship
-  // TODO: make private after use
-  public getColorVariant(baseColor: string = "#20B2AA"): string {
-    let variant: string;
-    do {
-      // Extract RGB from hex
-      const r = parseInt(baseColor.substring(1, 3), 16);
-      const g = parseInt(baseColor.substring(3, 5), 16);
-      const b = parseInt(baseColor.substring(5, 7), 16);
+  private add_pointer_listener() {
+    /*
 
-      // Apply slight variation within a safe range
-      const newR = Math.min(255, Math.max(0, r + (Math.random() * 20 - 10)));
-      const newG = Math.min(255, Math.max(0, g + (Math.random() * 20 - 10)));
-      const newB = Math.min(255, Math.max(0, b + (Math.random() * 20 - 10)));
+      Thoughts for optimization... sort the node list, then use binary search 
+      to get close enough -> maybe that crystal ball algorithm
 
-      // Convert back to hex
-      variant =
-        `#${Math.round(newR).toString(16).padStart(2, "0")}` +
-        `${Math.round(newG).toString(16).padStart(2, "0")}` +
-        `${Math.round(newB).toString(16).padStart(2, "0")}`;
-    } while (this.usedColors.has(variant)); // Ensure uniqueness
+     */
 
-    this.usedColors.add(variant);
-    return variant;
+    const rect = this.canvas_container.getBoundingClientRect();
+    let hovered_element: null | DrawableShape = null;
+
+    let last_mouse_check = 0;
+    const throttle_time = 16;
+
+    this.canvas_container.addEventListener("mousemove", (e) => {
+      const now = performance.now();
+      if (now - throttle_time < last_mouse_check) {
+        return;
+      }
+
+      last_mouse_check = now;
+
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      // Not hovering node anymore
+      if (
+        hovered_element &&
+        (mouseX > hovered_element[0] + this.current_radius ||
+          mouseX < hovered_element[0] - this.current_radius ||
+          mouseY < hovered_element[1] - this.current_radius ||
+          mouseY > hovered_element[1] + this.current_radius)
+      ) {
+        this.canvas.clearRect(hovered_element[0], hovered_element[1], 10, 10);
+        this.canvas.fillStyle = "lightseagreen";
+        this.canvas.beginPath();
+
+        const [x, y, _, children] = hovered_element;
+
+        this.canvas.arc(x, y, 10, 0, Math.PI * 2);
+        this.canvas.fill();
+
+        // Make the child connections all light up
+        for (const [l_x, l_y] of children) {
+          const cx = x,
+            cy = l_y;
+
+          this.canvas.beginPath();
+          this.canvas.moveTo(x, y);
+          this.canvas.quadraticCurveTo(cx, cy, l_x, l_y);
+          this.canvas.strokeStyle = "lightseagreen";
+          this.canvas.stroke();
+        }
+
+        this.set_node(() => "");
+
+        hovered_element = null;
+      }
+
+      if (hovered_element) {
+        return;
+      }
+
+      for (let i = 0; i < this.drawable_shapes.length; i++) {
+        const [x, y, label] = this.drawable_shapes[i];
+
+        if (
+          mouseX < x + this.current_radius &&
+          mouseX > x - this.current_radius &&
+          mouseY > y - this.current_radius &&
+          mouseY < y + this.current_radius
+        ) {
+          this.canvas.clearRect(x, y, 10, 10);
+          this.canvas.fillStyle = "grey";
+          this.canvas.beginPath();
+
+          this.canvas.arc(x, y, 10, 0, Math.PI * 2);
+          this.canvas.fill();
+
+          // Make the child connections all light up
+          for (const [l_x, l_y] of this.drawable_shapes[i][3]) {
+            const cx = x,
+              cy = l_y;
+
+            this.canvas.beginPath();
+            this.canvas.moveTo(x, y);
+            this.canvas.quadraticCurveTo(cx, cy, l_x, l_y);
+            this.canvas.strokeStyle = "grey"; // Change the curve color
+            this.canvas.stroke();
+          }
+
+          // Make the label appear
+          const split_label = label.split("+");
+          const table = split_label[split_label.length - 1]
+            .split("_")
+            .map((w) => {
+              return w
+                .split("")
+                .map((l, i) => {
+                  return !i ? l.toLocaleUpperCase() : l;
+                })
+                .join("");
+            })
+            .join(" ");
+
+          // Write current hovering label
+          this.set_node(() => table);
+
+          hovered_element = this.drawable_shapes[i];
+        }
+      }
+    });
   }
 
+  /*
+
+    We want to be able to add color hightlighting from 
+    parent to children on hover. Additionally we want 
+    the table name of the hovered element to appear. 
+
+  */
   private draw_canvas_nodes() {
+    const drawable_nodes_map: Map<string, number> = new Map();
+
+    this.drawable_shapes = [];
     // We can go in columns based off the max width
     const rows = this.create_rows_to_write();
 
@@ -105,6 +195,7 @@ export class GraphData {
 
     const height = rows.length;
     let max_width = 0;
+    let current_drawable_shape_offset = 0;
 
     for (const row of rows) {
       max_width = Math.max(max_width, row.length);
@@ -114,6 +205,8 @@ export class GraphData {
     const x_spacing = Math.floor(this.max_width / (max_width * 1.2));
     const radius = Math.floor(10);
     const middle = Math.floor(this.max_width / 2);
+
+    this.current_radius = radius;
 
     /*
       
@@ -132,6 +225,9 @@ export class GraphData {
 
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
+      if (i > 0) {
+        current_drawable_shape_offset += rows[i - 1].length - 1;
+      }
       const y = i === 0 ? y_spacing * 0.2 : y_spacing * ((i + 1) * 0.7);
       let x = 0;
 
@@ -190,22 +286,42 @@ export class GraphData {
           );
 
           const [p_x, p_y] = prev_nodes[parent_idx];
-          const [x, y] = curr_nodes[written_nodes];
+          const [l_x, l_y] = curr_nodes[written_nodes];
 
-          if (!p_x || !p_y || !x || !y) {
-            throw new Error("Could not find parent: " + p_x + p_y + x + y);
+          if (!p_x || !p_y || !l_x || !l_y) {
+            throw new Error("Could not find parent: " + p_x + p_y + l_x + l_y);
           }
 
           // Draw from previous to current
           const cx = p_x,
-            cy = y;
+            cy = l_y;
 
           this.canvas.beginPath();
           this.canvas.moveTo(p_x, p_y);
-          this.canvas.quadraticCurveTo(cx, cy, x, y);
+          this.canvas.quadraticCurveTo(cx, cy, l_x, l_y);
           this.canvas.strokeStyle = "lightseagreen"; // Change the curve color
           this.canvas.stroke();
+
+          const parent_drawable_shape = drawable_nodes_map.get(`${p_x}_${p_y}`);
+          if (parent_drawable_shape === undefined) {
+            throw new Error("no drawable shape parent");
+          }
+
+          this.drawable_shapes[parent_drawable_shape][3].push([x, local_y]);
         }
+
+        // Get the parent idx from the map, then write the
+        // child [x, y] to the lines
+
+        // We need to add the child [x, y] to the parents
+        // 3 indexed drawable_shapes.
+
+        this.drawable_shapes.push([x, local_y, row[written_nodes], []]);
+
+        drawable_nodes_map.set(
+          `${x}_${local_y}`,
+          this.drawable_shapes.length - 1,
+        );
 
         if (curr_node === 0) {
           // TODO: might be an off by one issue here
@@ -219,6 +335,13 @@ export class GraphData {
         written_nodes++;
       }
     }
+
+    // Sort the drawable shapes here for faster search later.
+    this.drawable_shapes.sort((a, b) => {
+      return a[0] > b[0] ? 1 : -1;
+    });
+
+    this.add_pointer_listener();
   }
 
   private create_rows_to_write(): Array<string[]> {
