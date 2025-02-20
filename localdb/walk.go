@@ -26,19 +26,27 @@ func Walk(dbd *DBDetails) error {
 	dbd.schemaWalk(&dbd.Schema, dbd.Table)
 
 	// Append the top level table to visited
-	dbd.visitedTables[dbd.Table] = true
 
 	dbd.Logger.Log("past initial schema walk: ")
+
+	visited := make(map[string]bool)
+	visited[dbd.Table] = true
+
+	map_chan := make(chan map[string]bool, 1)
+	map_chan <- visited
+	// Make a channel and store the map in it
 
 	for i := 0; i < len(dbd.Schema); i++ {
 		if dbd.Schema[i].ReferencesAnotherTable {
 
 			dbd.wg.Add(1)
-			go dbd.child_walk(*dbd.Schema[i].ReferencedTableName, &dbd.Schema[i].Children)
+			go dbd.child_walk(*dbd.Schema[i].ReferencedTableName, &dbd.Schema[i].Children, map_chan)
 		}
 	}
 
 	dbd.wg.Wait()
+
+	close(map_chan)
 
 	// Close after walking
 	defer dbd.dbConn.Close()
@@ -59,25 +67,20 @@ func Walk(dbd *DBDetails) error {
 // have some circular references that are not handled by the ref replacment. With
 // those we need to say 'if x.references_another_table && not x.children -> hightlight
 // integer as being incomplete'
-func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
+func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema, map_chan chan map[string]bool) {
 	defer dbd.wg.Done()
 
-	// TODO: Think about this mutex. The map shouldn't have conflicting values, however,
-	// if we could have circular issues if a thread gets ahead of another thread and then
-	// we look into tables that we shouldn't.
-	// So far, there have been no circular issues experienced, but it is a risk, however
-	// the mutex will slow things down, and could be unnecessary.
-	// @Code Review extra focus
-	dbd.mu.Lock()
+	visited_tables := <-map_chan
 
-	if dbd.visitedTables[table_name] {
-		dbd.mu.Unlock()
+	if visited_tables[table_name] {
+
+		map_chan <- visited_tables
 		return
 	}
 
-	dbd.visitedTables[table_name] = true
+	visited_tables[table_name] = true
 
-	dbd.mu.Unlock()
+	map_chan <- visited_tables
 
 	dbd.schemaWalk(children, table_name)
 
@@ -86,7 +89,7 @@ func (dbd *DBDetails) child_walk(table_name string, children *[]*ColumnSchema) {
 			dbd.wg.Add(1)
 
 			dbd.Logger.Log("added a wg ")
-			go dbd.child_walk(*(*children)[i].ReferencedTableName, &(*children)[i].Children)
+			go dbd.child_walk(*(*children)[i].ReferencedTableName, &(*children)[i].Children, map_chan)
 		}
 	}
 }
