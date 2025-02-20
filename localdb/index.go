@@ -22,28 +22,25 @@ type ColumnSchema struct {
 }
 
 type DBDetails struct {
-	Name          string `json:"name"`
-	Table         string `json:"table"`
-	IsSchema      bool   `json:"is_schema"`
-	UserName      string `json:"user_name"`
-	dbConn        *sql.DB
-	Logger        *locallogger.Logger // Anywhere there is state, there are logs
-	visitedTables map[string]bool     // we have cases where much higher than 30, so map more optimized
-	Schema        []*ColumnSchema     `json:"schema"`
-	Conn          *websocket.Conn
-	mu            sync.Mutex
-	wg            sync.WaitGroup
-	Password      string
+	Name     string `json:"name"`
+	Table    string `json:"table"`
+	IsSchema bool   `json:"is_schema"`
+	UserName string `json:"user_name"`
+	dbConn   *sql.DB
+	Logger   *locallogger.Logger // Anywhere there is state, there are logs
+	Schema   []*ColumnSchema     `json:"schema"`
+	Conn     *websocket.Conn
+	wg       sync.WaitGroup
+	Password string
 }
 
 func CreateDbDetails(isSchema bool, name string, table string, userName string, logger *locallogger.Logger) *DBDetails {
 	DbD := DBDetails{
-		IsSchema:      isSchema,
-		Name:          name,
-		Table:         table,
-		UserName:      userName,
-		Logger:        logger,
-		visitedTables: make(map[string]bool),
+		IsSchema: isSchema,
+		Name:     name,
+		Table:    table,
+		UserName: userName,
+		Logger:   logger,
 	}
 
 	return &DbD
